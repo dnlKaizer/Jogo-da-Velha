@@ -1,5 +1,5 @@
 class JogoDaVelha {
-    matriz = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]];
+    matriz = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
     nJogadas = 0
 
     getMatriz() {
@@ -8,6 +8,7 @@ class JogoDaVelha {
     }
 
     jogar(i, j) {
+        // -1 indica vazio
         // 0 indica que é O
         // 1 indica que é X
         if (this.matriz[i][j] == -1) {
@@ -17,4 +18,14 @@ class JogoDaVelha {
     }
 }
 
-const jogoDaVelha = new JogoDaVelha()
+class Cpu {
+    jogoDaVelha
+    dificuldade
+    // 0 indica fácil
+    // 1 indica médio
+    // 2 indica difícil
+    // 3 indica impossível
+}
+
+let jogoDaVelha = new JogoDaVelha()
+let cpu = new Cpu()
