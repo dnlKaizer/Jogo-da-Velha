@@ -19,44 +19,49 @@ class JogoDaVelha {
 
     verificarVencedorLinha(i) {
         if (this.matriz[i][0] != -1 && this.matriz[i][0] == this.matriz[i][1] && this.matriz[i][0] == this.matriz[i][2]) {
-            return true
+            return this.matriz[i][0]
         } else {
-            return false
+            return -1
         }
     }
 
     verificarVencedorColuna(j) {
         if (this.matriz[0][j] != -1 && this.matriz[0][j] == this.matriz[1][j] && this.matriz[0][j] == this.matriz[2][j]) {
-            return true
+            return this.matriz[0][j]
         } else {
-            return false
+            return -1
         }
     }
 
     verificarVencedorDiagonais() {
-        let anterior = 0
         if (this.matriz[1][1] == -1) {
-            return false
+            return -1
         }
         if (this.matriz[0][0] == this.matriz[1][1] && this.matriz[1][1] == this.matriz[2][2]) {
-            return true
+            return this.matriz[1][1]
         }
         if (this.matriz[0][2] == this.matriz[1][1] && this.matriz[1][1] == this.matriz[2][0]) {
-            return true
+            return this.matriz[1][1]
         }
-        return false
+        return -1
     }
 
     verificarVencedor() {
-        if (this.verificarVencedorDiagonais()) {
-            return true
+        let teste = this.verificarVencedorDiagonais()
+        if (teste != -1) {
+            return teste
         }
         for (const pos in this.matriz) {
-            if (this.verificarVencedorColuna(pos) || this.verificarVencedorLinha(pos)) {
-                return true
+            teste = this.verificarVencedorColuna(pos)
+            if (teste != -1) {
+                return teste
+            }
+            teste = this.verificarVencedorLinha(pos)
+            if (teste != -1) {
+                return teste
             }
         }
-        return false
+        return -1
     }
 }
 
@@ -85,3 +90,15 @@ class Cpu {
 
 let jogo = new JogoDaVelha()
 let cpu = new Cpu()
+
+console.log(jogo.verificarVencedor())
+jogo.jogar(0,0)
+console.log(jogo.verificarVencedor())
+jogo.jogar(1,0)
+console.log(jogo.verificarVencedor())
+jogo.jogar(0,1)
+console.log(jogo.verificarVencedor())
+jogo.jogar(1,1)
+console.log(jogo.verificarVencedor())
+jogo.jogar(0,2)
+console.log(jogo.verificarVencedor())
