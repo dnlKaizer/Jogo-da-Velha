@@ -4,7 +4,7 @@ class JogoDaVelha {
 
     getMatriz() {
         const matrizAux = this.matriz.map((x) => x) // Copia o atributo this.matriz
-        return this.matrizAux
+        return matrizAux
     }
 
     jogar(i, j) {
@@ -66,7 +66,6 @@ class JogoDaVelha {
 }
 
 class Cpu {
-    jogo
     dificuldade
     // 0 indica fácil
     // 1 indica médio
@@ -75,6 +74,109 @@ class Cpu {
     
     adicionarDificuldade(dificuldade) {
         this.dificuldade = dificuldade
+    }
+
+    melhorJogada() {
+        const dif = this.dificuldade
+        const mat = jogo.getMatriz()
+        const nJogadas = jogo.nJogadas
+
+        let i
+        let j
+
+        switch (nJogadas) {
+            case 0:
+                i = this.random(0,2)
+                j = this.random(0,2)
+                jogo.jogar(i,j)
+                break;
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break;
+            case 7:
+                
+                break;
+            case 8:
+                
+                break;
+            case 9:
+                
+                break;
+        
+            default:
+                break;
+        }
+    } 
+
+
+    verificarAmeacaLinha(i) {
+        let ameaca = {
+            indexI: -1,
+            indexJ: -1
+        }
+        const mat = jogo.getMatriz()
+        inicio:
+        for (let m = 0; m < 3; m++) {
+            for (let n = m + 1; n < 3; n++) {
+                if (mat[i][m] == -1) {
+                    continue inicio
+                }
+                if (mat[i][m] == mat[i][n]) {
+                    ameaca.indexI = i
+                    if (m == 1) {
+                        ameaca.indexJ = 0
+                    } else if (n == 1) {
+                        ameaca.indexJ = 2
+                    } else {
+                        ameaca.indexJ = 1
+                    }
+                    return ameaca
+                }
+            }
+        }
+        return false
+    }
+    verificarAmeacaColuna(j) {
+        let ameaca = {
+            indexI: -1,
+            indexJ: -1
+        }
+        const mat = jogo.getMatriz()
+        inicio:
+        for (let m = 0; m < 3; m++) {
+            for (let n = m + 1; n < 3; n++) {
+                if (mat[m][j] == -1) {
+                    continue inicio
+                }
+                if (mat[m][j] == mat[n][j]) {
+                    ameaca.indexJ = j
+                    if (m == 1) {
+                        ameaca.indexI = 0
+                    } else if (n == 1) {
+                        ameaca.indexI = 2
+                    } else {
+                        ameaca.indexI = 1
+                    }
+                    return ameaca
+                }
+            }
+        }
+        return false
     }
 
     /**
@@ -90,15 +192,5 @@ class Cpu {
 
 let jogo = new JogoDaVelha()
 let cpu = new Cpu()
-
-console.log(jogo.verificarVencedor())
-jogo.jogar(0,0)
-console.log(jogo.verificarVencedor())
-jogo.jogar(1,0)
-console.log(jogo.verificarVencedor())
-jogo.jogar(0,1)
-console.log(jogo.verificarVencedor())
-jogo.jogar(1,1)
-console.log(jogo.verificarVencedor())
-jogo.jogar(0,2)
-console.log(jogo.verificarVencedor())
+cpu.adicionarJogo(jogo)
+cpu.adicionarDificuldade(0)
