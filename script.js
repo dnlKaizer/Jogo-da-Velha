@@ -3,8 +3,8 @@ class JogoDaVelha {
     nJogadas = 0
 
     getMatriz() {
-        const matrizAux = this.matriz.map((x) => x) // Copia o atributo matriz
-        return matrizAux
+        const matrizAux = this.matriz.map((x) => x) // Copia o atributo this.matriz
+        return this.matrizAux
     }
 
     jogar(i, j) {
@@ -16,16 +16,58 @@ class JogoDaVelha {
             this.matriz[i][j] = this.nJogadas % 2
         }
     }
+
+    verificarVencedorLinha(i) {
+        if (this.matriz[i][0] != -1 && this.matriz[i][0] == this.matriz[i][1] && this.matriz[i][0] == this.matriz[i][2]) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    verificarVencedorColuna(j) {
+        if (this.matriz[0][j] != -1 && this.matriz[0][j] == this.matriz[1][j] && this.matriz[0][j] == this.matriz[2][j]) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    verificarVencedorDiagonais() {
+        let anterior = 0
+        if (this.matriz[1][1] == -1) {
+            return false
+        }
+        if (this.matriz[0][0] == this.matriz[1][1] && this.matriz[1][1] == this.matriz[2][2]) {
+            return true
+        }
+        if (this.matriz[0][2] == this.matriz[1][1] && this.matriz[1][1] == this.matriz[2][0]) {
+            return true
+        }
+        return false
+    }
+
+    verificarVencedor() {
+        if (this.verificarVencedorDiagonais()) {
+            return true
+        }
+        for (const pos in this.matriz) {
+            if (this.verificarVencedorColuna(pos) || this.verificarVencedorLinha(pos)) {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 class Cpu {
-    jogoDaVelha
+    jogo
     dificuldade
     // 0 indica fácil
     // 1 indica médio
     // 2 indica difícil
     // 3 indica impossível
-
+    
     adicionarDificuldade(dificuldade) {
         this.dificuldade = dificuldade
     }
@@ -41,5 +83,5 @@ class Cpu {
     }
 }
 
-let jogoDaVelha = new JogoDaVelha()
+let jogo = new JogoDaVelha()
 let cpu = new Cpu()
