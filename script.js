@@ -25,6 +25,20 @@ class Cpu {
     // 1 indica médio
     // 2 indica difícil
     // 3 indica impossível
+
+    adicionarDificuldade(dificuldade) {
+        this.dificuldade = dificuldade
+    }
+
+    /**
+     * Retorna número aleatório [min, max]. AMBOS inclusos.
+     * @param {number} min   
+     * @param {number} max   
+     * @returns {number} número aleatório
+     */ 
+    random(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min
+    }
 }
 
 let jogoDaVelha = new JogoDaVelha()
