@@ -129,9 +129,34 @@ class Cpu {
         }
     } 
 
+    verificarAmeacas() {
+        let ameaca
+        let ameacas = []
+        for (let m = 0; m < 3; m++) {
+            ameaca = this.verificarAmeacaLinha(m)
+            if (ameaca != false) {
+                ameacas.push(ameaca)
+            }
+            ameaca = this.verificarAmeacaColuna(m)
+            if (ameaca != false) {
+                ameacas.push(ameaca)
+            }
+        }
+        ameaca = this.verificarAmeacaDiagonais()
+        if (ameaca != false) {
+            ameacas.push(ameaca)
+        }
+        for (let i = 0; i < ameacas.length - 1; i++) {
+            for (let j = 0; j < ameacas.length; j++) {
+                if (ameacas[i] == ameacas[j]) {
+                    ameacas.splice(j, 1)
+                }
+            }
+        }
+        return ameacas
+    }
 
     verificarAmeacaLinha(i) {
-        let ameaca = new Ameaca
         const mat = jogo.getMatriz()
         inicio:
         for (let m = 0; m < 3; m++) {
@@ -140,16 +165,15 @@ class Cpu {
                     continue inicio
                 }
                 if (mat[i][m] == mat[i][n]) {
-                    ameaca.indexI = i
-                    ameaca.simbolo = mat[i][m]
-                    if (m == 1) {
-                        ameaca.indexJ = 0
-                    } else if (n == 1) {
-                        ameaca.indexJ = 2
-                    } else {
-                        ameaca.indexJ = 1
+                    for (let index = 0; index < 3; index++) {
+                        if (mat[i][index] == -1) {
+                            const ameaca = new Ameaca
+                            ameaca.indexI = i
+                            ameaca.indexJ = index
+                            ameaca.simbolo = mat[i][m]
+                            return ameaca
+                        }
                     }
-                    return ameaca
                 }
             }
         }
@@ -157,7 +181,6 @@ class Cpu {
     }
 
     verificarAmeacaColuna(j) {
-        let ameaca = new Ameaca
         const mat = jogo.getMatriz()
         inicio:
         for (let m = 0; m < 3; m++) {
@@ -166,16 +189,15 @@ class Cpu {
                     continue inicio
                 }
                 if (mat[m][j] == mat[n][j]) {
-                    ameaca.indexJ = j
-                    ameaca.simbolo = mat[m][j]
-                    if (m == 1) {
-                        ameaca.indexI = 0
-                    } else if (n == 1) {
-                        ameaca.indexI = 2
-                    } else {
-                        ameaca.indexI = 1
+                    for (let index = 0; index < 3; index++) {
+                        if (mat[index][j] == -1) {
+                            const ameaca = new Ameaca
+                            ameaca.indexI = index
+                            ameaca.indexJ = j
+                            ameaca.simbolo = mat[m][j]
+                            return ameaca
+                        }
                     }
-                    return ameaca
                 }
             }
         }
@@ -183,7 +205,6 @@ class Cpu {
     }
 
     verificarAmeacaDiagonais() {
-        let ameaca = new Ameaca
         const mat = jogo.getMatriz()
         inicio:
         for (let m = 0; m < 3; m++) {
@@ -192,35 +213,25 @@ class Cpu {
                     continue inicio
                 }
                 if (mat[m][m] == mat[n][n]) {
-                    ameaca.simbolo = mat[m][m]
-                    if (m == 1) {
-                        ameaca.indexI = 0
-                        ameaca.indexJ = 0
-                        return ameaca
-                    } else if (n == 1) {
-                        ameaca.indexI = 2
-                        ameaca.indexJ = 2
-                        return ameaca
-                    } else {
-                        ameaca.indexI = 1
-                        ameaca.indexJ = 1
-                        return ameaca
+                    for (let index = 0; index < 3; index++) {
+                        if (mat[index][index] == -1) {
+                            const ameaca = new Ameaca
+                            ameaca.indexI = index
+                            ameaca.indexJ = index
+                            ameaca.simbolo = mat[m][m]
+                            return ameaca
+                        }
                     }
                 }
                 if (mat[m][2 - m] == mat[n][2 - n]) {
-                    ameaca.simbolo = mat[m][2 - m]
-                    if (m == 1) {
-                        ameaca.indexI = 0
-                        ameaca.indexJ = 2
-                        return ameaca
-                    } else if (n == 1) {
-                        ameaca.indexI = 2
-                        ameaca.indexJ = 0
-                        return ameaca
-                    } else {
-                        ameaca.indexI = 1
-                        ameaca.indexJ = 1
-                        return ameaca
+                    for (let index = 0; index < 3; index++) {
+                        if (mat[index][2 - index] == -1) {
+                            const ameaca = new Ameaca
+                            ameaca.indexI = index
+                            ameaca.indexJ = 2 - index
+                            ameaca.simbolo = mat[m][m]
+                            return ameaca
+                        }
                     }
                 }
             }
@@ -242,11 +253,14 @@ class Cpu {
 let jogo = new JogoDaVelha()
 let cpu = new Cpu()
 
-console.log(cpu.verificarAmeacaColuna(0))
-console.log(cpu.verificarAmeacaDiagonais())
+console.log(cpu.verificarAmeacas())
 jogo.jogar(0,0)
+jogo.jogar(0,1)
 jogo.jogar(0,2)
 jogo.jogar(1,0)
-jogo.jogar(1,1)
-console.log(cpu.verificarAmeacaColuna(0))
-console.log(cpu.verificarAmeacaDiagonais())
+jogo.jogar(2,0)
+jogo.jogar(1,2)
+jogo.jogar(2,2)
+jogo.jogar(2,1)
+console.log(cpu.verificarAmeacas())
+console.log(jogo.getMatriz())
