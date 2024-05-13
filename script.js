@@ -77,7 +77,7 @@ class Jogada {
     isCanto() {
         const cantos = [[0,0], [0,2], [2,0], [2,2]]
         for (const valor of cantos) {
-            if (this.compararArrays(valor, this.indice)) {
+            if (compararArrays(valor, this.indice)) {
                 return true
             }
         }
@@ -85,7 +85,7 @@ class Jogada {
     }
 
     isCentro() {
-        return this.compararArrays(this.indice, [1,1])
+        return compararArrays(this.indice, [1,1])
     }
 
     isMeio() {
@@ -119,7 +119,7 @@ class Cpu {
                 this.jogada2()
                 break;
             case 2:
-
+                this.jogada3()
                 break;
             case 3:
                 
@@ -259,8 +259,8 @@ class Cpu {
     }
 
     jogada1() {
-        i = this.random(0,2)
-        j = this.random(0,2)
+        let i = this.random(0,2)
+        let j = this.random(0,2)
         jogo.jogar(i,j)
     }
 
@@ -284,6 +284,52 @@ class Cpu {
         }
         
         this.fazerJogada(pattern)
+    }
+
+    jogada3() {
+        const mat = jogo.getMatriz()
+        let i
+        let j
+        let x = new Jogada
+        let o = new Jogada
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                if (mat[i][j] != -1) {
+                    if (mat[i][j] == 1) {
+                        x.indice = [i,j]
+                    } else {
+                        o.indice = [i,j]
+                    }
+                } 
+            }
+        }
+
+        if (x.isCentro()) {
+            if (o.isCanto()) {
+                i = 2 - o.indice[0]
+                j = 2 - o.indice[1]
+            } else {
+                this.fazerJogada(0)
+                return
+            }
+        } else if (x.isCanto()) {
+            if (mat[1][1] == -1) {
+                i = 1
+                j = 1
+            } else {
+                i = 2 - x.indice[0]
+                j = 2 - x.indice[1]
+            }
+        } else {
+            if (mat[1][1] == -1) {
+                i = 1
+                j = 1
+            } else {
+                i = x.indice[1]
+                j = x.indice[0]
+            }
+        }
+        jogo.jogar(i,j)
     }
 
 
@@ -348,15 +394,15 @@ class Cpu {
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min
     }
+}
 
-    compararArrays(ar1, ar2) {
-        for (let i = 0; i < ar1.length; i++) {
-            if (ar1[i] != ar2[i]) {
-                return false
-            }
+function compararArrays(ar1, ar2) {
+    for (let i = 0; i < ar1.length; i++) {
+        if (ar1[i] != ar2[i]) {
+            return false
         }
-        return true
     }
+    return true
 }
 
 let jogo = new JogoDaVelha()
