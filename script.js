@@ -3,7 +3,7 @@ class JogoDaVelha {
     nJogadas = 0
 
     getMatriz() {
-        const matrizAux = this.matriz.map((x) => x) // Copia o atributo this.matriz
+        const matrizAux = this.matriz.slice() // Copia o atributo this.matriz
         return matrizAux
     }
 
@@ -94,6 +94,7 @@ class Cpu {
                 this.jogada2()
                 break;
             case 2:
+
                 break;
             case 3:
                 
@@ -240,7 +241,7 @@ class Cpu {
 
     jogada2() {
 
-        let mat = jogo.getMatriz()
+        const mat = jogo.getMatriz()
         let pattern = 2
 
         inicio:
@@ -267,7 +268,7 @@ class Cpu {
         1 - Meios
         2 - Qualquer
         */
-       let mat = jogo.getMatriz()
+       const mat = jogo.getMatriz()
        let jogadas = []
        let i
        let j
@@ -312,6 +313,27 @@ class Cpu {
         jogo.jogar(i,j)
     }
 
+    isCanto(jogada) {
+        const cantos = [[0,0], [0,2], [2,0], [2,2]]
+        for (const valor of cantos) {
+            if (this.compararArrays(valor, jogada)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    isCentro(jogada) {
+        return this.compararArrays(jogada, [1,1])
+    }
+
+    isMeio(jogada) {
+        if (this.isCanto(jogada) || this.isCentro(jogada)) {
+            return false
+        }
+        return true
+    }
+
     /**
      * Retorna número aleatório [min, max]. AMBOS inclusos.
      * @param {number} min   
@@ -321,11 +343,16 @@ class Cpu {
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min
     }
+
+    compararArrays(ar1, ar2) {
+        for (let i = 0; i < ar1.length; i++) {
+            if (ar1[i] != ar2[i]) {
+                return false
+            }
+        }
+        return true
+    }
 }
 
 let jogo = new JogoDaVelha()
 let cpu = new Cpu()
-
-jogo.jogar(1,0)
-cpu.melhorJogada()
-console.log(jogo.getMatriz())
