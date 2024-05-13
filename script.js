@@ -83,24 +83,17 @@ class Cpu {
     }
 
     melhorJogada() {
-        const dif = this.dificuldade
         const mat = jogo.getMatriz()
         const nJogadas = jogo.nJogadas
 
-        let i
-        let j
-
         switch (nJogadas) {
             case 0:
-                i = this.random(0,2)
-                j = this.random(0,2)
-                jogo.jogar(i,j)
+                this.jogada1()
                 break;
             case 1:
-                
+                this.jogada2()
                 break;
             case 2:
-                
                 break;
             case 3:
                 
@@ -239,6 +232,86 @@ class Cpu {
         return false
     }
 
+    jogada1() {
+        i = this.random(0,2)
+        j = this.random(0,2)
+        jogo.jogar(i,j)
+    }
+
+    jogada2() {
+
+        let mat = jogo.getMatriz()
+        let pattern = 2
+
+        inicio:
+        if (mat[1][1] != -1) {
+            pattern = 0
+        } else {
+            for (let i = 0; i < 3; i += 2) {
+                for (let j = 0; j < 3; j += 2) {
+                    if (mat[i][j] != -1) {
+                        pattern = 0
+                        break inicio
+                    }
+                }
+            }
+        }
+        
+        this.fazerJogada(pattern)
+    }
+
+    fazerJogada(pattern) {
+        /* 
+        Patterns (Ambos incluem centro):
+        0 - Cantos
+        1 - Meios
+        2 - Qualquer
+        */
+       let mat = jogo.getMatriz()
+       let jogadas = []
+       let i
+       let j
+       let m
+
+        if (pattern == 2) {
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 3; j++) {
+                    if (mat[i][j] == -1) {
+                        jogadas.push([i,j])
+                    }
+                }
+            }
+        } else {
+            if (mat[1][1] == -1) {
+                jogadas.push([1,1])
+            }
+            if (pattern == 0) {
+                for (i = 0; i < 3; i += 2) {
+                    for (j = 0; j < 3; j += 2) {
+                        if (mat[i][j] == -1) {
+                            jogadas.push([i,j])
+                        }
+                    }
+                }
+            } else {
+                for (m = 0; m < 3; m += 2) {
+                    if (mat[m][1] == -1) {
+                        jogadas.push([m,1])
+                    }
+                    if (mat[1][m] == -1) {
+                        jogadas.push([1,m])
+                    }
+                }
+            }
+        }
+
+        m = this.random(0, jogadas.length - 1)
+        i = jogadas[m][0]
+        j = jogadas[m][1]
+        
+        jogo.jogar(i,j)
+    }
+
     /**
      * Retorna número aleatório [min, max]. AMBOS inclusos.
      * @param {number} min   
@@ -253,14 +326,6 @@ class Cpu {
 let jogo = new JogoDaVelha()
 let cpu = new Cpu()
 
-console.log(cpu.verificarAmeacas())
-jogo.jogar(0,0)
-jogo.jogar(0,1)
-jogo.jogar(0,2)
 jogo.jogar(1,0)
-jogo.jogar(2,0)
-jogo.jogar(1,2)
-jogo.jogar(2,2)
-jogo.jogar(2,1)
-console.log(cpu.verificarAmeacas())
+cpu.melhorJogada()
 console.log(jogo.getMatriz())
