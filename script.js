@@ -71,6 +71,31 @@ class Ameaca {
     simbolo
 }
 
+class Jogada {
+    indice
+
+    isCanto() {
+        const cantos = [[0,0], [0,2], [2,0], [2,2]]
+        for (const valor of cantos) {
+            if (this.compararArrays(valor, this.indice)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    isCentro() {
+        return this.compararArrays(this.indice, [1,1])
+    }
+
+    isMeio() {
+        if (this.isCanto() || this.isCentro()) {
+            return false
+        }
+        return true
+    }
+}
+
 class Cpu {
     dificuldade
     // 0 indica fácil
@@ -150,7 +175,7 @@ class Cpu {
         return ameacas
     }
 
-    verificarAmeacaLinha(i) {
+    verificarAmeacaLinha(i) {x
         const mat = jogo.getMatriz()
         inicio:
         for (let m = 0; m < 3; m++) {
@@ -261,6 +286,7 @@ class Cpu {
         this.fazerJogada(pattern)
     }
 
+
     fazerJogada(pattern) {
         /* 
         Patterns (Ambos incluem centro):
@@ -311,27 +337,6 @@ class Cpu {
         j = jogadas[m][1]
         
         jogo.jogar(i,j)
-    }
-
-    isCanto(jogada) {
-        const cantos = [[0,0], [0,2], [2,0], [2,2]]
-        for (const valor of cantos) {
-            if (this.compararArrays(valor, jogada)) {
-                return true
-            }
-        }
-        return false
-    }
-
-    isCentro(jogada) {
-        return this.compararArrays(jogada, [1,1])
-    }
-
-    isMeio(jogada) {
-        if (this.isCanto(jogada) || this.isCentro(jogada)) {
-            return false
-        }
-        return true
     }
 
     /**
