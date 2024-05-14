@@ -121,8 +121,8 @@ class Cpu {
             case 2:
                 this.jogada3()
                 break;
-            case 3:
-                
+            case 3: 
+                this.jogada4() 
                 break;
             case 4:
                 
@@ -166,7 +166,7 @@ class Cpu {
             ameacas.push(ameaca)
         }
         for (let i = 0; i < ameacas.length - 1; i++) {
-            for (let j = 0; j < ameacas.length; j++) {
+            for (let j = i + 1; j < ameacas.length; j++) {
                 if (ameacas[i] == ameacas[j]) {
                     ameacas.splice(j, 1)
                 }
@@ -175,7 +175,7 @@ class Cpu {
         return ameacas
     }
 
-    verificarAmeacaLinha(i) {x
+    verificarAmeacaLinha(i) {
         const mat = jogo.getMatriz()
         inicio:
         for (let m = 0; m < 3; m++) {
@@ -242,6 +242,9 @@ class Cpu {
                         }
                     }
                 }
+                if (mat[m][2 - m] == -1) {
+                    continue inicio
+                }
                 if (mat[m][2 - m] == mat[n][2 - n]) {
                     for (let index = 0; index < 3; index++) {
                         if (mat[index][2 - index] == -1) {
@@ -283,7 +286,7 @@ class Cpu {
             }
         }
         
-        this.fazerJogada(pattern)
+        this.fazerJogadaPattern(pattern)
     }
 
     jogada3() {
@@ -309,7 +312,7 @@ class Cpu {
                 i = 2 - o.indice[0]
                 j = 2 - o.indice[1]
             } else {
-                this.fazerJogada(0)
+                this.fazerJogadaPattern(0)
                 return
             }
         } else if (x.isCanto()) {
@@ -333,7 +336,7 @@ class Cpu {
     }
 
 
-    fazerJogada(pattern) {
+    fazerJogadaPattern(pattern) {
         /* 
         Patterns (Ambos incluem centro):
         0 - Cantos
@@ -383,6 +386,28 @@ class Cpu {
         j = jogadas[m][1]
         
         jogo.jogar(i,j)
+    }
+
+    fazerJogadaAmeacas() {
+        const ameacas = this.verificarAmeacas()
+        if (ameacas.length > 0) {
+            if (ameacas.length != 1) {
+                for (const ameaca of ameacas) {
+                    if (ameaca.simbolo == this.nJogadas % 2 + 1) {
+                        let i = ameaca.indexI
+                        let j = ameaca.indexJ
+                        jogo.jogar(i,j)
+                        return true
+                    }
+                }
+            }
+            const ameaca = ameacas[0]
+            let i = ameaca.indexI
+            let j = ameaca.indexJ
+            jogo.jogar(i,j)
+            return true
+        }
+        return false
     }
 
     /**
