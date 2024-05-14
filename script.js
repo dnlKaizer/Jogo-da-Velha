@@ -131,17 +131,17 @@ class Cpu {
                 
                 break;
             case 6:
+
                 break;
             case 7:
-                
+                this.jogada7()
                 break;
             case 8:
-                
+                this.jogada8()
                 break;
             case 9:
-                
+                this.jogada9()
                 break;
-        
             default:
                 break;
         }
@@ -334,6 +334,24 @@ class Cpu {
         jogo.jogar(i,j)
     }
 
+    // REVER
+    jogada7() {
+        if (this.fazerJogadaAmeacas()) {
+            return
+        }
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada8() {
+        if (this.fazerJogadaAmeacas()) {
+            return
+        }
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada9() {
+        this.fazerJogadaPattern(2)
+    }
 
     fazerJogadaPattern(pattern) {
         /* 
