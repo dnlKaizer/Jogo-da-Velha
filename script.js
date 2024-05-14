@@ -131,7 +131,6 @@ class Cpu {
                 
                 break;
             case 6:
-                
                 break;
             case 7:
                 
@@ -375,6 +374,58 @@ class Cpu {
                         jogadas.push([m,1])
                     }
                     if (mat[1][m] == -1) {
+                        jogadas.push([1,m])
+                    }
+                }
+            }
+        }
+
+        m = this.random(0, jogadas.length - 1)
+        i = jogadas[m][0]
+        j = jogadas[m][1]
+        
+        jogo.jogar(i,j)
+    }
+
+    fazerJogadaPattern(pattern, exception) {
+        /* 
+        Patterns (Ambos incluem centro):
+        0 - Cantos
+        1 - Meios
+        2 - Qualquer
+        */
+       const mat = jogo.getMatriz()
+       let jogadas = []
+       let i
+       let j
+       let m
+
+        if (pattern == 2) {
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 3; j++) {
+                    if (mat[i][j] == -1 && !compararArrays([i,j],exception)) {
+                        jogadas.push([i,j])
+                    }
+                }
+            }
+        } else {
+            if (mat[1][1] == -1 && !compararArrays([1,1],exception)) {
+                jogadas.push([1,1])
+            }
+            if (pattern == 0) {
+                for (i = 0; i < 3; i += 2) {
+                    for (j = 0; j < 3; j += 2) {
+                        if (mat[i][j] == -1 && !compararArrays([i,j],exception)) {
+                            jogadas.push([i,j])
+                        }
+                    }
+                }
+            } else {
+                for (m = 0; m < 3; m += 2) {
+                    if (mat[m][1] == -1 && !compararArrays([m,1],exception)) {
+                        jogadas.push([m,1])
+                    }
+                    if (mat[1][m] == -1 && !compararArrays([1,m],exception)) {
                         jogadas.push([1,m])
                     }
                 }
