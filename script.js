@@ -1,6 +1,5 @@
 class JogoDaVelha {
     matriz = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
-    fim = true
     nJogadas = 0
 
     getMatriz() {
@@ -14,20 +13,31 @@ class JogoDaVelha {
     }
 
     jogar(i, j) {
-        if (this.fim) {
-            // -1 indica vazio
-            // 0 indica que é O
-            // 1 indica que é X
-            if (this.matriz[i][j] == -1) {
-                this.nJogadas++;
-                this.matriz[i][j] = this.nJogadas % 2
-                atualizarGrid(i, j)
-                const teste = this.verificarVencedor()
-                if (teste != -1 || this.nJogadas == 9) {
-                    this.fim = false
-                    const winner = document.getElementById('winner-msg')
-                    winner.style.display = 'flex'
+        // -1 indica vazio
+        // 0 indica que é O
+        // 1 indica que é X
+        if (this.matriz[i][j] == -1) {
+            this.nJogadas++;
+            this.matriz[i][j] = this.nJogadas % 2
+            atualizarGrid(i, j)
+            const teste = this.verificarVencedor()
+            if (teste != -1 || this.nJogadas == 9) {
+                const winner = document.getElementById('winner-msg')
+                const winnerName = document.getElementById('winner-name')
+                const winnerType = document.getElementById('winner-type')
+                let str
+                let type = 'VENCEDOR'
+                if (teste == -1) {
+                    str = 'XO'
+                    type = 'EMPATE'
+                } else if (teste == 1) {
+                    str = 'X'
+                } else {
+                    str = 'O'
                 }
+                winnerType.textContent = type
+                winnerName.textContent = str
+                winner.style.display = 'flex'
             }
         }
     }
