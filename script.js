@@ -22,8 +22,11 @@ class JogoDaVelha {
                 this.nJogadas++;
                 this.matriz[i][j] = this.nJogadas % 2
                 atualizarGrid(i, j)
-                if (this.verificarVencedor() != -1) {
+                const teste = this.verificarVencedor()
+                if (teste != -1 || this.nJogadas == 9) {
                     this.fim = false
+                    const winner = document.getElementById('winner-msg')
+                    winner.style.display = 'flex'
                 }
             }
         }
@@ -484,6 +487,30 @@ function atualizarGrid(i, j) {
     img.src = `./imagens/${mat[i][j]}.png`
     cells[index].innerHTML = ''
     cells[index].appendChild(img)
+}
+
+function restartGrid() {
+    const cells = document.getElementsByClassName('cell')
+    for (let i = 0; i < 9; i++) {
+        const cell = cells[i]
+        cell.innerHTML = ''
+        const input = document.createElement('input')
+        input.type = 'button'
+        const m = Math.floor(i / 3)
+        const n = i % 3
+        input.onclick = function() { clicar(m,n) }
+        if (innerWidth > 480) {
+            input.style.width = '150px'
+            input.style.height = '150px'
+        } else {
+            input.style.width = '80px'
+            input.style.height = '80px'
+        }
+        cell.appendChild(input)
+    }
+    const winner = document.getElementById('winner-msg')
+    winner.style.display = 'none'
+    jogo = new JogoDaVelha
 }
 
 function clicar(i,j) {
