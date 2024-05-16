@@ -21,6 +21,7 @@ class JogoDaVelha {
             if (this.matriz[i][j] == -1) {
                 this.nJogadas++;
                 this.matriz[i][j] = this.nJogadas % 2
+                atualizarGrid(i, j)
                 if (this.verificarVencedor() != -1) {
                     this.fim = false
                 }
@@ -473,6 +474,20 @@ function compararArrays(ar1, ar2) {
         }
     }
     return true
+}
+
+function atualizarGrid(i, j) {
+    const mat = jogo.getMatriz()
+    const cells = document.getElementsByClassName('cell')
+    const index = (3 * i) + j
+    let img = document.createElement('img')
+    img.src = `./imagens/${mat[i][j]}.png`
+    cells[index].innerHTML = ''
+    cells[index].appendChild(img)
+}
+
+function clicar(i,j) {
+    jogo.jogar(i,j)
 }
 
 let jogo = new JogoDaVelha()
