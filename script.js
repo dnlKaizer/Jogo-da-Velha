@@ -1,5 +1,6 @@
 class JogoDaVelha {
     matriz = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
+    fim = true
     nJogadas = 0
 
     getMatriz() {
@@ -13,12 +14,17 @@ class JogoDaVelha {
     }
 
     jogar(i, j) {
-        // -1 indica vazio
-        // 0 indica que é O
-        // 1 indica que é X
-        if (this.matriz[i][j] == -1) {
-            this.nJogadas++;
-            this.matriz[i][j] = this.nJogadas % 2
+        if (this.fim) {
+            // -1 indica vazio
+            // 0 indica que é O
+            // 1 indica que é X
+            if (this.matriz[i][j] == -1) {
+                this.nJogadas++;
+                this.matriz[i][j] = this.nJogadas % 2
+                if (this.verificarVencedor() != -1) {
+                    this.fim = false
+                }
+            }
         }
     }
 
