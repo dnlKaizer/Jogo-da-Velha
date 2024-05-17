@@ -5,6 +5,11 @@
     font-family: LTS;
 }
 
+@keyframes append-border{
+    from {border-color: transparent;}
+    to {}
+}
+
 @font-face { /* Cria uma nova fonte */
     font-family: LTS;
     src: url(./fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
@@ -23,6 +28,11 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 450px;
+}
+
+#box .cell {
+    animation-name: append-border;
+    animation-duration: 5s;
 }
 
 .cell {
