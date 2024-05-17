@@ -1,6 +1,7 @@
 class JogoDaVelha {
     matriz = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
     nJogadas = 0
+    fim = true
 
     getMatriz() {
         const matrizAux = this.matriz.slice() // Copia o atributo this.matriz
@@ -16,28 +17,11 @@ class JogoDaVelha {
         // -1 indica vazio
         // 0 indica que é O
         // 1 indica que é X
-        if (this.matriz[i][j] == -1) {
+        if (this.matriz[i][j] == -1 && this.fim) {
             this.nJogadas++;
             this.matriz[i][j] = this.nJogadas % 2
-            atualizarGrid(i, j)
-            const teste = this.verificarVencedor()
-            if (teste != -1 || this.nJogadas == 9) {
-                const winner = document.getElementById('winner-msg')
-                const winnerName = document.getElementById('winner-name')
-                const winnerType = document.getElementById('winner-type')
-                let str
-                let type = 'VENCEDOR'
-                if (teste == -1) {
-                    str = 'XO'
-                    type = 'EMPATE'
-                } else if (teste == 1) {
-                    str = 'X'
-                } else {
-                    str = 'O'
-                }
-                winnerType.textContent = type
-                winnerName.textContent = str
-                winner.style.display = 'flex'
+            if (this.verificarVencedor() != -1 || this.nJogadas == 9) {
+                this.fim = false
             }
         }
     }
@@ -487,30 +471,6 @@ function compararArrays(ar1, ar2) {
         }
     }
     return true
-}
-
-function atualizarGrid(i, j) {
-    const mat = jogo.getMatriz()
-    const cells = document.getElementsByClassName('cell')
-    const index = (3 * i) + j
-    cells[index].style.backgroundImage = `url(./imagens/${mat[i][j]}.png)`
-    cells[index].style.cursor = 'auto'
-}
-
-function restartGrid() {
-    const cells = document.getElementsByClassName('cell')
-    for (let i = 0; i < 9; i++) {
-        const cell = cells[i]
-        cell.style.backgroundImage = ''
-        cell.style.cursor = 'pointer'
-    }
-    const winner = document.getElementById('winner-msg')
-    winner.style.display = 'none'
-    jogo = new JogoDaVelha
-}
-
-function clicar(i,j) {
-    jogo.jogar(i,j)
 }
 
 let jogo = new JogoDaVelha()
