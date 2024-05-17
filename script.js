@@ -493,30 +493,16 @@ function atualizarGrid(i, j) {
     const mat = jogo.getMatriz()
     const cells = document.getElementsByClassName('cell')
     const index = (3 * i) + j
-    let img = document.createElement('img')
-    img.src = `./imagens/${mat[i][j]}.png`
-    cells[index].innerHTML = ''
-    cells[index].appendChild(img)
+    cells[index].style.backgroundImage = `url(./imagens/${mat[i][j]}.png)`
+    cells[index].style.cursor = 'auto'
 }
 
 function restartGrid() {
     const cells = document.getElementsByClassName('cell')
     for (let i = 0; i < 9; i++) {
         const cell = cells[i]
-        cell.innerHTML = ''
-        const input = document.createElement('input')
-        input.type = 'button'
-        const m = Math.floor(i / 3)
-        const n = i % 3
-        input.onclick = function() { clicar(m,n) }
-        if (innerWidth > 480) {
-            input.style.width = '150px'
-            input.style.height = '150px'
-        } else {
-            input.style.width = '80px'
-            input.style.height = '80px'
-        }
-        cell.appendChild(input)
+        cell.style.backgroundImage = ''
+        cell.style.cursor = 'pointer'
     }
     const winner = document.getElementById('winner-msg')
     winner.style.display = 'none'
