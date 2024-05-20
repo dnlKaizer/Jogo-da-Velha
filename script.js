@@ -2,15 +2,11 @@ class JogoDaVelha {
     matriz = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
     nJogadas = 0
     fim = true
+    vencedor = -1
 
     getMatriz() {
         const matrizAux = this.matriz.slice() // Copia o atributo this.matriz
         return matrizAux
-    }
-
-    inserirMatriz(matriz) {
-        this.matriz = matriz
-        this.nJogadas = matriz.nJogadas
     }
 
     jogar(i, j) {
@@ -20,7 +16,7 @@ class JogoDaVelha {
         if (this.matriz[i][j] == -1 && this.fim) {
             this.nJogadas++;
             this.matriz[i][j] = this.nJogadas % 2
-            if (this.verificarVencedor() != -1 || this.nJogadas == 9) {
+            if (this.verificarVencedor() || this.nJogadas == 9) {
                 this.fim = false
             }
         }
@@ -58,19 +54,22 @@ class JogoDaVelha {
     verificarVencedor() {
         let teste = this.verificarVencedorDiagonais()
         if (teste != -1) {
-            return teste
+            this.vencedor = teste
+            return true
         }
         for (const pos in this.matriz) {
             teste = this.verificarVencedorColuna(pos)
             if (teste != -1) {
-                return teste
+                this.vencedor = teste
+                return true
             }
             teste = this.verificarVencedorLinha(pos)
             if (teste != -1) {
-                return teste
+                this.vencedor = teste
+                return true
             }
         }
-        return -1
+        return false
     }
 }
 
@@ -374,16 +373,6 @@ class Cpu {
         jogo.jogar(i,j)
     }
 
-    fazerJogadaPattern(pattern, exception) {
-        let jogadas = this.lerJogadasPattern(pattern)
-
-        m = this.random(0, jogadas.length - 1)
-        i = jogadas[m][0]
-        j = jogadas[m][1]
-        
-        jogo.jogar(i,j)
-    }
-
     fazerJogadaAmeacas() {
         const ameacas = this.verificarAmeacas()
         if (ameacas.length > 0) {
@@ -471,6 +460,40 @@ function compararArrays(ar1, ar2) {
         }
     }
     return true
+}
+
+function clicar(i, j) {
+    if (jogo.vencedor == -1) {
+        jogo.jogar(i, j)
+        atualizarPainel((3 * i) + j)
+        if (jogo.vencedor != -1) {
+            encerrar()
+        }
+    }
+}
+
+function atualizarPainel(index) {
+    const cells = document.getElementsByClassName('cell')
+    const element = document.createElement('div')
+    element.classList = 'symbol' + (jogo.nJogadas % 2)
+    cells[index].appendChild(element)
+    cells[index].style.cursor = 'auto'
+}
+
+function encerrar() {
+    const cells = document.getElementsByClassName('cell')
+    for (let i = 0; i < 9; i++) {
+        cells[i].style.cursor = 'auto'
+    }
+}
+
+function restart() {
+    const cells = document.getElementsByClassName('cell')
+    for (let i = 0; i < 9; i++) {
+        cells[i].style.cursor = 'pointer'
+        cells[i].innerHTML = ''
+    }
+    jogo = new JogoDaVelha()
 }
 
 let jogo = new JogoDaVelha()

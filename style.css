@@ -68,7 +68,7 @@
 
 @font-face { /* Cria uma nova fonte */
     font-family: LTS;
-    src: url(./fonts/LTSaeada-Bold.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
+    src: url(./fonts/LTSaeada-Regular.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
 }
 
 #container {
@@ -101,29 +101,51 @@
     cursor: pointer;
 }
 
-.x::after, .x::before{
+#options {
+    width: 450px;
+    height: 45px;
+    margin-bottom: 18px;
+}
+
+/* TEMPORÁRIO */
+#restart {
+    padding-block: 10px;
+    padding-inline: 20px;
+    font-size: 15pt;
+    font-family: LTS;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 1px 1px 3px rgb(112, 112, 112);
+}
+#restart:hover {
+    background-color: rgb(238, 238, 238);
+}
+
+.symbol1::after, .symbol1::before{
     content: '';
     position: absolute;
     background-color: white;
     width: 165px;
     height: 12px;
 }
-.x::after {
+.symbol1::after {
     animation: append-x 0.15s;
     rotate: -135deg;
 }
-.x::before {
+.symbol1::before {
     animation: append-x-2 0.25s;
     rotate: -45deg;
 }
 
-.x {
+.symbol1 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.o {
+.symbol0 {
     animation: append-o 0.25s;
     position: absolute;
     width: 130px;
@@ -172,27 +194,27 @@
     background-color: rgb(208, 208, 208);
 }
 
-.cell:nth-child(1),
 .cell:nth-child(2),
-.cell:nth-child(3) {
+.cell:nth-child(3),
+.cell:nth-child(4) {
     border-top: 0;
 }
 
-.cell:nth-child(1),
-.cell:nth-child(4),
-.cell:nth-child(7) {
+.cell:nth-child(2),
+.cell:nth-child(5),
+.cell:nth-child(8) {
     border-left: 0;
 }
 
-.cell:nth-child(3),
-.cell:nth-child(6),
-.cell:nth-child(9) {
+.cell:nth-child(4),
+.cell:nth-child(7),
+.cell:nth-child(10) {
     border-right: 0;
 }
 
-.cell:nth-child(7),
 .cell:nth-child(8),
-.cell:nth-child(9) {
+.cell:nth-child(9),
+.cell:nth-child(10) {
     border-bottom: 0;
 }
 
@@ -205,13 +227,18 @@
         height: 100px;
         background-size: 80px 80px;
     }
-    .o {
+    .symbol0 {
         width: 87px;
         height: 87px;
         border-width: 8px;
     }
-    .x::after, .x::before {
+    .symbol1::after, .symbol1::before {
         width: 110px;
         height: 8px;
+    }
+    #options {
+        width: 300px;
+        height: 30px;
+        margin-bottom: 12px;
     }
   }
