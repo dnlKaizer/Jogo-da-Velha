@@ -485,10 +485,12 @@ function compararArrays(ar1, ar2) {
     return true
 }
 
-function clicar(i, j) {
+function clicar(index) {
+    let j = index % 3
+    let i = Math.floor(index / 3)
     if (jogo.vencedor == -1) {
         jogo.jogar(i, j)
-        atualizarPainel((3 * i) + j)
+        atualizarPainel(index)
         if (jogo.vencedor != -1) {
             encerrar()
         }
@@ -502,6 +504,30 @@ function atualizarPainel(index) {
     element.classList = 'symbol' + (jogo.nJogadas % 2)
     cells[index].appendChild(element)
     cells[index].style.cursor = 'auto'
+}
+
+function mouseEnter(index) {
+    let j = index % 3
+    let i = Math.floor(index / 3)
+    const mat = jogo.getMatriz()
+    if (mat[i][j] == -1 && jogo.fim) {
+        const cells = document.getElementsByClassName('cell')
+        const element = document.createElement('div')
+        const symbol = (jogo.nJogadas + 1) % 2
+        element.classList = 'symbol' + symbol
+        element.style.opacity = '0.2'
+        cells[index].appendChild(element)
+    }
+}
+
+function mouseLeave(index) {
+    let j = index % 3
+    let i = Math.floor(index / 3)
+    const mat = jogo.getMatriz()
+    if (mat[i][j] == -1 && jogo.fim) {
+        const cells = document.getElementsByClassName('cell')
+        cells[index].innerHTML = ''
+    }
 }
 
 function encerrar() {
