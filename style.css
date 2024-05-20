@@ -6,7 +6,7 @@
 }
 
 @keyframes append-border {
-    from {border-color: transparent;}
+    from {border-color: transparent; color: transparent;}
     to {}
 }
 
@@ -107,26 +107,26 @@
     cursor: pointer;
 }
 
-#options {
+#menu {
     width: 450px;
     height: 45px;
     margin-bottom: 18px;
 }
 
-/* TEMPORÁRIO */
 #restart {
-    padding-block: 10px;
-    padding-inline: 20px;
-    font-size: 15pt;
+    animation: append-border 5s;
+    float: right;
+    margin-top: 2px;
+    padding-block: 5px;
+    padding-inline: 5px;
+    font-size: 20pt;
     font-family: LTS;
+    font-weight: bold;
     cursor: pointer;
     border: none;
-    border-radius: 20px;
-    background-color: white;
-    box-shadow: 1px 1px 3px rgb(112, 112, 112);
-}
-#restart:hover {
-    background-color: rgb(238, 238, 238);
+    border-bottom: 1px solid white;
+    background: transparent;
+    color: white;
 }
 
 /* 

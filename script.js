@@ -498,6 +498,7 @@ function clicar(i, j) {
 function atualizarPainel(index) {
     const cells = document.getElementsByClassName('cell')
     const element = document.createElement('div')
+    element.id = `id${index}`
     element.classList = 'symbol' + (jogo.nJogadas % 2)
     cells[index].appendChild(element)
     cells[index].style.cursor = 'auto'
