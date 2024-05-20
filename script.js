@@ -24,53 +24,76 @@ class JogoDaVelha {
 
     verificarVencedorLinha(i) {
         if (this.matriz[i][0] != -1 && this.matriz[i][0] == this.matriz[i][1] && this.matriz[i][0] == this.matriz[i][2]) {
-            return this.matriz[i][0]
+            this.vencedor = new Vencedor()
+            this.vencedor.simbolo = this.matriz[i][0]
+            this.vencedor.tipo = 1
+            this.vencedor.index = i
+            return true
         } else {
-            return -1
+            return false
         }
     }
 
     verificarVencedorColuna(j) {
         if (this.matriz[0][j] != -1 && this.matriz[0][j] == this.matriz[1][j] && this.matriz[0][j] == this.matriz[2][j]) {
-            return this.matriz[0][j]
+            this.vencedor = new Vencedor()
+            this.vencedor.simbolo = this.matriz[i][0]
+            this.vencedor.tipo = 2
+            this.vencedor.index = j
+            return true
         } else {
-            return -1
+            return false
         }
     }
 
     verificarVencedorDiagonais() {
         if (this.matriz[1][1] == -1) {
-            return -1
+            return false
         }
         if (this.matriz[0][0] == this.matriz[1][1] && this.matriz[1][1] == this.matriz[2][2]) {
-            return this.matriz[1][1]
+            this.vencedor = new Vencedor()
+            this.vencedor.simbolo = this.matriz[0][0]
+            this.vencedor.tipo = 0
+            this.vencedor.index = 0
+            return true
         }
         if (this.matriz[0][2] == this.matriz[1][1] && this.matriz[1][1] == this.matriz[2][0]) {
-            return this.matriz[1][1]
+            this.vencedor = new Vencedor()
+            this.vencedor.simbolo = this.matriz[0][2]
+            this.vencedor.tipo = 0
+            this.vencedor.index = 1
+            return true
         }
-        return -1
+        return false
     }
 
     verificarVencedor() {
-        let teste = this.verificarVencedorDiagonais()
-        if (teste != -1) {
-            this.vencedor = teste
+        if (this.verificarVencedorDiagonais()) {
             return true
         }
         for (const pos in this.matriz) {
-            teste = this.verificarVencedorColuna(pos)
-            if (teste != -1) {
-                this.vencedor = teste
-                return true
-            }
-            teste = this.verificarVencedorLinha(pos)
-            if (teste != -1) {
-                this.vencedor = teste
+            if (this.verificarVencedorColuna(pos) || this.verificarVencedorLinha(pos)) {
                 return true
             }
         }
         return false
     }
+}
+
+class Vencedor {
+    simbolo
+    tipo
+    /* 
+    TIPO:
+    0: Diagonal
+    1: Linha
+    2: Coluna
+     */
+    index
+    /* INDEX:
+    Para tipos 1 ou 2, é o index da linha ou coluna
+    Para tipo 0, é 0 para diagonal principal e 1 para secundária
+     */
 }
 
 class Ameaca {
