@@ -37,7 +37,7 @@ class JogoDaVelha {
     verificarVencedorColuna(j) {
         if (this.matriz[0][j] != -1 && this.matriz[0][j] == this.matriz[1][j] && this.matriz[0][j] == this.matriz[2][j]) {
             this.vencedor = new Vencedor()
-            this.vencedor.simbolo = this.matriz[i][0]
+            this.vencedor.simbolo = this.matriz[0][j]
             this.vencedor.tipo = 2
             this.vencedor.index = j
             return true
@@ -508,10 +508,50 @@ function encerrar() {
     for (let i = 0; i < 9; i++) {
         cells[i].style.cursor = 'auto'
     }
+    linhaVitoria()
+}
+
+function linhaVitoria() {
+    const vencedor = jogo.vencedor
+    let multiplicador
+    if (innerWidth > 480) {
+        multiplicador = 1
+    } else {
+        multiplicador = 2 / 3
+    }
+    const tagVencedor = document.createElement('div')
+    const box = document.querySelector('#box')
+    tagVencedor.style.height = `${12 * multiplicador}px`
+    tagVencedor.classList = 'vencedor'
+    if (vencedor.tipo == 0) {
+        tagVencedor.style.width = `${624 * multiplicador}px`
+        if (vencedor.index == 0) {
+            tagVencedor.style.rotate = '45deg'
+        } else {
+            tagVencedor.style.rotate = '135deg'
+        }
+    } else {
+        const distancia = [-151, 0, 151]
+        tagVencedor.style.width = `${450 * multiplicador}px`
+        if (vencedor.tipo == 1) {
+            let vertical = distancia[vencedor.index] * multiplicador
+            tagVencedor.style.transform = `translateY(${vertical}px)`
+        } else {
+            let horizontal = distancia[vencedor.index] * multiplicador
+            tagVencedor.style.rotate = '90deg'
+            tagVencedor.style.transform = `translateY(${horizontal * (-1)}px)`
+        }
+    }
+    box.appendChild(tagVencedor)
 }
 
 function restart() {
     const cells = document.getElementsByClassName('cell')
+    const box = document.querySelector('#box')
+    if (jogo.vencedor != -1) {
+        const vencedor = document.querySelector('.vencedor')
+        box.removeChild(vencedor)
+    }
     for (let i = 0; i < 9; i++) {
         cells[i].style.cursor = 'pointer'
         cells[i].innerHTML = ''

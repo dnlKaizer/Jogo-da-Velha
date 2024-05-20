@@ -12,7 +12,7 @@
 
 @keyframes append-x {
     from {
-        clip-path: inset(0 0 0 100%);
+        clip-path: inset(0 100% 0 0);
       }
       to {
         clip-path: inset(0 0 0 0);
@@ -21,10 +21,10 @@
 
 @keyframes append-x-2 {
     0% {
-        clip-path: inset(0 0 0 100%);
+        clip-path: inset(0 100% 0 0);
     }
     50% {
-        clip-path: inset(0 0 0 100%);
+        clip-path: inset(0 100% 0 0);
     }
     100% {
         clip-path: inset(0 0 0 0);
@@ -63,7 +63,11 @@
     100% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 50% 0);
     }
+}
 
+@keyframes vencer-diagonal {
+    from {width: 0px;}
+    to {width: 624px;}
 }
 
 @font-face { /* Cria uma nova fonte */
@@ -72,7 +76,7 @@
 }
 
 #container {
-    background: linear-gradient(to left top, rgb(9, 100, 191), rgb(144, 237, 234));
+    background: linear-gradient(to left top, rgb(166, 42, 255), rgb(252, 227, 255));
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -84,6 +88,8 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 450px;
+    align-items: center;
+    justify-content: center;
 }
 
 #box .cell {
@@ -123,20 +129,35 @@
     background-color: rgb(238, 238, 238);
 }
 
+/* 
+Diagonal:
+width: 624px 
+
+Horizontal/Vertical: 
+width: 450px
+*/
+
+.vencedor {
+    background-color: white;
+    position: absolute;
+    animation: append-x 0.75s;
+    animation-timing-function: ease-in-out;
+}
+
 .symbol1::after, .symbol1::before{
     content: '';
     position: absolute;
     background-color: white;
-    width: 165px;
+    width: 170px;
     height: 12px;
 }
 .symbol1::after {
-    animation: append-x 0.15s;
-    rotate: -135deg;
+    animation: append-x-2 0.25s;
+    rotate: 135deg;
 }
 .symbol1::before {
-    animation: append-x-2 0.25s;
-    rotate: -45deg;
+    animation: append-x 0.15s;
+    rotate: 45deg;
 }
 
 .symbol1 {
@@ -159,6 +180,8 @@
     align-items: center;
     justify-content: center;
     position: fixed;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     bottom: 0;
     left: 0;
@@ -194,27 +217,27 @@
     background-color: rgb(208, 208, 208);
 }
 
+.cell:nth-child(1),
 .cell:nth-child(2),
-.cell:nth-child(3),
-.cell:nth-child(4) {
+.cell:nth-child(3) {
     border-top: 0;
 }
 
-.cell:nth-child(2),
-.cell:nth-child(5),
-.cell:nth-child(8) {
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7) {
     border-left: 0;
 }
 
-.cell:nth-child(4),
-.cell:nth-child(7),
-.cell:nth-child(10) {
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9) {
     border-right: 0;
 }
 
+.cell:nth-child(7),
 .cell:nth-child(8),
-.cell:nth-child(9),
-.cell:nth-child(10) {
+.cell:nth-child(9) {
     border-bottom: 0;
 }
 
@@ -233,12 +256,17 @@
         border-width: 8px;
     }
     .symbol1::after, .symbol1::before {
-        width: 110px;
+        width: 113px;
         height: 8px;
     }
     #options {
         width: 300px;
         height: 30px;
-        margin-bottom: 12px;
+        margin-bottom: 18px;
+    }
+    #restart {
+        font-size: 12pt;
+        padding-inline: 15px;
+        padding-block: 7.5px;
     }
   }
