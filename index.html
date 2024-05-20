@@ -10,25 +10,27 @@
         <script src="script.js"></script>
 
         <div id="container">
-            <div id="winner-msg">
-                <div>
-                    <p><h2 id="winner-type">EMPATE</h2></p>
-                    <p><h1 id="winner-name">XO</h1></p>
-                    <button onclick="">Recomeçar</button>
+            <div>
+                <div id="options"><!-- Botão temporário --><button id="restart" onclick="restart()">Reiniciar</button></div>
+                <section id="box">
+                    <div onclick="clicar(0,0)" class="cell"></div>
+                    <div onclick="clicar(0,1)" class="cell"></div>
+                    <div onclick="clicar(0,2)" class="cell"></div>
+                    <div onclick="clicar(1,0)" class="cell"></div>
+                    <div onclick="clicar(1,1)" class="cell"></div>
+                    <div onclick="clicar(1,2)" class="cell"></div>
+                    <div onclick="clicar(2,0)" class="cell"></div>
+                    <div onclick="clicar(2,1)" class="cell"></div>
+                    <div onclick="clicar(2,2)" class="cell"></div>
+                </section>
+                <div id="winner-msg">
+                    <div>
+                        <p><h2 id="winner-type">EMPATE</h2></p>
+                        <p><h1 id="winner-name">XO</h1></p>
+                        <button onclick="">Recomeçar</button>
+                    </div>
                 </div>
             </div>
-            <section id="box">
-                <div id="options"><!-- Botão temporário --><button id="restart" onclick="restart()">Reiniciar</button></div>
-                <div onclick="clicar(0,0)" class="cell"></div>
-                <div onclick="clicar(0,1)" class="cell"></div>
-                <div onclick="clicar(0,2)" class="cell"></div>
-                <div onclick="clicar(1,0)" class="cell"></div>
-                <div onclick="clicar(1,1)" class="cell"></div>
-                <div onclick="clicar(1,2)" class="cell"></div>
-                <div onclick="clicar(2,0)" class="cell"></div>
-                <div onclick="clicar(2,1)" class="cell"></div>
-                <div onclick="clicar(2,2)" class="cell"></div>
-            </section>
         </div>
     </body>
 </html>
