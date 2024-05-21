@@ -6,8 +6,13 @@ class JogoDaVelha {
     jogadas = []
 
     getMatriz() {
-        const matrizAux = this.matriz.slice() // Copia o atributo this.matriz
+        const matrizAux = this.matriz.slice() // Copia o atributo
         return matrizAux
+    }
+
+    getJogadas() {
+        const jogadasAux = this.jogadas.slice() // Copia o atributo 
+        return jogadasAux
     }
 
     jogar(vetor) {
@@ -112,13 +117,29 @@ class Ameaca {
 class Jogada {
     indice
     simbolo
+    inverso
 
     inserirIndice(vet) {
         this.indice = vet
+        this.inverso = [2 - vet[0], 2 - vet[1]]
     }
 
     inserirSimbolo(simbolo) {
         this.simbolo = simbolo
+    }
+
+    getIndice() {
+        const indiceAux = this.indice.slice() // Copia o atributo 
+        return indiceAux
+    }
+
+    getInverso() {
+        const inversoAux = this.inverso.slice() // Copia o atributo
+        return inversoAux
+    }
+
+    getSimbolo() {
+        return this.simbolo
     }
 
     isCanto() {
@@ -145,7 +166,8 @@ class Jogada {
 
 class Cpu {
     dificuldade
-    estaJogando = false
+    estaJogando = true
+    vezCpu = true
     // 0 indica fácil
     // 1 indica médio
     // 2 indica difícil
@@ -163,25 +185,31 @@ class Cpu {
                 this.jogada1()
                 break;
             case 1:
+                this.jogada2()
                 break;
             case 2:
+                this.jogada3()
                 break;
             case 3: 
+                this.jogada4()
                 break;
             case 4:
-                
+                this.jogada5()
                 break;
             case 5:
-                
+                this.jogada6()
                 break;
             case 6:
-
+                this.jogada7()
                 break;
             case 7:
+                this.jogada8()
                 break;
             case 8:
+                this.jogada9()
                 break;
             case 9:
+                this.fazerJogadaPattern(2)
                 break;
             default:
                 break;
@@ -190,6 +218,48 @@ class Cpu {
 
     jogada1() {
         clicar(this.random(0,8))
+    }
+
+    jogada2() {
+        let jogadas = jogo.getJogadas()
+        if (jogadas[0].isCentro()) {
+            this.fazerJogadaPattern(0)
+        } else if (jogadas[0].isCanto()) {
+            let jogadasPossiveis = []
+            jogadasPossiveis.push(jogadas[0].getInverso())
+            jogadasPossiveis.push([1,1])
+            this.fazerJogadaPossivel(jogadasPossiveis)
+        } else {
+            this.fazerJogadaPattern(2)
+        }
+    }
+
+    jogada3() {
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada4() {
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada5() {
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada6() {
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada7() {
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada8() {
+        this.fazerJogadaPattern(2)
+    }
+
+    jogada9() {
+        this.fazerJogadaPattern(2)
     }
 
     verificarAmeacas() {
@@ -305,14 +375,17 @@ class Cpu {
         return false
     }
 
+    fazerJogadaPossivel(jogadasPossiveis) {
+        let m = this.random(0, jogadasPossiveis.length - 1)
+        let i = jogadasPossiveis[m][0]
+        let j = jogadasPossiveis[m][1]
+        
+        clicar((3 * i) + j)
+    }
+
     fazerJogadaPattern(pattern) {
         let jogadasPossiveis = this.lerJogadasPossiveis(pattern)
-
-        m = this.random(0, jogadasPossiveis.length - 1)
-        i = jogadasPossiveis[m][0]
-        j = jogadasPossiveis[m][1]
-        
-        jogo.jogar([i,j])
+        this.fazerJogadaPossivel(jogadasPossiveis)
     }
 
     fazerJogadaAmeacas() {
@@ -323,18 +396,15 @@ class Cpu {
                     if (ameaca.simbolo == jogo.nJogadas % 2 + 1) {
                         let i = ameaca.indexI
                         let j = ameaca.indexJ
-                        jogo.jogar([i,j])
-                        return true
+                        clicar((3 * i) + j)
                     }
                 }
             }
             const ameaca = ameacas[0]
             let i = ameaca.indexI
             let j = ameaca.indexJ
-            jogo.jogar([i,j])
-            return true
+            clicar((3 * i) + j)
         }
-        return false
     }
 
     lerJogadasPossiveis(pattern) {
@@ -415,7 +485,14 @@ function clicar(index) {
             return
         }
         if (cpu.estaJogando) {
-            cpu.melhorJogada()
+            if (cpu.vezCpu)
+                setTimeout(() => {
+                    cpu.vezCpu = false
+                    cpu.melhorJogada()
+                }, "1000");
+            else {
+                cpu.vezCpu = true
+            }
         }
     }
 }
@@ -507,15 +584,18 @@ function restart() {
         cells[i].innerHTML = ''
     }
     jogo = new JogoDaVelha()
+    cpu = new Cpu()
 }
 
-function jogarContraCpu() {
-    if (cpu.estaJogando) {
-        cpu.melhorJogada()
-    } else {
-        cpu.estaJogando = true
-    }
-}
+// function jogarContraCpu() {
+//     if (cpu.estaJogando) {
+//         cpu.vezCpu = false
+//         cpu.melhorJogada()
+//     } else {
+//         cpu.estaJogando = true
+//         cpu.vezCpu = true
+//     }
+// }
 
 let jogo = new JogoDaVelha()
 let cpu = new Cpu()
