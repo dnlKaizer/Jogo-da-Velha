@@ -3,6 +3,7 @@ class JogoDaVelha {
     nJogadas = 0
     fim = true
     vencedor = -1
+    jogadas = []
 
     getMatriz() {
         const matrizAux = this.matriz.slice() // Copia o atributo this.matriz
@@ -16,6 +17,10 @@ class JogoDaVelha {
         if (this.matriz[i][j] == -1 && this.fim) {
             this.nJogadas++;
             this.matriz[i][j] = this.nJogadas % 2
+            let jogada = new Jogada
+            jogada.inserirIndice([i,j])
+            jogada.inserirSimbolo(this.nJogadas % 2)
+            this.jogadas.push(jogada)
             if (this.verificarVencedor() || this.nJogadas == 9) {
                 this.fim = false
             }
@@ -104,6 +109,15 @@ class Ameaca {
 
 class Jogada {
     indice
+    simbolo
+
+    inserirIndice(vet) {
+        this.indice = vet
+    }
+
+    inserirSimbolo(simbolo) {
+        this.simbolo = simbolo
+    }
 
     isCanto() {
         const cantos = [[0,0], [0,2], [2,0], [2,2]]
@@ -139,21 +153,16 @@ class Cpu {
     }
 
     melhorJogada() {
-        const mat = jogo.getMatriz()
         const nJogadas = jogo.nJogadas
 
         switch (nJogadas) {
             case 0:
-                this.jogada1()
                 break;
             case 1:
-                this.jogada2()
                 break;
             case 2:
-                this.jogada3()
                 break;
             case 3: 
-                this.jogada4() 
                 break;
             case 4:
                 
@@ -165,18 +174,19 @@ class Cpu {
 
                 break;
             case 7:
-                this.jogada7()
                 break;
             case 8:
-                this.jogada8()
                 break;
             case 9:
-                this.jogada9()
                 break;
             default:
                 break;
         }
     } 
+
+    jogada1() {
+        const mat = jogo.getMatriz()
+    }
 
     verificarAmeacas() {
         let ameaca
@@ -291,107 +301,12 @@ class Cpu {
         return false
     }
 
-    jogada1() {
-        let i = this.random(0,2)
-        let j = this.random(0,2)
-        jogo.jogar(i,j)
-    }
-
-    jogada2() {
-        const mat = jogo.getMatriz()
-        let pattern = 2
-        inicio:
-        if (mat[1][1] != -1) {
-            pattern = 0
-        } else {
-            for (let i = 0; i < 3; i += 2) {
-                for (let j = 0; j < 3; j += 2) {
-                    if (mat[i][j] != -1) {
-                        pattern = 0
-                        break inicio
-                    }
-                }
-            }
-        }
-        this.fazerJogadaPattern(pattern)
-    }
-
-    jogada3() {
-        const mat = jogo.getMatriz()
-        let i
-        let j
-        let x = new Jogada
-        let o = new Jogada
-        for (i = 0; i < 3; i++) {
-            for (j = 0; j < 3; j++) {
-                if (mat[i][j] != -1) {
-                    if (mat[i][j] == 1) {
-                        x.indice = [i,j]
-                    } else {
-                        o.indice = [i,j]
-                    }
-                } 
-            }
-        }
-
-        if (x.isCentro()) {
-            if (o.isCanto()) {
-                i = 2 - o.indice[0]
-                j = 2 - o.indice[1]
-            } else {
-                this.fazerJogadaPattern(0)
-                return
-            }
-        } else if (x.isCanto()) {
-            if (mat[1][1] == -1) {
-                i = 1
-                j = 1
-            } else {
-                i = 2 - x.indice[0]
-                j = 2 - x.indice[1]
-            }
-        } else {
-            if (mat[1][1] == -1) {
-                i = 1
-                j = 1
-            } else {
-                i = x.indice[1]
-                j = x.indice[0]
-            }
-        }
-        jogo.jogar(i,j)
-    }
-
-    // REVER
-    jogada7() {
-        if (this.fazerJogadaAmeacas()) {
-            return
-        }
-        const jogoAux = jogo
-        jogo = new JogoDaVelha
-        jogo.inserirMatriz(jogoAux.getMatriz())
-        for (let i = 9 - jogo.nJogadas; i > 0; i--) {
-
-        }
-    }
-
-    jogada8() {
-        if (this.fazerJogadaAmeacas()) {
-            return
-        }
-        this.fazerJogadaPattern(2)
-    }
-
-    jogada9() {
-        this.fazerJogadaPattern(2)
-    }
-
     fazerJogadaPattern(pattern) {
-        let jogadas = this.lerJogadasPattern(pattern)
+        let jogadasPossiveis = this.lerJogadasPossiveis(pattern)
 
-        m = this.random(0, jogadas.length - 1)
-        i = jogadas[m][0]
-        j = jogadas[m][1]
+        m = this.random(0, jogadasPossiveis.length - 1)
+        i = jogadasPossiveis[m][0]
+        j = jogadasPossiveis[m][1]
         
         jogo.jogar(i,j)
     }
@@ -418,7 +333,7 @@ class Cpu {
         return false
     }
 
-    lerJogadasPattern(pattern) {
+    lerJogadasPossiveis(pattern) {
         /* 
         Patterns (Ambos incluem centro):
         0 - Cantos
@@ -426,7 +341,7 @@ class Cpu {
         2 - Qualquer
         */
        const mat = jogo.getMatriz()
-       let jogadas = []
+       let jogadasPossiveis = []
        let i
        let j
        let m
@@ -435,34 +350,34 @@ class Cpu {
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
                     if (mat[i][j] == -1) {
-                        jogadas.push([i,j])
+                        jogadasPossiveis.push([i,j])
                     }
                 }
             }
         } else {
             if (mat[1][1] == -1) {
-                jogadas.push([1,1])
+                jogadasPossiveis.push([1,1])
             }
             if (pattern == 0) {
                 for (i = 0; i < 3; i += 2) {
                     for (j = 0; j < 3; j += 2) {
                         if (mat[i][j] == -1) {
-                            jogadas.push([i,j])
+                            jogadasPossiveis.push([i,j])
                         }
                     }
                 }
             } else {
                 for (m = 0; m < 3; m += 2) {
                     if (mat[m][1] == -1) {
-                        jogadas.push([m,1])
+                        jogadasPossiveis.push([m,1])
                     }
                     if (mat[1][m] == -1) {
-                        jogadas.push([1,m])
+                        jogadasPossiveis.push([1,m])
                     }
                 }
             }
         }
-        return jogadas
+        return jogadasPossiveis
     }
 
     /**
