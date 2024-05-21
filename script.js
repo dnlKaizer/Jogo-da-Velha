@@ -10,10 +10,12 @@ class JogoDaVelha {
         return matrizAux
     }
 
-    jogar(i, j) {
+    jogar(vetor) {
         // -1 indica vazio
         // 0 indica que é O
         // 1 indica que é X
+        const i = vetor[0]
+        const j = vetor[1]
         if (this.matriz[i][j] == -1 && this.fim) {
             this.nJogadas++;
             this.matriz[i][j] = this.nJogadas % 2
@@ -143,6 +145,7 @@ class Jogada {
 
 class Cpu {
     dificuldade
+    estaJogando = false
     // 0 indica fácil
     // 1 indica médio
     // 2 indica difícil
@@ -157,6 +160,7 @@ class Cpu {
 
         switch (nJogadas) {
             case 0:
+                this.jogada1()
                 break;
             case 1:
                 break;
@@ -185,7 +189,7 @@ class Cpu {
     } 
 
     jogada1() {
-        const mat = jogo.getMatriz()
+        clicar(this.random(0,8))
     }
 
     verificarAmeacas() {
@@ -308,7 +312,7 @@ class Cpu {
         i = jogadasPossiveis[m][0]
         j = jogadasPossiveis[m][1]
         
-        jogo.jogar(i,j)
+        jogo.jogar([i,j])
     }
 
     fazerJogadaAmeacas() {
@@ -319,7 +323,7 @@ class Cpu {
                     if (ameaca.simbolo == jogo.nJogadas % 2 + 1) {
                         let i = ameaca.indexI
                         let j = ameaca.indexJ
-                        jogo.jogar(i,j)
+                        jogo.jogar([i,j])
                         return true
                     }
                 }
@@ -327,7 +331,7 @@ class Cpu {
             const ameaca = ameacas[0]
             let i = ameaca.indexI
             let j = ameaca.indexJ
-            jogo.jogar(i,j)
+            jogo.jogar([i,j])
             return true
         }
         return false
@@ -404,10 +408,14 @@ function clicar(index) {
     let j = index % 3
     let i = Math.floor(index / 3)
     if (jogo.vencedor == -1) {
-        jogo.jogar(i, j)
+        jogo.jogar([i,j])
         atualizarPainel(index)
         if (jogo.vencedor != -1) {
             encerrar()
+            return
+        }
+        if (cpu.estaJogando) {
+            cpu.melhorJogada()
         }
     }
 }
@@ -499,6 +507,14 @@ function restart() {
         cells[i].innerHTML = ''
     }
     jogo = new JogoDaVelha()
+}
+
+function jogarContraCpu() {
+    if (cpu.estaJogando) {
+        cpu.melhorJogada()
+    } else {
+        cpu.estaJogando = true
+    }
 }
 
 let jogo = new JogoDaVelha()

@@ -5,7 +5,7 @@
     font-family: LTS;
 }
 
-@keyframes append-border {
+@keyframes append {
     from {border-color: transparent; color: transparent;}
     to {}
 }
@@ -94,7 +94,7 @@
 }
 
 #box .cell {
-    animation-name: append-border;
+    animation-name: append;
     animation-duration: 5s;
 }
 
@@ -114,9 +114,8 @@
     margin-bottom: 5vh;
 }
 
-#restart {
-    animation: append-border 5s;
-    float: right;
+.botao {
+    animation: append 5s;
     margin-top: 2px;
     padding-block: 5px;
     padding-inline: 5px;
@@ -128,6 +127,9 @@
     border-bottom: 1px solid white;
     background: transparent;
     color: white;
+}
+#restart {
+    float: right;
 }
 
 /* 
