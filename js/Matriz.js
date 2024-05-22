@@ -38,4 +38,10 @@ export class Matriz {
     alterar(valor, i, j) {
         this.indices[i][j] = valor
     }
+
+    alterarByIndex(valor, index) {
+        let j = index % 3 
+        let i = (index - j) / 3
+        this.indices[i][j] = valor
+    }
 }
