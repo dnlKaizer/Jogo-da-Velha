@@ -2,7 +2,7 @@
   "name": "jogo-da-velha",
   "version": "1.0.0",
   "description": "Jogo da Velha",
-  "main": "main.js",
+  "main": "./js/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
