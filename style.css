@@ -147,20 +147,20 @@ width: 450px
     animation-timing-function: ease-in-out;
 }
 
-.symbol1::after, .symbol1::before{
+.symbol11, .symbol12{
     content: '';
     position: absolute;
     background-color: white;
     width: 170px;
     height: 12px;
 }
-.symbol1::after {
-    animation: append-x-2 0.25s;
-    rotate: 135deg;
-}
-.symbol1::before {
+.symbol11 {
     animation: append-x 0.15s;
     rotate: 45deg;
+}
+.symbol12 {
+    animation: append-x-2 0.25s;
+    rotate: 135deg;
 }
 
 .symbol1 {
