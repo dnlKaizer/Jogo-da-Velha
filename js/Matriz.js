@@ -21,6 +21,22 @@ export class Matriz {
         return column
     }
 
+    getDiagonalPrincipal() {
+        let diagonalPrincipal = []
+        this.indices.forEach((linha,i) => {
+            diagonalPrincipal.push(linha[i])
+        });
+        return diagonalPrincipal
+    }
+
+    getDiagonalSecundaria() {
+        let diagonalSecundaria = []
+        this.indices.forEach((linha,i) => {
+            diagonalSecundaria.push(linha[2 - i])
+        });
+        return diagonalSecundaria
+    }
+
     getIndice(i,j) {
         return this.indices[i][j]
     }
