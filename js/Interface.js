@@ -18,6 +18,43 @@ export class Interface {
                 this.adicionarSimbolo(cell)
             }
         }
+        if (this.jogo.getFim) {
+            this.adicionarLinhaVitoria()
+        }
+    }
+
+    adicionarLinhaVitoria() {
+        const box = document.querySelector('#box')
+        const vencedor = this.jogo.getVencedor
+        const div = document.createElement('div')
+        div.classList = 'vencedor'
+        let multiplicador = 2 /3
+        if (innerWidth > 480) {
+            multiplicador = 1
+        }
+        div.style.height = `${12 * multiplicador}px`
+        div.style.animation = 'appear-x1 1.5s'
+        if (vencedor.getType == 2) {
+            div.style.width = `${624 * multiplicador}px`
+            if (vencedor.getIndex == 0) {
+                div.style.rotate = '45deg'
+            } else {
+                div.style.rotate = '-45deg'
+            }
+
+        } else {
+            div.style.width = `${450 * multiplicador}px`
+            let values = [-150 * multiplicador, 0, 150 * multiplicador]
+            if (vencedor.getType == 0) {
+                div.style.transform = `translate(0px, ${values[vencedor.getIndex]}px)`
+            } else {
+                div.style.transform = `translate(0px, ${(-1) * values[vencedor.getIndex]}px)`
+                div.style.rotate = '90deg'
+            }
+        }
+        setTimeout(() => {
+            box.appendChild(div)
+        }, 500)
     }
 
     adicionarSimbolo(cell) {
