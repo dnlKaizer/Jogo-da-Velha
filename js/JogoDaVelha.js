@@ -22,4 +22,12 @@ export class JogoDaVelha {
         this.nJogadas++
         this.matriz.alterar((this.nJogadas % 2), i, j)
     }
+
+    jogarIndex(index) {
+        if (this.fim) {
+            return
+        }
+        this.nJogadas++
+        this.matriz.alterarByIndex((this.nJogadas % 2), index)
+    }
 }
