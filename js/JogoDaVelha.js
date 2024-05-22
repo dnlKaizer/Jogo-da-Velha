@@ -15,6 +15,10 @@ export class JogoDaVelha {
         return this.nJogadas
     }
 
+    get getFim() {
+        return this.fim
+    }
+
     jogar(i, j) {
         if (this.fim) {
             return
