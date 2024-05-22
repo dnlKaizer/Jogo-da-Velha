@@ -1,8 +1,20 @@
 export class Vencedor {
     constructor(symbol, type, index) {
-        this.symbol = symbol
+        this.symbol = symbol 
         this.type = type
+        /* 
+        0: Linha
+        1: Coluna
+        2: Diagonal
+        */
         this.index = index
+        /* 
+        Se type == 0 ou type == 1
+        index é o índice da linha/coluna
+        Se type == 2
+        0: Diagonal Principal
+        1: Diagonal Secundária
+        */
     }
 
     get getSymbol() {
