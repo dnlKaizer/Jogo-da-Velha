@@ -2,8 +2,10 @@ import { Interface } from './Interface.js'
 import { JogoDaVelha } from './JogoDaVelha.js'
 
 window.clicar = (index) => {
-    jogo.jogarIndex(index)
-    tela.atualizar()
+    if (jogo.getMatriz.getIndiceByIndex(index) == -1) {
+        jogo.jogarIndex(index)
+        tela.atualizar()
+    }
 }
 
 window.reiniciar = () => {

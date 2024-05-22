@@ -9,22 +9,27 @@ export class Interface {
         for (let i = 0; i < 9; i++) {
             const cell = cells[i]
             if (mat.getIndiceByIndex(i) != -1) {
-                let div = cell.querySelector('div')
-                if (div == null) {
-                    let nJogadas = this.jogo.getNJogadas
-                    let symbol = document.createElement('div')
-                    symbol.classList = `symbol${nJogadas % 2}`
-                    if (nJogadas % 2 == 1) {
-                        let before = document.createElement('div')
-                        let after = document.createElement('div')
-                        before.classList = 'symbol11'
-                        after.classList = 'symbol12'
-                        symbol.appendChild(before)
-                        symbol.appendChild(after)
-                    }
-                    cell.appendChild(symbol)
-                }
+                cell.style.cursor = 'auto'
+                this.adicionarSimbolo(cell)
             }
+        }
+    }
+
+    adicionarSimbolo(cell) {
+        let div = cell.querySelector('div')
+        if (div == null) {
+            let nJogadas = this.jogo.getNJogadas
+            let symbol = document.createElement('div')
+            symbol.classList = `symbol${nJogadas % 2}`
+            if (nJogadas % 2 == 1) {
+                let before = document.createElement('div')
+                let after = document.createElement('div')
+                before.classList = 'symbol11'
+                after.classList = 'symbol12'
+                symbol.appendChild(before)
+                symbol.appendChild(after)
+            }
+            cell.appendChild(symbol)
         }
     }
 
@@ -32,6 +37,7 @@ export class Interface {
         const cells = document.getElementsByClassName('cell')
         for (let i = 0; i < 9; i++) {
             const cell = cells[i]
+            cell.style.cursor = 'pointer'
             let div = cell.querySelector('div')
             if (div != null) {
                 this.disappearSymbol(cell)
