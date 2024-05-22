@@ -28,14 +28,35 @@ export class Interface {
         }
     }
 
-    restart() {
+    reiniciar() {
         const cells = document.getElementsByClassName('cell')
         for (let i = 0; i < 9; i++) {
             const cell = cells[i]
             let div = cell.querySelector('div')
             if (div != null) {
-                cell.removeChild(div)
+                this.disappearSymbol(cell)
             }
+        }
+    }
+
+    disappearSymbol(cell) {
+        let div = cell.querySelector('div')
+        let before = div.querySelector('.symbol11')
+        if (before != null) {
+            let after = div.querySelector('.symbol12')
+            before.style.animation = 'disappear-x1 0.5s'
+            after.style.animation = 'disappear-x2 0.25s'
+            setTimeout(() => {
+                div.removeChild(after)
+            }, 240)
+            setTimeout(() => {
+                cell.removeChild(div)
+            }, 490)
+        } else {
+            div.style.animation = 'disappear-o 0.4s'
+            setTimeout(() => {
+                cell.removeChild(div)
+            }, 390)
         }
     }
 }

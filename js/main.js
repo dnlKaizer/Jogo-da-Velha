@@ -6,8 +6,8 @@ window.clicar = (index) => {
     tela.atualizar()
 }
 
-window.restart = () => {
-    tela.restart()
+window.reiniciar = () => {
+    tela.reiniciar()
     jogo = new JogoDaVelha()
     tela = new Interface(jogo)
 }

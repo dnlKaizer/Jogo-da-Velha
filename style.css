@@ -5,12 +5,12 @@
     font-family: LTS;
 }
 
-@keyframes aparecer {
+@keyframes appear {
     from {border-color: transparent; color: transparent;}
     to {}
 }
 
-@keyframes aparecer-x1 {
+@keyframes appear-x1 {
     from {
         clip-path: inset(0 100% 0 0);
       }
@@ -19,7 +19,7 @@
       }
 }
 
-@keyframes sumir-x1 {
+@keyframes disappear-x1 {
     from {
         clip-path: inset(0 0 0 0);
       }
@@ -28,7 +28,7 @@
       }
 }
 
-@keyframes sumir-x2 {
+@keyframes disappear-x2 {
     0% {
         clip-path: inset(0 0 0 0);
     }
@@ -40,7 +40,7 @@
     }
 }
 
-@keyframes aparecer-x2 {
+@keyframes appear-x2 {
     0% {
         clip-path: inset(0 100% 0 0);
     }
@@ -52,7 +52,7 @@
     }
 }
 
-@keyframes aparecer-o {
+@keyframes appear-o {
     0% {
         clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0);
     }
@@ -82,7 +82,7 @@
     }
 }
 
-@keyframes sumir-o {
+@keyframes disappear-o {
     0% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 50% 0);
     }
@@ -142,7 +142,7 @@
 }
 
 #box .cell {
-    animation-name: aparecer;
+    animation-name: appear;
     animation-duration: 5s;
 }
 
@@ -163,7 +163,7 @@
 }
 
 .botao {
-    animation: aparecer 5s;
+    animation: appear 5s;
     margin-top: 2px;
     padding-block: 5px;
     padding-inline: 5px;
@@ -191,7 +191,7 @@ width: 450px
 .vencedor {
     background-color: white;
     position: absolute;
-    animation: aparecer-x 0.75s;
+    animation: appear-x 0.75s;
     animation-timing-function: ease-in-out;
 }
 
@@ -208,16 +208,16 @@ width: 450px
     height: 12px;
 }
 .symbol11 {
-    animation: aparecer-x1 0.15s;
+    animation: appear-x1 0.15s;
     rotate: 45deg;
 }
 .symbol12 {
-    animation: aparecer-x2 0.25s;
+    animation: appear-x2 0.25s;
     rotate: 135deg;
 }
 
 .symbol0 {
-    animation: aparecer-o 0.25s;
+    animation: appear-o 0.25s;
     position: absolute;
     width: 130px;
     height: 130px;
