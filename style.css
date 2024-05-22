@@ -5,12 +5,12 @@
     font-family: LTS;
 }
 
-@keyframes append {
+@keyframes aparecer {
     from {border-color: transparent; color: transparent;}
     to {}
 }
 
-@keyframes append-x {
+@keyframes aparecer-x1 {
     from {
         clip-path: inset(0 100% 0 0);
       }
@@ -19,7 +19,28 @@
       }
 }
 
-@keyframes append-x-2 {
+@keyframes sumir-x1 {
+    from {
+        clip-path: inset(0 0 0 0);
+      }
+      to {
+        clip-path: inset(0 100% 0 0);
+      }
+}
+
+@keyframes sumir-x2 {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    50% {
+        clip-path: inset(0 0 0 0);
+    }
+    100% {
+       clip-path: inset(0 100% 0 0);
+    }
+}
+
+@keyframes aparecer-x2 {
     0% {
         clip-path: inset(0 100% 0 0);
     }
@@ -31,37 +52,64 @@
     }
 }
 
-@keyframes append-o {
+@keyframes aparecer-o {
     0% {
         clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0);
-        /* clip-path: inset(0 50% 100% 50%); */
     }
     12.5% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 0, 0 0, 0 0, 0 0);
     }
     25% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 50%, 0 50%, 0 50%, 0 50%);
-        /* clip-path: inset(0 50% 50% 0); */
     }
     37.5% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 0 100%, 0 100%, 0 100%);
     }
     50% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 50% 100%, 50% 100%, 50% 100%);
-        /* clip-path: inset(0 50% 0 0); */
     }
     62.5% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 100%, 100% 100%);
     }
     75% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 50%, 100% 50%);
-        /* clip-path: inset(0 0 0 100%); */
     }
     87.5% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 100% 0);
     }
     100% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 50% 0);
+    }
+}
+
+@keyframes sumir-o {
+    0% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 50% 0);
+    }
+    12.5% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 100% 0);
+    }
+    25% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 50%, 100% 50%);
+    }
+    37.5% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 100%, 100% 100%);
+    }
+    50% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 50% 100%, 50% 100%, 50% 100%);
+    }
+    62.5% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 0 100%, 0 100%, 0 100%);
+    }
+    75% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 50%, 0 50%, 0 50%, 0 50%);
+    }
+    87.5% {
+        clip-path: polygon(50% 50%, 50% 0, 0 0, 0 0, 0 0, 0 0, 0 0);
+    }
+    100% {
+        clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0);
+       
     }
 }
 
@@ -94,7 +142,7 @@
 }
 
 #box .cell {
-    animation-name: append;
+    animation-name: aparecer;
     animation-duration: 5s;
 }
 
@@ -115,7 +163,7 @@
 }
 
 .botao {
-    animation: append 5s;
+    animation: aparecer 5s;
     margin-top: 2px;
     padding-block: 5px;
     padding-inline: 5px;
@@ -143,10 +191,15 @@ width: 450px
 .vencedor {
     background-color: white;
     position: absolute;
-    animation: append-x 0.75s;
+    animation: aparecer-x 0.75s;
     animation-timing-function: ease-in-out;
 }
 
+.symbol1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .symbol11, .symbol12{
     content: '';
     position: absolute;
@@ -155,22 +208,16 @@ width: 450px
     height: 12px;
 }
 .symbol11 {
-    animation: append-x 0.15s;
+    animation: aparecer-x1 0.15s;
     rotate: 45deg;
 }
 .symbol12 {
-    animation: append-x-2 0.25s;
+    animation: aparecer-x2 0.25s;
     rotate: 135deg;
 }
 
-.symbol1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .symbol0 {
-    animation: append-o 0.25s;
+    animation: aparecer-o 0.25s;
     position: absolute;
     width: 130px;
     height: 130px;
