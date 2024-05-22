@@ -4,4 +4,16 @@ export class Vencedor {
         this.type = type
         this.index = index
     }
+
+    get getSymbol() {
+        return this.symbol
+    }
+
+    get getType() {
+        return this.type
+    }
+
+    get getSymbol() {
+        return this.symbol
+    }
 }
