@@ -1,7 +1,6 @@
-class Matriz {
+export class Matriz {
     constructor() {
-        // this.indices = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
-        this.indices = [[1,2,3],[4,5,6],[7,8,9]]
+        this.indices = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
     }
 
     getMatIndices() {
