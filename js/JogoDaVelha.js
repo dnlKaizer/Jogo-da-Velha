@@ -21,6 +21,10 @@ export class JogoDaVelha {
         return this.fim
     }
 
+    get getVencedor() {
+        return this.vencedor
+    }
+
     jogarIndex(index) {
         if (this.fim) {
             return
