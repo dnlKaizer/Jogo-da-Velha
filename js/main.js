@@ -1,4 +1,4 @@
-import { Matriz } from './Matriz.js'
+import { JogoDaVelha } from './JogoDaVelha.js'
 
-let mat = new Matriz()
-console.log(mat.getMatIndices())
+let jogo = new JogoDaVelha()
+let mat = jogo.getMatriz()
