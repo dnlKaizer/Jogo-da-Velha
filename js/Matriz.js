@@ -3,7 +3,7 @@ export class Matriz {
         this.indices = [[-1,-1,-1],[-1,-1,-1],[-1,-1,-1]]
     }
 
-    getMatIndices() {
+    get getMatIndices() {
         const matAux = this.indices.slice()
         return matAux
     }

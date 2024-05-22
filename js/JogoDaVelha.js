@@ -7,7 +7,7 @@ export class JogoDaVelha {
         this.fim = false
     }
 
-    getMatriz() {
+    get getMatriz() {
         return this.matriz
     }
 
