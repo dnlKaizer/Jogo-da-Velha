@@ -6,8 +6,13 @@ export class Interface {
     atualizar() {
         const mat = this.jogo.getMatriz
         const cells = document.getElementsByClassName('cell')
+        let cursorType = 'pointer'
+        if (this.jogo.getFim) {
+            cursorType = 'auto'
+        }
         for (let i = 0; i < 9; i++) {
             const cell = cells[i]
+            cell.style.cursor = cursorType
             if (mat.getIndiceByIndex(i) != -1) {
                 cell.style.cursor = 'auto'
                 this.adicionarSimbolo(cell)
