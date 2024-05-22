@@ -13,7 +13,7 @@ export class Vencedor {
         return this.type
     }
 
-    get getSymbol() {
-        return this.symbol
+    get getIndex() {
+        return this.index
     }
 }
