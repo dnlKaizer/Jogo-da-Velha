@@ -32,7 +32,7 @@ export class Interface {
         if (innerWidth > 480) {
             multiplicador = 1
         }
-        div.style.height = `${12 * multiplicador}px`
+        div.style.height = `${12.5 * multiplicador}px`
         div.style.animation = 'appear-x1 1.5s'
         if (vencedor.getType == 2) {
             div.style.width = `${624 * multiplicador}px`
@@ -44,7 +44,7 @@ export class Interface {
 
         } else {
             div.style.width = `${450 * multiplicador}px`
-            let values = [-150 * multiplicador, 0, 150 * multiplicador]
+            let values = [-151 * multiplicador, 0, 151 * multiplicador]
             if (vencedor.getType == 0) {
                 div.style.transform = `translate(0px, ${values[vencedor.getIndex]}px)`
             } else {
@@ -77,6 +77,11 @@ export class Interface {
 
     reiniciar() {
         const cells = document.getElementsByClassName('cell')
+        const box = document.querySelector('#box')
+        const div = box.querySelector('div.vencedor')
+        if (div != null) {
+            box.removeChild(div)
+        }
         for (let i = 0; i < 9; i++) {
             const cell = cells[i]
             cell.style.cursor = 'pointer'
@@ -99,12 +104,12 @@ export class Interface {
             }, 240)
             setTimeout(() => {
                 cell.removeChild(div)
-            }, 490)
+            }, 480)
         } else {
-            div.style.animation = 'disappear-o 0.4s'
+            div.style.animation = 'disappear-o 0.5s'
             setTimeout(() => {
                 cell.removeChild(div)
-            }, 390)
+            }, 480)
         }
     }
 }

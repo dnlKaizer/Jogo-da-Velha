@@ -19,24 +19,30 @@
       }
 }
 
-@keyframes disappear-x1 {
-    from {
-        clip-path: inset(0 0 0 0);
-      }
-      to {
-        clip-path: inset(0 100% 0 0);
-      }
-}
-
 @keyframes disappear-x2 {
     0% {
         clip-path: inset(0 0 0 0);
     }
-    50% {
-        clip-path: inset(0 0 0 0);
+    80% {
+        clip-path: inset(0 100% 0 0);
     }
     100% {
+        clip-path: inset(0 100% 0 0);
+    }
+}
+
+@keyframes disappear-x1 {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    40% {
+        clip-path: inset(0 0 0 0);
+    }
+    80% {
        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        clip-path: inset(0 100% 0 0);
     }
 }
 
@@ -113,11 +119,6 @@
     }
 }
 
-@keyframes vencer-diagonal {
-    from {width: 0px;}
-    to {width: 624px;}
-}
-
 @font-face { /* Cria uma nova fonte */
     font-family: LTS;
     src: url(./fonts/LTSaeada-Regular.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
@@ -189,7 +190,7 @@ width: 450px
 */
 
 .vencedor {
-    background-color: white;
+    background-color: rgb(225, 225, 225);
     position: absolute;
     animation: appear-x 0.75s;
     animation-timing-function: ease-in-out;
@@ -305,7 +306,7 @@ width: 450px
         height: 87px;
         border-width: 8px;
     }
-    .symbol1::after, .symbol1::before {
+    .symbol11, .symbol12 {
         width: 113px;
         height: 8px;
     }
@@ -314,7 +315,7 @@ width: 450px
         height: 30px;
         margin-bottom: 18px;
     }
-    #restart {
+    .botao {
         font-size: 12pt;
         padding-inline: 15px;
         padding-block: 7.5px;
