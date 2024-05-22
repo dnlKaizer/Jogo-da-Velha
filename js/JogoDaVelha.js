@@ -11,6 +11,10 @@ export class JogoDaVelha {
         return this.matriz
     }
 
+    get getNJogadas() {
+        return this.nJogadas
+    }
+
     jogar(i, j) {
         if (this.fim) {
             return
