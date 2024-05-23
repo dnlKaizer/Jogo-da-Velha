@@ -1,30 +1,45 @@
 export class Interface {
     constructor(jogo) {
         this.jogo = jogo
+        this.cells = document.getElementsByClassName('cell')
+        this.box = document.querySelector('#box')
     }
-
+    
     atualizar() {
         const mat = this.jogo.getMatriz
-        const cells = document.getElementsByClassName('cell')
         let cursorType = 'pointer'
         if (this.jogo.getFim) {
             cursorType = 'default'
         }
         for (let i = 0; i < 9; i++) {
-            const cell = cells[i]
+            const cell = this.cells[i]
             cell.style.cursor = cursorType
             if (mat.getIndiceByIndex(i) != -1) {
                 cell.style.cursor = 'default'
-                this.adicionarSimbolo(cell)
+                this.appearSymbol(cell)
             }
         }
         if (this.jogo.getFim) {
             this.adicionarLinhaVitoria()
         }
     }
-
+    
+    reiniciar() {
+        const div = box.querySelector('div.vencedor')
+        if (div != null) {
+            this.box.removeChild(div)
+        }
+        for (let i = 0; i < 9; i++) {
+            const cell = this.cells[i]
+            cell.style.cursor = 'pointer'
+            let div = cell.querySelector('div')
+            if (div != null) {
+                this.disappearSymbol(cell)
+            }
+        }
+    }
+    
     adicionarLinhaVitoria() {
-        const box = document.querySelector('#box')
         const vencedor = this.jogo.getVencedor
         const div = document.createElement('div')
         div.classList = 'vencedor'
@@ -52,11 +67,11 @@ export class Interface {
             }
         }
         setTimeout(() => {
-            box.appendChild(div)
+            this.box.appendChild(div)
         }, 500)
     }
 
-    adicionarSimbolo(cell) {
+    appearSymbol(cell) {
         let div = cell.querySelector('div')
         if (div == null) {
             let nJogadas = this.jogo.getNJogadas
@@ -71,23 +86,6 @@ export class Interface {
                 symbol.appendChild(after)
             }
             cell.appendChild(symbol)
-        }
-    }
-
-    reiniciar() {
-        const cells = document.getElementsByClassName('cell')
-        const box = document.querySelector('#box')
-        const div = box.querySelector('div.vencedor')
-        if (div != null) {
-            box.removeChild(div)
-        }
-        for (let i = 0; i < 9; i++) {
-            const cell = cells[i]
-            cell.style.cursor = 'pointer'
-            let div = cell.querySelector('div')
-            if (div != null) {
-                this.disappearSymbol(cell)
-            }
         }
     }
 
