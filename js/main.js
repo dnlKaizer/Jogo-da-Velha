@@ -16,5 +16,9 @@ window.reiniciar = () => {
     }, 500)
 }
 
+window.clicarSeletor = () => {
+    tela.atualizarSeletor()
+}
+
 let jogo = new JogoDaVelha()
 let tela = new Interface(jogo)

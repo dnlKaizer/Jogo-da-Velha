@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
+    <head id="head">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Jogo Da Velha</title>
         <link rel="stylesheet" href="style.css">
+        <style id="style"></style>
     </head>
     <body>
         <script type="module" src="./js/main.js"></script>
 
         <div id="container">
             <div>
-                <div id="menu">
-                    <div class="botao" class="modos" id="modo" onclick="">Modo<img src="./imagens/seta.png" alt="Seta"></div>
-                    <div id="selector">
-                        <div class="modos" id="modo1">Fácil</div>
-                        <div class="modos" id="modo2">Médio</div>
-                        <div class="modos" id="modo3">Impossível</div>
-                        <div class="modos" id="modo4">Jogadores</div>
+                <div id="container-menu">
+                    <div id="menu">
+                        <div class="botao" id="modo">Modo
+                            <img onclick="clicarSeletor()" src="./imagens/seta.png" alt="Seta" id="seta">
+                        </div>
+                        <button onclick="reiniciar()" class="botao" id="reiniciar">Reiniciar</button>
                     </div>
-                    <button class="botao" id="reiniciar" onclick="reiniciar()">Reiniciar</button>
+                    <div id="seletor">
+                        <div onclick="" class="modos" id="modo1">Fácil</div>
+                        <div onclick="" class="modos" id="modo2">Médio</div>
+                        <div onclick="" class="modos" id="modo3">Impossível</div>
+                        <div onclick="" class="modos" id="modo4">Jogadores</div>
+                    </div>
                 </div>
                 <section id="box">
                     <div onclick="clicar(0)" class="cell"></div>

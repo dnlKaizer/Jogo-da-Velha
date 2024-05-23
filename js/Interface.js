@@ -1,8 +1,12 @@
+import { Seletor } from "./Seletor.js"
+
 export class Interface {
     constructor(jogo) {
         this.jogo = jogo
         this.cells = document.getElementsByClassName('cell')
         this.box = document.querySelector('#box')
+        this.seletor = new Seletor()
+        this.modo = document.querySelector('#modo')
     }
 
     getCell(index) {
@@ -111,6 +115,14 @@ export class Interface {
             setTimeout(() => {
                 cell.removeChild(div)
             }, 480)
+        }
+    }
+
+    atualizarSeletor() {
+        if (this.seletor.getStatus) {
+            this.seletor.disappear()
+        } else {
+            this.seletor.appear()
         }
     }
 }

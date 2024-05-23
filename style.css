@@ -130,9 +130,16 @@
     }
 }
 
-@keyframes appear-selector {
-    from {height: 0px;}
-    to {}
+@keyframes appear-seletor {
+    0% {max-height: 0px;}
+    66% {max-height: 168px;}
+    100% {max-height: 168px;}
+}
+
+@keyframes disappear-seletor {
+    0% {max-height: 168px;}
+    66% {max-height: 0px;}
+    100% {max-height: 0px;}
 }
 
 @font-face { /* Cria uma nova fonte */
@@ -156,14 +163,12 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 6vh;
-}
-
-#box .cell {
-    animation: start 3s;
-    animation-timing-function: ease-in-out;
+    margin-top: 5vh;
 }
 
 .cell {
+    animation: start 3s;
+    animation-timing-function: ease-in-out;
     width: 150px;
     height: 150px;
     border: 1px solid white;
@@ -179,7 +184,6 @@
     border-radius: 20px;
     width: 450px;
     height: 60px;
-    margin-bottom: 5vh;
     animation: start 3s;
 }
 
@@ -214,22 +218,21 @@
     margin-left: 10px;
 }
 
-#selector {
-    display: none;
-    animation: appear-selector 1.5s;
+#seletor {
     animation-timing-function: ease-in-out;
-    animation-delay: 2s;
     margin-top: 6px;
     position: absolute;
-    width: 214px;
+    max-height: 0px;
     height: 168px;
+    width: 180px;
     border-radius: 20px;
     background-color: rgb(240, 180, 255);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    z-index: 1;
 }
 .modos {
-    width: 174px;
+    width: 140px;
     margin-left: 20px;
     padding-inline: 5px;
     padding-top: 8px;
