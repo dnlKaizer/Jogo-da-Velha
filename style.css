@@ -3,11 +3,21 @@
     margin: 0;
     padding: 0;
     font-family: LTS;
+    color: white;
 }
 
-@keyframes appear {
-    from {border-color: transparent; color: transparent;}
-    to {}
+@keyframes start {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes appear-line {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+    }
 }
 
 @keyframes appear-x1 {
@@ -119,9 +129,14 @@
     }
 }
 
+@keyframes appear-selector {
+    from {height: 0px;}
+    to {}
+}
+
 @font-face { /* Cria uma nova fonte */
     font-family: LTS;
-    src: url(./fonts/LTSaeada-Regular.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
+    src: url(./fonts/LTSaeada-Light.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
 }
 
 #container {
@@ -143,8 +158,8 @@
 }
 
 #box .cell {
-    animation-name: appear;
-    animation-duration: 5s;
+    animation: start 3s;
+    animation-timing-function: ease-in-out;
 }
 
 .cell {
@@ -158,33 +173,79 @@
 }
 
 #menu {
+    background-color: rgb(239, 175, 255);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
     width: 450px;
-    height: 45px;
+    height: 60px;
     margin-bottom: 5vh;
+    animation: start 3s;
 }
 
 .botao {
-    animation: appear 5s;
-    margin-top: 2px;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    margin-inline: 20px;
+    animation: start 3s;
+    animation-timing-function: ease-in-out;
     padding-block: 5px;
     padding-inline: 5px;
-    font-size: 20pt;
+    font-size: 25px;
     font-family: LTS;
-    font-weight: bold;
     cursor: pointer;
     border: none;
     border-bottom: 1px solid white;
     background: transparent;
     color: white;
 }
-#restart {
+
+#modo {
+    display: inline-block;
+    cursor: default;
+    width: 174px;
+}
+#modo > img {
+    cursor: pointer;
+    width: 25px;
+    padding: 3px;
+    display: inline;
+    float: right;
+    margin-left: 10px;
+}
+
+#selector {
+    display: none;
+    animation: appear-selector 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 2s;
+    margin-top: 6px;
+    position: absolute;
+    width: 214px;
+    height: 168px;
+    border-radius: 20px;
+    background-color: rgb(240, 180, 255);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+.modos {
+    width: 174px;
+    margin-left: 20px;
+    padding-inline: 5px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+    font-size: 20pt;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+
+#reiniciar {
     float: right;
 }
 
 .vencedor {
-    background-color: rgb(225, 225, 225);
+    background-color: rgb(240, 180, 255);
     position: absolute;
-    animation: appear-x 0.75s;
+    animation: appear-line 0.75s;
     animation-timing-function: ease-in-out;
 }
 
@@ -202,10 +263,12 @@
 }
 .symbol11 {
     animation: appear-x1 0.15s;
+    animation-timing-function: ease-in-out;
     rotate: 45deg;
 }
 .symbol12 {
     animation: appear-x2 0.25s;
+    animation-timing-function: ease-in-out;
     rotate: 135deg;
 }
 
@@ -309,11 +372,14 @@
     }
     .botao {
         font-size: 12pt;
-        padding-inline: 15px;
-        padding-block: 7.5px;
     }
     #menu {
         width: 300px;
         height: 30px;
     }
-  }
+    #modo > img {
+        width: 15px;
+        padding: 1px;
+        margin-left: 10px;
+    }
+}

@@ -8,13 +8,13 @@ export class Interface {
         const cells = document.getElementsByClassName('cell')
         let cursorType = 'pointer'
         if (this.jogo.getFim) {
-            cursorType = 'auto'
+            cursorType = 'default'
         }
         for (let i = 0; i < 9; i++) {
             const cell = cells[i]
             cell.style.cursor = cursorType
             if (mat.getIndiceByIndex(i) != -1) {
-                cell.style.cursor = 'auto'
+                cell.style.cursor = 'default'
                 this.adicionarSimbolo(cell)
             }
         }
@@ -32,8 +32,7 @@ export class Interface {
         if (innerWidth > 480) {
             multiplicador = 1
         }
-        div.style.height = `${12.5 * multiplicador}px`
-        div.style.animation = 'appear-x1 1.5s'
+        div.style.height = `${13 * multiplicador}px`
         if (vencedor.getType == 2) {
             div.style.width = `${624 * multiplicador}px`
             if (vencedor.getIndex == 0) {

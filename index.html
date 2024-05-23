@@ -12,8 +12,14 @@
         <div id="container">
             <div>
                 <div id="menu">
-                    <button class="botao" id="cpu" onclick="jogarContraCpu()">CPU</button>
-                    <button class="botao" id="restart" onclick="reiniciar()">Reiniciar</button>
+                    <div class="botao" class="modos" id="modo" onclick="">Modo<img src="./imagens/seta.png" alt="Seta"></div>
+                    <div id="selector">
+                        <div class="modos" id="modo1">Fácil</div>
+                        <div class="modos" id="modo2">Médio</div>
+                        <div class="modos" id="modo3">Impossível</div>
+                        <div class="modos" id="modo4">Jogadores</div>
+                    </div>
+                    <button class="botao" id="reiniciar" onclick="reiniciar()">Reiniciar</button>
                 </div>
                 <section id="box">
                     <div onclick="clicar(0)" class="cell"></div>
