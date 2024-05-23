@@ -181,14 +181,6 @@
     float: right;
 }
 
-/* 
-Diagonal:
-width: 624px 
-
-Horizontal/Vertical: 
-width: 450px
-*/
-
 .vencedor {
     background-color: rgb(225, 225, 225);
     position: absolute;

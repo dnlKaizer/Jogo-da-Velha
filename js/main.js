@@ -10,8 +10,10 @@ window.clicar = (index) => {
 
 window.reiniciar = () => {
     tela.reiniciar()
-    jogo = new JogoDaVelha()
-    tela = new Interface(jogo)
+    setTimeout(() => {
+        jogo = new JogoDaVelha()
+        tela = new Interface(jogo)
+    }, 500)
 }
 
 let jogo = new JogoDaVelha()

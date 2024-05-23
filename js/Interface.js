@@ -28,7 +28,7 @@ export class Interface {
         const vencedor = this.jogo.getVencedor
         const div = document.createElement('div')
         div.classList = 'vencedor'
-        let multiplicador = 2 /3
+        let multiplicador = 2 / 3
         if (innerWidth > 480) {
             multiplicador = 1
         }
@@ -44,7 +44,7 @@ export class Interface {
 
         } else {
             div.style.width = `${450 * multiplicador}px`
-            let values = [-151 * multiplicador, 0, 151 * multiplicador]
+            let values = [-150 * multiplicador, 0, 150 * multiplicador]
             if (vencedor.getType == 0) {
                 div.style.transform = `translate(0px, ${values[vencedor.getIndex]}px)`
             } else {
