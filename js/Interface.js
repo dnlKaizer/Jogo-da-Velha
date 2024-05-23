@@ -4,6 +4,10 @@ export class Interface {
         this.cells = document.getElementsByClassName('cell')
         this.box = document.querySelector('#box')
     }
+
+    getCell(index) {
+        return this.cells[index]
+    }
     
     atualizar() {
         const mat = this.jogo.getMatriz
@@ -12,7 +16,7 @@ export class Interface {
             cursorType = 'default'
         }
         for (let i = 0; i < 9; i++) {
-            const cell = this.cells[i]
+            const cell = this.getCell(i)
             cell.style.cursor = cursorType
             if (mat.getIndiceByIndex(i) != -1) {
                 cell.style.cursor = 'default'
@@ -30,7 +34,7 @@ export class Interface {
             this.box.removeChild(div)
         }
         for (let i = 0; i < 9; i++) {
-            const cell = this.cells[i]
+            const cell = this.getCell(i)
             cell.style.cursor = 'pointer'
             let div = cell.querySelector('div')
             if (div != null) {
