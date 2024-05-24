@@ -15,36 +15,55 @@ export class Interface {
     
     atualizar() {
         const mat = this.jogo.getMatriz
-        let cursorType = 'pointer'
-        if (this.jogo.getFim) {
-            cursorType = 'default'
-        }
         for (let i = 0; i < 9; i++) {
             const cell = this.getCell(i)
-            cell.style.cursor = cursorType
-            if (mat.getIndiceByIndex(i) != -1) {
-                cell.style.cursor = 'default'
+            if (mat.getIndiceByIndex(i) != -1 && cell.querySelector('div') == null) {
+                this.disableButton(cell)
                 this.appearSymbol(cell)
             }
         }
         if (this.jogo.getFim) {
             this.adicionarLinhaVitoria()
+            this.disableAllButtons()
         }
     }
     
     reiniciar() {
-        const div = box.querySelector('div.vencedor')
+        const div = box.querySelector('.vencedor')
         if (div != null) {
             this.box.removeChild(div)
         }
         for (let i = 0; i < 9; i++) {
             const cell = this.getCell(i)
-            cell.style.cursor = 'pointer'
             let div = cell.querySelector('div')
             if (div != null) {
                 this.disappearSymbol(cell)
             }
         }
+        setTimeout(() => {
+            this.enableButtons()
+        }, 500)
+    }
+
+    enableButtons() {
+        for (let index = 0; index < 9; index++) {
+            this.cells[index].onclick = () => {window.clicar(index)}
+            if (this.jogo.getMatriz.getIndiceByIndex(index) == -1) {
+                this.cells[index].style.cursor = 'pointer'
+            }
+        }
+    }
+
+    disableAllButtons() {
+        for (let index = 0; index < 9; index++) {
+            this.cells[index].onclick = ''
+            this.cells[index].style.cursor = 'default'
+        }
+    }
+
+    disableButton(button) {
+        button.onclick = ''
+        button.style.cursor = 'default'
     }
     
     adicionarLinhaVitoria() {
@@ -80,21 +99,21 @@ export class Interface {
     }
 
     appearSymbol(cell) {
-        let div = cell.querySelector('div')
-        if (div == null) {
-            let nJogadas = this.jogo.getNJogadas
-            let symbol = document.createElement('div')
-            symbol.classList = `symbol${nJogadas % 2}`
-            if (nJogadas % 2 == 1) {
-                let before = document.createElement('div')
-                let after = document.createElement('div')
-                before.classList = 'symbol11'
-                after.classList = 'symbol12'
-                symbol.appendChild(before)
-                symbol.appendChild(after)
-            }
-            cell.appendChild(symbol)
+        // let div = cell.querySelector('div')
+        let nJogadas = this.jogo.getNJogadas
+        let symbol = document.createElement('div')
+        symbol.classList = `symbol${nJogadas % 2}`
+        if (nJogadas % 2 == 1) {
+            let before = document.createElement('div')
+            let after = document.createElement('div')
+            before.classList = 'symbol11'
+            after.classList = 'symbol12'
+            symbol.appendChild(before)
+            symbol.appendChild(after)
         }
+        cell.appendChild(symbol)
+        // if (div == null) {
+        // }
     }
 
     disappearSymbol(cell) {
