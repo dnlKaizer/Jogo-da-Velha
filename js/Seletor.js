@@ -1,12 +1,18 @@
 export class Seletor {
     constructor() {
         this.seletor = document.querySelector('#seletor')
+        this.textoSeletor = document.querySelector('#texto-seletor')
         this.seta = document.querySelector('#seta')
         this.enable = false
+        this.modo = -1
     }
 
     get getStatus() {
         return this.enable
+    }
+
+    get getModo() {
+        return this.modo
     }
 
     appear() {
@@ -33,5 +39,11 @@ export class Seletor {
                 window.clicarSeletor()
             }
         }, 1000)
+    }
+
+    escolherModo(index) {
+        this.modo = index
+        let texts = ['Fácil', 'Médio', 'Impossível', 'Jogadores']
+        this.textoSeletor.innerHTML = texts[index]
     }
 }

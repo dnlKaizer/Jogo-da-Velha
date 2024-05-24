@@ -7,35 +7,36 @@
         <link rel="stylesheet" href="style.css">
         <style id="style"></style>
     </head>
-    <body>
+    <body onload="">
         <script type="module" src="./js/main.js"></script>
 
         <div id="container">
             <div>
                 <div id="container-menu">
                     <div id="menu">
-                        <div class="botao" id="modo">Modo
+                        <div class="botao" id="modo">
+                            <div id="texto-seletor">Modo</div>
                             <img onclick="clicarSeletor()" src="./imagens/seta.png" alt="Seta" id="seta">
                         </div>
                         <button onclick="reiniciar()" class="botao" id="reiniciar">Reiniciar</button>
                     </div>
                     <div id="seletor">
-                        <div onclick="" class="modos" id="modo1">Fácil</div>
-                        <div onclick="" class="modos" id="modo2">Médio</div>
-                        <div onclick="" class="modos" id="modo3">Impossível</div>
-                        <div onclick="" class="modos" id="modo4">Jogadores</div>
+                        <div onclick="escolherModo(0)" class="modos" id="modo1">Fácil</div>
+                        <div onclick="escolherModo(1)" class="modos" id="modo2">Médio</div>
+                        <div onclick="escolherModo(2)" class="modos" id="modo3">Impossível</div>
+                        <div onclick="escolherModo(3)" class="modos" id="modo4">Jogadores</div>
                     </div>
                 </div>
                 <section id="box">
-                    <div onclick="clicar(0)" class="cell"></div>
-                    <div onclick="clicar(1)" class="cell"></div>
-                    <div onclick="clicar(2)" class="cell"></div>
-                    <div onclick="clicar(3)" class="cell"></div>
-                    <div onclick="clicar(4)" class="cell"></div>
-                    <div onclick="clicar(5)" class="cell"></div>
-                    <div onclick="clicar(6)" class="cell"></div>
-                    <div onclick="clicar(7)" class="cell"></div>
-                    <div onclick="clicar(8)" class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
+                    <div class="cell"></div>
                 </section>
                 <div id="winner-msg">
                     <div>

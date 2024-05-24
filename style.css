@@ -24,10 +24,10 @@
 @keyframes appear-x1 {
     from {
         clip-path: inset(0 100% 0 0);
-      }
-      to {
+    }
+    to {
         clip-path: inset(0 0 0 0);
-      }
+    }
 }
 
 @keyframes disappear-x2 {
@@ -175,7 +175,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
 #menu {
@@ -231,6 +230,11 @@
     overflow: hidden;
     z-index: 1;
 }
+
+#texto-seletor {
+    display: inline;
+}
+
 .modos {
     width: 140px;
     margin-left: 20px;
@@ -240,6 +244,11 @@
     font-size: 20pt;
     border-bottom: 1px solid white;
     cursor: pointer;
+    transition: transform 0.5s;
+}
+.modos:hover {
+    transform: translate(0px, -2px);
+    transition: transform 0.5s;
 }
 
 #reiniciar {
@@ -358,7 +367,6 @@
     .cell {
         width: 100px;
         height: 100px;
-        background-size: 80px 80px;
     }
     .symbol0 {
         width: 87px;

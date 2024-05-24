@@ -144,4 +144,8 @@ export class Interface {
             this.seletor.appear()
         }
     }
+
+    escolherModo(index) {
+        this.seletor.escolherModo(index)
+    }
 }

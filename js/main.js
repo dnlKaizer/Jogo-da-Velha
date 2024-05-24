@@ -9,15 +9,20 @@ window.clicar = (index) => {
 }
 
 window.reiniciar = () => {
+    jogo = new JogoDaVelha()
+    tela = new Interface(jogo)
     tela.reiniciar()
-    setTimeout(() => {
-        jogo = new JogoDaVelha()
-        tela = new Interface(jogo)
-    }, 500)
 }
 
 window.clicarSeletor = () => {
     tela.atualizarSeletor()
+}
+
+window.escolherModo = (index) => {
+    tela.enableButtons()
+    tela.escolherModo(index)
+    tela.atualizarSeletor()
+    // ADICIONAR DIFICULDADE DO CPU AQUI
 }
 
 let jogo = new JogoDaVelha()
