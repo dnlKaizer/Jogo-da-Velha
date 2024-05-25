@@ -136,8 +136,20 @@
     100% {max-height: 168px;}
 }
 
+@keyframes appear-seletor-mobile {
+    0% {max-height: 0px;}
+    66% {max-height: 120px;}
+    100% {max-height: 120px;}
+}
+
 @keyframes disappear-seletor {
     0% {max-height: 168px;}
+    66% {max-height: 0px;}
+    100% {max-height: 0px;}
+}
+
+@keyframes disappear-seletor-mobile {
+    0% {max-height: 120px;}
     66% {max-height: 0px;}
     100% {max-height: 0px;}
 }
@@ -193,8 +205,7 @@
     margin-inline: 20px;
     animation: start 3s;
     animation-timing-function: ease-in-out;
-    padding-block: 5px;
-    padding-inline: 5px;
+    padding: 5px;
     font-size: 25px;
     font-family: LTS;
     cursor: pointer;
@@ -354,11 +365,13 @@
         font-size: 12pt;
         margin-top: 5px;
         margin-bottom: 8px;
-        margin-inline: 20px;
+        margin-inline: 12px;
+        padding: 4px;
     }
     #menu {
         width: 300px;
         height: 40px;
+        border-radius: 12px;
     }
     #modo {
         width: 114px;
@@ -376,5 +389,22 @@
     }
     .vencedor-diagonal {
         width: 416px;
+    }
+    #seletor {
+        margin-top: 6px;
+        height: 120px;
+        width: 114px;
+        border-radius: 12px;
+        background-color: rgb(240, 180, 255);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        z-index: 1;
+    }
+    .modos {
+        width: 90px;
+        margin-left: 12px;
+        font-size: 12pt;
+        padding-top: 7px;
+        padding-bottom: 4px;
     }
 }

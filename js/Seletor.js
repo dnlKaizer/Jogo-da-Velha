@@ -5,6 +5,15 @@ export class Seletor {
         this.seta = document.querySelector('#seta')
         this.enable = false
         this.modo = 3
+        this.txtAppear = 'appear-seletor'
+        this.txtDisappear = 'disappear-seletor'
+        if (innerWidth > 480) {
+            this.maxHeight = '168px'
+        } else {
+            this.minHeight = '120px'
+            this.txtAppear += '-mobile'
+            this.txtDisappear += '-mobile'
+        }
     }
 
     get getStatus() {
@@ -16,12 +25,12 @@ export class Seletor {
     }
 
     appear() {
-        this.seletor.style.animation = 'appear-seletor 1.5s'
+        this.seletor.style.animation = `${this.txtAppear} 1.5s`
         this.enable = true
         this.seta.style.rotate = '180deg'
         this.seta.onclick = ''
         setTimeout(() => {
-            this.seletor.style.maxHeight = '168px'
+            this.seletor.style.maxHeight = this.maxHeight
             this.seta.onclick = () => {
                 window.clicarSeletor()
             }
@@ -29,7 +38,7 @@ export class Seletor {
     }
 
     disappear() {
-        this.seletor.style.animation = 'disappear-seletor 1.5s'
+        this.seletor.style.animation = `${this.txtDisappear} 1.5s`
         this.enable = false
         this.seta.style.rotate = '0deg'
         this.seta.onclick = ''
