@@ -30,7 +30,8 @@ export class Interface {
     
     reiniciar() {
         const div = box.querySelector('.vencedor')
-        if (div != null) {
+        const divDiagonal = box.querySelector('.vencedor-diagonal')
+        if (div != null || divDiagonal != null) {
             this.box.removeChild(div)
         }
         for (let i = 0; i < 9; i++) {
@@ -69,28 +70,19 @@ export class Interface {
     adicionarLinhaVitoria() {
         const vencedor = this.jogo.getVencedor
         const div = document.createElement('div')
-        div.classList = 'vencedor'
-        let multiplicador = 2 / 3
-        if (innerWidth > 480) {
-            multiplicador = 1
-        }
-        div.style.height = `${13 * multiplicador}px`
         if (vencedor.getType == 2) {
-            div.style.width = `${624 * multiplicador}px`
+            div.classList = 'vencedor-diagonal'
             if (vencedor.getIndex == 0) {
                 div.style.rotate = '45deg'
             } else {
                 div.style.rotate = '-45deg'
             }
-
         } else {
-            div.style.width = `${450 * multiplicador}px`
-            let values = [-150 * multiplicador, 0, 150 * multiplicador]
-            if (vencedor.getType == 0) {
-                div.style.transform = `translate(0px, ${values[vencedor.getIndex]}px)`
-            } else {
-                div.style.transform = `translate(0px, ${(-1) * values[vencedor.getIndex]}px)`
-                div.style.rotate = '90deg'
+            div.classList = 'vencedor'
+            let values = [(-1) * this.cells[0].offsetWidth, 0, this.cells[0].offsetWidth]
+            div.style.transform = `translate(0px, ${values[vencedor.getIndex]}px)`
+            if (vencedor.getType == 1) {
+                div.style.rotate = '-90deg'
             }
         }
         setTimeout(() => {
