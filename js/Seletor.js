@@ -4,7 +4,7 @@ export class Seletor {
         this.textoSeletor = document.querySelector('#texto-seletor')
         this.seta = document.querySelector('#seta')
         this.enable = false
-        this.modo = -1
+        this.modo = 3
     }
 
     get getStatus() {
