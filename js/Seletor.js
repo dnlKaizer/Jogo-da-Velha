@@ -10,7 +10,7 @@ export class Seletor {
         if (innerWidth > 480) {
             this.maxHeight = '168px'
         } else {
-            this.minHeight = '120px'
+            this.maxHeight = '120px'
             this.txtAppear += '-mobile'
             this.txtDisappear += '-mobile'
         }
