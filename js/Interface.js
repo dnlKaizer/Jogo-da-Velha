@@ -29,9 +29,8 @@ export class Interface {
     }
     
     reiniciar() {
-        const div = box.querySelector('.vencedor')
-        const divDiagonal = box.querySelector('.vencedor-diagonal')
-        if (div != null || divDiagonal != null) {
+        const div = box.lastChild
+        if (div.className != 'cell') {
             this.box.removeChild(div)
         }
         for (let i = 0; i < 9; i++) {
@@ -85,8 +84,9 @@ export class Interface {
                 div.style.rotate = '-90deg'
             }
         }
+        this.box.appendChild(div)
         setTimeout(() => {
-            this.box.appendChild(div)
+            div.style.opacity = '1'
         }, 500)
     }
 

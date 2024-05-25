@@ -260,7 +260,9 @@
     position: absolute;
     animation: appear-line 0.75s;
     animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
     height: 13px;
+    opacity: 0;
 }
 .vencedor {
     width: 450px;
