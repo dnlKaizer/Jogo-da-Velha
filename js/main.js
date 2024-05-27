@@ -19,9 +19,7 @@ window.clicarSeletor = () => {
 }
 
 window.escolherModo = (index) => {
-    tela.enableButtons()
     tela.escolherModo(index)
-    tela.atualizarSeletor()
     // ADICIONAR DIFICULDADE DO CPU AQUI
 }
 

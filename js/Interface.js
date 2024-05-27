@@ -7,6 +7,7 @@ export class Interface {
         this.box = document.querySelector('#box')
         this.seletor = new Seletor()
         this.modo = document.querySelector('#modo')
+        this.buttonReiniciar = document.querySelector('#reiniciar')      
     }
 
     getCell(index) {
@@ -41,17 +42,29 @@ export class Interface {
             }
         }
         setTimeout(() => {
-            this.enableButtons()
+            this.enableAllCellButtons()
         }, 500)
     }
 
-    enableButtons() {
+    enableSelectedCellButtons() {
         for (let index = 0; index < 9; index++) {
-            this.cells[index].onclick = () => {window.clicar(index)}
             if (this.jogo.getMatriz.getIndiceByIndex(index) == -1) {
+                this.cells[index].onclick = () => {window.clicar(index)}
                 this.cells[index].style.cursor = 'pointer'
             }
         }
+    }
+
+    enableAllCellButtons() {
+        for (let index = 0; index < 9; index++) {
+            this.cells[index].onclick = () => {window.clicar(index)}
+            this.cells[index].style.cursor = 'pointer'
+        }
+    }
+
+    enableButtonReiniciar() {
+        this.buttonReiniciar.style.cursor = 'pointer'
+        this.buttonReiniciar.onclick = () => {window.reiniciar()}
     }
 
     disableAllCellButtons() {
@@ -116,12 +129,17 @@ export class Interface {
     atualizarSeletor() {
         if (this.seletor.getStatus) {
             this.seletor.disappear()
+            this.enableSelectedCellButtons()
+            this.enableButtonReiniciar()
         } else {
             this.seletor.appear()
+            this.disableAllCellButtons()
+            this.disableButton(this.buttonReiniciar)
         }
     }
 
     escolherModo(index) {
         this.seletor.escolherModo(index)
+        this.atualizarSeletor()
     }
 }
