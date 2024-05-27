@@ -3,6 +3,7 @@ export class Seletor {
         this.seletor = document.querySelector('.seletor')
         this.textoSeletor = document.querySelector('#texto-seletor')
         this.seta = document.querySelector('#seta')
+        this.buttonModos = document.getElementsByClassName('modos')
         this.enable = false
         this.modo = 3
     }
@@ -25,6 +26,7 @@ export class Seletor {
             this.seta.onclick = () => {
                 window.clicarSeletor()
             }
+            this.enableButtonModos()
         }, 1000)
     }
 
@@ -38,7 +40,26 @@ export class Seletor {
             this.seta.onclick = () => {
                 window.clicarSeletor()
             }
+            this.disableButtonModos()
         }, 1000)
+    }
+
+    disableButtonModos() {
+        for (let index = 0; index < this.buttonModos.length; index++) {
+            const button = this.buttonModos[index]
+            button.style.cursor = 'default'
+            button.onclick = ''
+        }
+    }
+
+    enableButtonModos() {
+        for (let index = 0; index < this.buttonModos.length; index++) {
+            const button = this.buttonModos[index]
+            button.style.cursor = 'pointer'
+            button.onclick = () => {
+                window.escolherModo(index)
+            }
+        }
     }
 
     escolherModo(index) {

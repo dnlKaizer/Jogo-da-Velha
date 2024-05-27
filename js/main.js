@@ -20,6 +20,7 @@ window.clicarSeletor = () => {
 
 window.escolherModo = (index) => {
     tela.escolherModo(index)
+    window.reiniciar()
     // ADICIONAR DIFICULDADE DO CPU AQUI
 }
 
