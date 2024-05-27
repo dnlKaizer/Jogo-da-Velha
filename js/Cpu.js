@@ -5,6 +5,23 @@ export class Cpu {
         this.dificuldade = dificuldade
     }
 
+    verificarAmeacaArray(array) {
+        inicio:
+        for (let i = 0; i < 3; i++) {
+            for (let j = i + 1; j < 3; j++) {
+                if (array[i] == -1) {
+                    continue inicio
+                }
+                if (array[i] == array[j]) {
+                    if (array[3 - i - j] == -1) {
+                        return (3 - i - j)
+                    }
+                }
+            }
+        }
+        return -1
+    }
+
     lerJogadasPossiveis() {
         let jogadasPossiveis = []
         for (let i = 0; i < 9; i++) {
