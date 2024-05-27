@@ -30,7 +30,7 @@ export class Interface {
     
     reiniciar() {
         const div = box.lastChild
-        if (div.className != 'cell') {
+        if (div.className == 'vencedor') {
             this.box.removeChild(div)
         }
         for (let i = 0; i < 9; i++) {
@@ -69,21 +69,8 @@ export class Interface {
     adicionarLinhaVitoria() {
         const vencedor = this.jogo.getVencedor
         const div = document.createElement('div')
-        if (vencedor.getType == 2) {
-            div.classList = 'vencedor-diagonal'
-            if (vencedor.getIndex == 0) {
-                div.style.rotate = '45deg'
-            } else {
-                div.style.rotate = '-45deg'
-            }
-        } else {
-            div.classList = 'vencedor'
-            let values = [(-1) * this.cells[0].offsetWidth, 0, this.cells[0].offsetWidth]
-            div.style.transform = `translate(0px, ${values[vencedor.getIndex]}px)`
-            if (vencedor.getType == 1) {
-                div.style.rotate = '-90deg'
-            }
-        }
+        div.classList = 'vencedor'
+        div.id = `vencedor${vencedor.getType}${vencedor.getIndex}`
         this.box.appendChild(div)
         setTimeout(() => {
             div.style.opacity = '1'

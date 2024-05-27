@@ -268,19 +268,39 @@
     float: right;
 }
 
-.vencedor, .vencedor-diagonal {
+.vencedor {
     background-color: rgb(240, 180, 255);
     position: absolute;
     animation: appear-line 0.75s;
     animation-timing-function: ease-in-out;
     animation-delay: 0.5s;
-    height: 13px;
     opacity: 0;
-}
-.vencedor {
+    height: 13px;
     width: 450px;
 }
-.vencedor-diagonal {
+#vencedor00 {
+    transform: translate(0px, -150px);
+}
+#vencedor02 {
+    transform: translate(0px, 150px);
+}
+#vencedor10 {
+    rotate: 90deg;
+    transform: translate(0px, 150px);
+}
+#vencedor11 {
+    rotate: 90deg;
+}
+#vencedor12 {
+    rotate: 90deg;
+    transform: translate(0px, -151px);
+}
+#vencedor20 {
+    rotate: 45deg;
+    width: 624px;
+}
+#vencedor21 {
+    rotate: 135deg;
     width: 624px;
 }
 
@@ -382,15 +402,36 @@
         padding: 1px;
         margin-left: 10px;
     }
-    .vencedor, .vencedor-diagonal {
-        height: 8.7px;
-    }
     .vencedor {
+        height: 8.7px;
         width: 300px;
     }
-    .vencedor-diagonal {
+    #vencedor00 {
+        transform: translate(0px, -100px);
+    }
+    #vencedor02 {
+        transform: translate(0px, 101px);
+    }
+    #vencedor10 {
+        rotate: 90deg;
+        transform: translate(0px, 100px);
+    }
+    #vencedor11 {
+        rotate: 90deg;
+    }
+    #vencedor12 {
+        rotate: 90deg;
+        transform: translate(0px, -101px);
+    }
+    #vencedor20 {
+        rotate: 45deg;
         width: 416px;
     }
+    #vencedor21 {
+        rotate: 135deg;
+        width: 416px;
+    }
+    
     #seletor {
         margin-top: 6px;
         height: 120px;
