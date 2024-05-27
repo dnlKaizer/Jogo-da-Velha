@@ -7,7 +7,8 @@ export class Interface {
         this.box = document.querySelector('#box')
         this.seletor = new Seletor()
         this.modo = document.querySelector('#modo')
-        this.buttonReiniciar = document.querySelector('#reiniciar')      
+        this.buttonReiniciar = document.querySelector('#reiniciar')     
+        this.background = document.querySelector('.background')
     }
 
     getCell(index) {
@@ -30,8 +31,8 @@ export class Interface {
     }
     
     reiniciar() {
-        const div = box.lastChild
-        if (div.className == 'vencedor') {
+        const div = box.querySelector('.vencedor')
+        if (div != null) {
             this.box.removeChild(div)
         }
         for (let i = 0; i < 9; i++) {
@@ -48,9 +49,11 @@ export class Interface {
 
     enableSelectedCellButtons() {
         for (let index = 0; index < 9; index++) {
-            if (this.jogo.getMatriz.getIndiceByIndex(index) == -1) {
-                this.cells[index].onclick = () => {window.clicar(index)}
-                this.cells[index].style.cursor = 'pointer'
+            if (!this.jogo.getFim) {
+                if (this.jogo.getMatriz.getIndiceByIndex(index) == -1) {
+                    this.cells[index].onclick = () => {window.clicar(index)}
+                    this.cells[index].style.cursor = 'pointer'
+                }
             }
         }
     }
@@ -87,7 +90,7 @@ export class Interface {
         this.box.appendChild(div)
         setTimeout(() => {
             div.style.opacity = '1'
-        }, 500)
+        }, 550)
     }
 
     appearSymbol(cell) {
@@ -131,15 +134,21 @@ export class Interface {
             this.seletor.disappear()
             this.enableSelectedCellButtons()
             this.enableButtonReiniciar()
+            this.background.id = 'backgroundOff'
+            setTimeout(() => {
+                this.background.style.zIndex = '0'
+            }, 900)
         } else {
             this.seletor.appear()
             this.disableAllCellButtons()
             this.disableButton(this.buttonReiniciar)
+            this.background.style.zIndex = '1'
+            this.background.id = 'backgroundOn'
         }
     }
 
     escolherModo(index) {
-        this.seletor.escolherModo(index)
         this.atualizarSeletor()
+        this.seletor.escolherModo(index)
     }
 }

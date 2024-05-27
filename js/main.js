@@ -9,9 +9,9 @@ window.clicar = (index) => {
 }
 
 window.reiniciar = () => {
+    tela.reiniciar()
     jogo = new JogoDaVelha()
     tela = new Interface(jogo)
-    tela.reiniciar()
 }
 
 window.clicarSeletor = () => {
