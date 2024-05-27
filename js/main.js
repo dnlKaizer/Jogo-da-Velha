@@ -1,3 +1,4 @@
+import { Cpu } from './Cpu.js'
 import { Interface } from './Interface.js'
 import { JogoDaVelha } from './JogoDaVelha.js'
 
@@ -20,9 +21,15 @@ window.clicarSeletor = () => {
 
 window.escolherModo = (index) => {
     tela.escolherModo(index)
-    window.reiniciar()
-    // ADICIONAR DIFICULDADE DO CPU AQUI
+    jogo = new JogoDaVelha()
+    tela = new Interface(jogo)
+    if (index < 3) {
+        cpu = new Cpu(jogo, index)
+    } else {
+        cpu = 0
+    }
 }
 
 let jogo = new JogoDaVelha()
 let tela = new Interface(jogo)
+let cpu = 0

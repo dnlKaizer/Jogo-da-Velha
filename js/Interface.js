@@ -150,5 +150,6 @@ export class Interface {
     escolherModo(index) {
         this.atualizarSeletor()
         this.seletor.escolherModo(index)
+        this.reiniciar()
     }
 }
