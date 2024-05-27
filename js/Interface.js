@@ -24,7 +24,7 @@ export class Interface {
         }
         if (this.jogo.getFim) {
             this.adicionarLinhaVitoria()
-            this.disableAllButtons()
+            this.disableAllCellButtons()
         }
     }
     
@@ -54,7 +54,7 @@ export class Interface {
         }
     }
 
-    disableAllButtons() {
+    disableAllCellButtons() {
         for (let index = 0; index < 9; index++) {
             this.cells[index].onclick = ''
             this.cells[index].style.cursor = 'default'
@@ -78,7 +78,6 @@ export class Interface {
     }
 
     appearSymbol(cell) {
-        // let div = cell.querySelector('div')
         let nJogadas = this.jogo.getNJogadas
         let symbol = document.createElement('div')
         symbol.classList = `symbol${nJogadas % 2}`
@@ -91,8 +90,6 @@ export class Interface {
             symbol.appendChild(after)
         }
         cell.appendChild(symbol)
-        // if (div == null) {
-        // }
     }
 
     disappearSymbol(cell) {

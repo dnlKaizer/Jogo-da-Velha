@@ -1,19 +1,10 @@
 export class Seletor {
     constructor() {
-        this.seletor = document.querySelector('#seletor')
+        this.seletor = document.querySelector('.seletor')
         this.textoSeletor = document.querySelector('#texto-seletor')
         this.seta = document.querySelector('#seta')
         this.enable = false
         this.modo = 3
-        this.txtAppear = 'appear-seletor'
-        this.txtDisappear = 'disappear-seletor'
-        if (innerWidth > 480) {
-            this.maxHeight = '168px'
-        } else {
-            this.maxHeight = '120px'
-            this.txtAppear += '-mobile'
-            this.txtDisappear += '-mobile'
-        }
     }
 
     get getStatus() {
@@ -25,12 +16,12 @@ export class Seletor {
     }
 
     appear() {
-        this.seletor.style.animation = `${this.txtAppear} 1.5s`
+        this.seletor.id = 'seletorOn'
         this.enable = true
+
         this.seta.style.rotate = '180deg'
         this.seta.onclick = ''
         setTimeout(() => {
-            this.seletor.style.maxHeight = this.maxHeight
             this.seta.onclick = () => {
                 window.clicarSeletor()
             }
@@ -38,12 +29,12 @@ export class Seletor {
     }
 
     disappear() {
-        this.seletor.style.animation = `${this.txtDisappear} 1.5s`
+        this.seletor.id = 'seletorOff'
         this.enable = false
+
         this.seta.style.rotate = '0deg'
         this.seta.onclick = ''
         setTimeout(() => {
-            this.seletor.style.maxHeight = '0px'
             this.seta.onclick = () => {
                 window.clicarSeletor()
             }

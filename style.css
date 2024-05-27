@@ -7,11 +7,13 @@
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
+/* Animação ao abrir página */
 @keyframes start {
     from {opacity: 0;}
     to {opacity: 1;}
 }
 
+/* Animação da Linha de Vitória */
 @keyframes appear-line {
     from {
         clip-path: inset(0 100% 0 0);
@@ -21,6 +23,7 @@
     }
 }
 
+/* Animação de aparecer do X */
 @keyframes appear-x1 {
     from {
         clip-path: inset(0 100% 0 0);
@@ -29,34 +32,6 @@
         clip-path: inset(0 0 0 0);
     }
 }
-
-@keyframes disappear-x2 {
-    0% {
-        clip-path: inset(0 0 0 0);
-    }
-    80% {
-        clip-path: inset(0 100% 0 0);
-    }
-    100% {
-        clip-path: inset(0 100% 0 0);
-    }
-}
-
-@keyframes disappear-x1 {
-    0% {
-        clip-path: inset(0 0 0 0);
-    }
-    40% {
-        clip-path: inset(0 0 0 0);
-    }
-    80% {
-       clip-path: inset(0 100% 0 0);
-    }
-    100% {
-        clip-path: inset(0 100% 0 0);
-    }
-}
-
 @keyframes appear-x2 {
     0% {
         clip-path: inset(0 100% 0 0);
@@ -69,6 +44,34 @@
     }
 }
 
+/* Animação de desaparecer do X */
+@keyframes disappear-x1 {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    40% {
+        clip-path: inset(0 0 0 0);
+    }
+    80% {
+        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        clip-path: inset(0 100% 0 0);
+    }
+}
+@keyframes disappear-x2 {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    80% {
+        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        clip-path: inset(0 100% 0 0);
+    }
+}
+
+/* Animação de aparecer do O */
 @keyframes appear-o {
     0% {
         clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0);
@@ -98,7 +101,7 @@
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 50% 0);
     }
 }
-
+/* Animação de desaparecer do O */
 @keyframes disappear-o {
     0% {
         clip-path: polygon(50% 50%, 50% 0, 0 0, 0 100%, 100% 100%, 100% 0, 50% 0);
@@ -130,35 +133,37 @@
     }
 }
 
+/* Animação de aparecer o seletor */
 @keyframes appear-seletor {
     0% {max-height: 0px;}
     66% {max-height: 168px;}
     100% {max-height: 168px;}
 }
-
 @keyframes appear-seletor-mobile {
     0% {max-height: 0px;}
     66% {max-height: 120px;}
     100% {max-height: 120px;}
 }
 
+/* Animação de desaparecer o seletor */
 @keyframes disappear-seletor {
     0% {max-height: 168px;}
     66% {max-height: 0px;}
     100% {max-height: 0px;}
 }
-
 @keyframes disappear-seletor-mobile {
     0% {max-height: 120px;}
     66% {max-height: 0px;}
     100% {max-height: 0px;}
 }
 
-@font-face { /* Cria uma nova fonte */
+/* Fonte Usada */
+@font-face { 
     font-family: LTS;
-    src: url(./fonts/LTSaeada-Light.otf); /* Caminho de fontes (1º ponto significa a pasta atual, 2º significa pasta anterior */
+    src: url(./fonts/LTSaeada-Light.otf);
 }
 
+/* Estruturas Principais */
 #container {
     background: linear-gradient(to left top, rgb(166, 42, 255), rgb(252, 227, 255));
     height: 100vh;
@@ -167,87 +172,135 @@
     align-items: center;
     justify-content: center;
 }
-
 #box {
     display: flex;
     flex-wrap: wrap;
-    max-width: 450px;
     align-items: center;
     justify-content: center;
     margin-bottom: 6vh;
     margin-top: 5vh;
-}
 
+    max-width: 450px;
+}
 .cell {
     animation: start 3s;
     animation-timing-function: ease-in;
-    width: 150px;
-    height: 150px;
     border: 1px solid white;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
+    width: 150px;
+    height: 150px;
 }
 
+/* Símbolos */
+.symbol0 {
+    animation: appear-o 0.25s;
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border: 12px solid white;
+    border-radius: 50%;
+}
+.symbol1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.symbol11, .symbol12{
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 170px;
+    height: 12px;
+}
+.symbol11 {
+    animation: appear-x1 0.15s;
+    animation-timing-function: ease-in-out;
+    rotate: 45deg;
+}
+.symbol12 {
+    animation: appear-x2 0.25s;
+    animation-timing-function: ease-in-out;
+    rotate: 135deg;
+}
+
+/* Menu */
 #menu {
     background-color: rgb(239, 175, 255);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    animation: start 3s;
+    animation-timing-function: ease-in;
+    
     border-radius: 20px;
     width: 450px;
     height: 60px;
-    animation: start 3s;
-    animation-timing-function: ease-in;
 }
-
 .botao {
-    margin-top: 10px;
-    margin-bottom: 14px;
-    margin-inline: 20px;
     animation: start 3s;
     animation-timing-function: ease-in-out;
-    padding: 5px;
-    font-size: 25px;
     font-family: LTS;
     cursor: pointer;
     border: none;
     border-bottom: 1px solid white;
     background: transparent;
     color: white;
+    
+    margin-top: 10px;
+    margin-bottom: 14px;
+    margin-inline: 20px;
+    padding: 5px;
+    font-size: 25px;
 }
-
 #modo {
     display: inline-block;
     cursor: default;
+    
     width: 174px;
 }
 #modo > img {
     cursor: pointer;
-    width: 25px;
-    padding: 3px;
     display: inline;
     float: right;
+
+    width: 25px;
+    padding: 3px;
     margin-left: 10px;
 }
+#reiniciar {
+    float: right;
+}
 
-#seletor {
+/* Seletor */
+.seletor {
     animation-timing-function: ease-in-out;
-    margin-top: 6px;
     position: absolute;
-    max-height: 0px;
-    height: 168px;
-    width: 180px;
-    border-radius: 20px;
     background-color: rgb(240, 180, 255);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     z-index: 1;
+    max-height: 0px;
+    
+    margin-top: 6px;
+    height: 168px;
+    width: 180px;
+    border-radius: 20px;
 }
-
+#seletorOn {
+    max-height: 168px;
+    animation: appear-seletor 1.5s;
+}
+#seletorOff {
+    max-height: 0px;
+    animation: disappear-seletor 1.5s;
+}
 #texto-seletor {
     display: inline;
 }
 
+/* Modos do Seletor */
 .modos {
     width: 140px;
     margin-left: 20px;
@@ -264,10 +317,7 @@
     transition: transform 0.5s;
 }
 
-#reiniciar {
-    float: right;
-}
-
+/* Linha de Vitória */
 .vencedor {
     background-color: rgb(240, 180, 255);
     position: absolute;
@@ -304,38 +354,7 @@
     width: 624px;
 }
 
-.symbol1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.symbol11, .symbol12{
-    content: '';
-    position: absolute;
-    background-color: white;
-    width: 170px;
-    height: 12px;
-}
-.symbol11 {
-    animation: appear-x1 0.15s;
-    animation-timing-function: ease-in-out;
-    rotate: 45deg;
-}
-.symbol12 {
-    animation: appear-x2 0.25s;
-    animation-timing-function: ease-in-out;
-    rotate: 135deg;
-}
-
-.symbol0 {
-    animation: appear-o 0.25s;
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    border: 12px solid white;
-    border-radius: 50%;
-}
-
+/* Bordas das células */
 .cell:nth-child(1),
 .cell:nth-child(2),
 .cell:nth-child(3) {
@@ -368,6 +387,7 @@
         width: 100px;
         height: 100px;
     }
+    
     .symbol0 {
         width: 87px;
         height: 87px;
@@ -377,10 +397,11 @@
         width: 113px;
         height: 8px;
     }
-    #options {
+
+    #menu {
         width: 300px;
-        height: 30px;
-        margin-bottom: 18px;
+        height: 40px;
+        border-radius: 12px;
     }
     .botao {
         font-size: 12pt;
@@ -388,11 +409,6 @@
         margin-bottom: 8px;
         margin-inline: 12px;
         padding: 4px;
-    }
-    #menu {
-        width: 300px;
-        height: 40px;
-        border-radius: 12px;
     }
     #modo {
         width: 114px;
@@ -402,6 +418,29 @@
         padding: 1px;
         margin-left: 10px;
     }
+    
+    .seletor {
+        margin-top: 6px;
+        height: 120px;
+        width: 114px;
+        border-radius: 12px;
+    }
+    #seletorOn {
+        max-height: 120px;
+        animation: appear-seletor-mobile 1.5s;
+    }
+    #seletorOff {
+        max-height: 0px;
+        animation: disappear-seletor-mobile 1.5s;
+    }
+    .modos {
+        width: 90px;
+        margin-left: 12px;
+        font-size: 12pt;
+        padding-top: 7px;
+        padding-bottom: 4px;
+    }
+    
     .vencedor {
         height: 8.7px;
         width: 300px;
@@ -430,23 +469,5 @@
     #vencedor21 {
         rotate: 135deg;
         width: 416px;
-    }
-    
-    #seletor {
-        margin-top: 6px;
-        height: 120px;
-        width: 114px;
-        border-radius: 12px;
-        background-color: rgb(240, 180, 255);
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        z-index: 1;
-    }
-    .modos {
-        width: 90px;
-        margin-left: 12px;
-        font-size: 12pt;
-        padding-top: 7px;
-        padding-bottom: 4px;
     }
 }
