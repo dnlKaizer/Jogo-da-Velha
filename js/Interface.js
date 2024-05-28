@@ -1,6 +1,10 @@
+import { JogoDaVelha } from "./JogoDaVelha.js"
 import { Seletor } from "./Seletor.js"
 
 export class Interface {
+    /**
+     * @param {JogoDaVelha} jogo
+     */
     constructor(jogo) {
         this.jogo = jogo
         this.cells = document.getElementsByClassName('cell')
@@ -13,6 +17,13 @@ export class Interface {
 
     get getModo() {
         return this.seletor.getModo
+    }
+
+    /**
+     * @param {JogoDaVelha} jogo
+     */
+    set setJogo(jogo) {
+        this.jogo = jogo
     }
 
     getCell(index) {
@@ -55,8 +66,7 @@ export class Interface {
         for (let index = 0; index < 9; index++) {
             if (!this.jogo.getFim) {
                 if (this.jogo.getMatriz.getIndiceByIndex(index) == -1) {
-                    this.cells[index].onclick = () => {window.clicar(index)}
-                    this.cells[index].style.cursor = 'pointer'
+                    this.enableButton(this.cells[index])
                 }
             }
         }
@@ -64,26 +74,24 @@ export class Interface {
 
     enableAllCellButtons() {
         for (let index = 0; index < 9; index++) {
-            this.cells[index].onclick = () => {window.clicar(index)}
-            this.cells[index].style.cursor = 'pointer'
+            this.enableButton(this.cells[index])
         }
-    }
-
-    enableButtonReiniciar() {
-        this.buttonReiniciar.style.cursor = 'pointer'
-        this.buttonReiniciar.onclick = () => {window.reiniciar()}
     }
 
     disableAllCellButtons() {
         for (let index = 0; index < 9; index++) {
-            this.cells[index].onclick = ''
-            this.cells[index].style.cursor = 'default'
+            this.disableButton(this.cells[index])
         }
     }
 
     disableButton(button) {
-        button.onclick = ''
+        button.disabled = true
         button.style.cursor = 'default'
+    }
+
+    enableButton(button) {
+        button.disabled = false
+        button.style.cursor = 'pointer'
     }
     
     adicionarLinhaVitoria() {
@@ -137,7 +145,7 @@ export class Interface {
         if (this.seletor.getStatus) {
             this.seletor.disappear()
             this.enableSelectedCellButtons()
-            this.enableButtonReiniciar()
+            this.enableButton(this.buttonReiniciar)
             this.background.id = 'backgroundOff'
             setTimeout(() => {
                 this.background.style.zIndex = '0'
@@ -154,6 +162,5 @@ export class Interface {
     escolherModo(index) {
         this.atualizarSeletor()
         this.seletor.escolherModo(index)
-        this.reiniciar()
     }
 }
