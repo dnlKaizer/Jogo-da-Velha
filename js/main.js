@@ -3,16 +3,30 @@ import { Interface } from './Interface.js'
 import { JogoDaVelha } from './JogoDaVelha.js'
 
 window.clicar = (index) => {
-    if (jogo.getMatriz.getIndiceByIndex(index) == -1) {
-        jogo.jogarIndex(index)
-        tela.atualizar()
+    jogo.jogarIndex(index)
+    tela.atualizar()
+    if (cpu != 0) {
+        tela.disableAllCellButtons()
+        setTimeout(() => {
+            if (!jogo.getFim) {
+                tela.enableAllCellButtons()
+                cpu.modoFacil()
+                tela.atualizar()
+            }
+        }, 1000)
     }
 }
 
 window.reiniciar = () => {
     tela.reiniciar()
+    const index = tela.getModo
     jogo = new JogoDaVelha()
-    tela = new Interface(jogo)
+    tela.setJogo = jogo
+    if (index < 3) {
+        cpu = new Cpu(jogo, index)
+    } else {
+        cpu = 0
+    }
 }
 
 window.clicarSeletor = () => {
@@ -21,13 +35,7 @@ window.clicarSeletor = () => {
 
 window.escolherModo = (index) => {
     tela.escolherModo(index)
-    jogo = new JogoDaVelha()
-    tela = new Interface(jogo)
-    if (index < 3) {
-        cpu = new Cpu(jogo, index)
-    } else {
-        cpu = 0
-    }
+    window.reiniciar()
 }
 
 let jogo = new JogoDaVelha()

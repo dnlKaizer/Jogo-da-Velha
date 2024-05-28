@@ -9,34 +9,52 @@ export class Cpu {
 
     modoFacil() {
         const nJogadas = this.jogo.getNJogadas
+        let jogadasPossiveis
         switch (nJogadas) {
             case 0:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 1:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 2:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 3:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 4:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 5:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 6:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 7:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
+
             case 8:
-                
-                break;
+                jogadasPossiveis = this.lerJogadasPossiveis()
+                this.fazerJogadaPossivel(jogadasPossiveis)
+            break;
         
             default:
                 break;
