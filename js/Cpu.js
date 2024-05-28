@@ -7,6 +7,60 @@ export class Cpu {
         this.dificuldade = dificuldade
     }
 
+    modoFacil() {
+        const nJogadas = this.jogo.getNJogadas
+        switch (nJogadas) {
+            case 0:
+                
+                break;
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break;
+            case 7:
+                
+                break;
+            case 8:
+                
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    fazerJogadaPossivel(jogadasPossiveis) {
+        const nJogadasPossiveis = jogadasPossiveis.length
+        if (nJogadasPossiveis > 0) {
+            const index = this.random(0, nJogadasPossiveis - 1)
+            this.jogo.jogarIndex(jogadasPossiveis[index])
+        }
+    }
+    
+    lerJogadasPossiveis() {
+        let jogadasPossiveis = []
+        for (let i = 0; i < 9; i++) {
+            if (this.matriz.getIndiceByIndex(i) == -1) {
+                jogadasPossiveis.push(i)
+            }
+        }
+        return jogadasPossiveis
+    }
+    
     verificarAmeacas() {
         let ameacas = []
         let ameaca
@@ -79,17 +133,7 @@ export class Cpu {
         }
         return -1
     }
-
-    lerJogadasPossiveis() {
-        let jogadasPossiveis = []
-        for (let i = 0; i < 9; i++) {
-            if (this.matriz.getIndiceByIndex(i) == -1) {
-                jogadasPossiveis.push(i)
-            }
-        }
-        return jogadasPossiveis
-    }
-
+    
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
