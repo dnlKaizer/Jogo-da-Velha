@@ -11,6 +11,10 @@ export class Interface {
         this.background = document.querySelector('.background')
     }
 
+    get getModo() {
+        return this.seletor.getModo
+    }
+
     getCell(index) {
         return this.cells[index]
     }
