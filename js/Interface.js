@@ -103,6 +103,14 @@ export class Interface {
         button.disabled = false
         button.style.cursor = 'pointer'
     }
+
+    disableButtonReiniciar() {
+        this.disableButton(this.buttonReiniciar)
+    }
+
+    enableButtonReiniciar() {
+        this.enableButton(this.buttonReiniciar)
+    }
     
     adicionarLinhaVitoria() {
         const vencedor = this.jogo.getVencedor
