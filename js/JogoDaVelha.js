@@ -26,7 +26,10 @@ export class JogoDaVelha {
     get getVencedor() {
         return this.vencedor
     }
-    
+
+    /**
+     * @returns {Jogada[]}
+     */
     get getJogadas() {
         return this.jogadas
     }
