@@ -26,6 +26,10 @@ export class Interface {
         this.jogo = jogo
     }
 
+    /** 
+     * @param {number} index 
+     * @returns {HTMLButtonElement} 
+    */
     getCell(index) {
         return this.cells[index]
     }
@@ -84,11 +88,17 @@ export class Interface {
         }
     }
 
+    /** 
+     * @param {HTMLButtonElement} button
+    */
     disableButton(button) {
         button.disabled = true
         button.style.cursor = 'default'
     }
 
+    /** 
+     * @param {HTMLButtonElement} button
+    */
     enableButton(button) {
         button.disabled = false
         button.style.cursor = 'pointer'
@@ -105,6 +115,9 @@ export class Interface {
         }, 550)
     }
 
+    /** 
+     * @param {HTMLButtonElement} cell
+    */
     appearSymbol(cell) {
         let nJogadas = this.jogo.getNJogadas
         let symbol = document.createElement('div')
@@ -120,6 +133,9 @@ export class Interface {
         cell.appendChild(symbol)
     }
 
+    /** 
+     * @param {HTMLButtonElement} cell
+    */
     disappearSymbol(cell) {
         let div = cell.querySelector('div')
         let before = div.querySelector('.symbol11')
@@ -159,6 +175,9 @@ export class Interface {
         }
     }
 
+    /** 
+     * @param {number} index
+    */
     escolherModo(index) {
         this.atualizarSeletor()
         this.seletor.escolherModo(index)

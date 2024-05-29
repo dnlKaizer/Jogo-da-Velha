@@ -2,6 +2,9 @@ import { Cpu } from './Cpu.js'
 import { Interface } from './Interface.js'
 import { JogoDaVelha } from './JogoDaVelha.js'
 
+/** 
+ * @param {number} index 
+*/
 window.clicar = (index) => {
     jogo.jogarIndex(index)
     tela.atualizar()
@@ -9,9 +12,11 @@ window.clicar = (index) => {
         tela.disableAllCellButtons()
         setTimeout(() => {
             if (!jogo.getFim) {
-                tela.enableAllCellButtons()
                 cpu.modoFacil()
                 tela.atualizar()
+                setTimeout(() => {
+                    tela.enableAllCellButtons()
+                }, 500)
             }
         }, 1000)
     }
@@ -33,6 +38,9 @@ window.clicarSeletor = () => {
     tela.atualizarSeletor()
 }
 
+/** 
+ * @param {number} index 
+*/
 window.escolherModo = (index) => {
     tela.escolherModo(index)
     window.reiniciar()

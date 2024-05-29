@@ -1,4 +1,9 @@
 export class Ameaca {
+    /** 
+     * @param {number} indiceI
+     * @param {number} indiceJ
+     * @param {number} symbol
+    */
     constructor(indiceI, indiceJ, symbol) {
         this.indiceI = indiceI
         this.indiceJ = indiceJ

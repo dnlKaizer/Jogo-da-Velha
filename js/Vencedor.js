@@ -1,4 +1,9 @@
 export class Vencedor {
+    /** 
+     * @param {number} symbol
+     * @param {number} type
+     * @param {number} index
+    */
     constructor(symbol, type, index) {
         this.symbol = symbol 
         this.type = type
@@ -16,6 +21,7 @@ export class Vencedor {
         1: Diagonal Secundária
         */
     }
+
 
     get getSymbol() {
         return this.symbol

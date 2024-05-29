@@ -6,7 +6,7 @@ export class JogoDaVelha {
         this.matriz = new Matriz()
         this.nJogadas = 0
         this.fim = false
-        this.vencedor
+        this.vencedor = new Vencedor()
     }
 
     get getMatriz() {
@@ -25,6 +25,9 @@ export class JogoDaVelha {
         return this.vencedor
     }
 
+    /** 
+     * @param {number} index
+    */
     jogarIndex(index) {
         if (this.fim) {
             return
@@ -55,6 +58,10 @@ export class JogoDaVelha {
         }
     }
 
+    /** 
+     * @param {number[]} array
+     * @returns {boolean} 
+    */
     valoresVetorIguais(array) {
         for (let m = 0; m < 3; m++) {
             for (let n = m + 1; n < 3; n++) {

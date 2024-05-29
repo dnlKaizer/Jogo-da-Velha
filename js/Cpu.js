@@ -1,6 +1,11 @@
 import { Ameaca } from "./Ameaca.js"
+import { JogoDaVelha } from "./JogoDaVelha.js"
 
 export class Cpu {
+    /** 
+     * @param {JogoDaVelha} jogo 
+     * @param {number} dificuldade 
+    */
     constructor(jogo, dificuldade) {
         this.jogo = jogo
         this.matriz = jogo.getMatriz
@@ -61,6 +66,9 @@ export class Cpu {
         }
     }
 
+    /** 
+     * @param {number[]} jogadasPossiveis 
+    */
     fazerJogadaPossivel(jogadasPossiveis) {
         const nJogadasPossiveis = jogadasPossiveis.length
         if (nJogadasPossiveis > 0) {
@@ -68,7 +76,10 @@ export class Cpu {
             this.jogo.jogarIndex(jogadasPossiveis[index])
         }
     }
-    
+
+    /** 
+     * @returns {number[]} 
+    */
     lerJogadasPossiveis() {
         let jogadasPossiveis = []
         for (let i = 0; i < 9; i++) {
@@ -79,6 +90,9 @@ export class Cpu {
         return jogadasPossiveis
     }
     
+    /** 
+     * @returns {Ameaca[]} 
+    */
     verificarAmeacas() {
         let ameacas = []
         let ameaca
@@ -135,6 +149,10 @@ export class Cpu {
         return ameacas
     }
 
+    /** 
+     * @param {number[]} array 
+     * @returns {number}
+    */
     verificarAmeacaArray(array) {
         inicio:
         for (let i = 0; i < 3; i++) {
@@ -152,6 +170,11 @@ export class Cpu {
         return -1
     }
     
+    /** 
+     * @param {number} min 
+     * @param {number} max 
+     * @returns {number}
+    */
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }

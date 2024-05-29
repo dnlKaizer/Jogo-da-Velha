@@ -62,6 +62,9 @@ export class Seletor {
         }
     }
 
+    /** 
+     * @param {number} index
+    */
     escolherModo(index) {
         this.modo = index
         let texts = ['Fácil', 'Médio', 'Impossível', 'Jogadores']

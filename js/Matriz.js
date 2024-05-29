@@ -8,11 +8,19 @@ export class Matriz {
         return matAux
     }
 
+    /** 
+     * @param {number} i
+     * @returns {number[]}
+    */
     getRow(i) {
         const row = this.indices[i].slice()
         return row
     }
 
+    /** 
+     * @param {number} j
+     * @returns {number[]}
+    */
     getColumn(j) {
         const column = []
         this.indices.forEach(row => {
@@ -21,6 +29,9 @@ export class Matriz {
         return column
     }
 
+    /** 
+     * @returns {number[]}
+    */
     getDiagonalPrincipal() {
         let diagonalPrincipal = []
         this.indices.forEach((linha,i) => {
@@ -29,6 +40,9 @@ export class Matriz {
         return diagonalPrincipal
     }
 
+    /** 
+     * @returns {number[]}
+    */
     getDiagonalSecundaria() {
         let diagonalSecundaria = []
         this.indices.forEach((linha,i) => {
@@ -37,13 +51,18 @@ export class Matriz {
         return diagonalSecundaria
     }
 
+    /** 
+     * @param {number} i
+     * @param {number} j
+     * @returns {number}
+    */
     getIndice(i,j) {
         return this.indices[i][j]
     }
 
     /**
-     * @param {number} index [0, 8]
-     * @returns {number} indice
+     * @param {number} index 
+     * @returns {number}
      */
     getIndiceByIndex(index) {
         let j = index % 3 
@@ -51,10 +70,19 @@ export class Matriz {
         return this.indices[i][j]
     }
 
+    /** 
+     * @param {number} valor
+     * @param {number} i
+     * @param {number} j
+    */
     alterar(valor, i, j) {
         this.indices[i][j] = valor
     }
 
+    /** 
+     * @param {number} valor
+     * @param {number} index
+    */
     alterarByIndex(valor, index) {
         let j = index % 3 
         let i = (index - j) / 3
