@@ -11,5 +11,4 @@ Repositório para criação de um web app de jogo da velha, para praticar e apre
 . Criar 4 dificuldades de jogo contra a CPU:<br/>
 &emsp;&emsp;- Fácil<br/>
 &emsp;&emsp;- Médio<br/>
-&emsp;&emsp;- Difícil<br/>
 &emsp;&emsp;- Impossível (Literalmente)<br/>
