@@ -2,6 +2,7 @@ import { Ameaca } from "./Ameaca.js"
 import { JogoDaVelha } from "./JogoDaVelha.js"
 
 export class Cpu {
+
     /** 
      * @param {JogoDaVelha} jogo 
      * @param {number} dificuldade 
@@ -26,7 +27,7 @@ export class Cpu {
     jogarModoFacil() {
         const ameacas = this.verificarAmeacas()
         const nAmeacas = ameacas.length
-        let jogadasPossiveis = this.lerJogadasPossiveis()
+        let jogadasPossiveis = this.lerTodasJogadasPossiveis()
         const nJogadas = this.jogo.getNJogadas
 
         if (nAmeacas > 0) {
@@ -40,7 +41,7 @@ export class Cpu {
             }
         }
         if (jogadasPossiveis.length == 0) {
-            jogadasPossiveis = this.lerJogadasPossiveis()
+            jogadasPossiveis = this.lerTodasJogadasPossiveis()
         }
         this.fazerJogadaPossivel(jogadasPossiveis)
     }
@@ -62,7 +63,7 @@ export class Cpu {
                 }
             }
         } else {
-            jogadasPossiveis = this.lerJogadasPossiveis()
+            jogadasPossiveis = this.lerTodasJogadasPossiveis()
         }
         this.fazerJogadaPossivel(jogadasPossiveis)
     }
@@ -188,10 +189,23 @@ export class Cpu {
         }
     }
 
+    /**
+     * @param {number[]} array 
+     */
+    lerJogadaPossivel(array) {
+        for (let i = 0; i < array.length; i++) {
+            if (this.matriz.getIndiceByIndex(array[i]) == -1) {
+                array.splice(i, 1)
+                i--
+            }
+        }
+        return array
+    }
+
     /** 
      * @returns {number[]} 
     */
-    lerJogadasPossiveis() {
+    lerTodasJogadasPossiveis() {
         let jogadasPossiveis = []
         for (let i = 0; i < 9; i++) {
             if (this.matriz.getIndiceByIndex(i) == -1) {
