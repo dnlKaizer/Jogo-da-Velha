@@ -9,6 +9,7 @@ export class Cpu {
     constructor(jogo, dificuldade) {
         this.jogo = jogo
         this.matriz = jogo.getMatriz
+        this.jogadas = jogo.
         this.dificuldade = dificuldade
     }
 
@@ -18,7 +19,7 @@ export class Cpu {
         } else if (this.dificuldade == 1) {
             this.jogarModoMedio()
         } else {
-            this.jogarModoMedio()
+            this.jogarModoImpossivel()
         }
     }
 
@@ -64,6 +65,93 @@ export class Cpu {
             jogadasPossiveis = this.lerJogadasPossiveis()
         }
         this.fazerJogadaPossivel(jogadasPossiveis)
+    }
+
+    jogarModoImpossivel() {
+        const nJogadas = this.jogo.getNJogadas
+        switch (nJogadas) {
+            case 0:
+                this.jogada0()
+            break;
+        
+            case 1:
+                this.jogada1()
+            break;
+        
+            case 2:
+                this.jogada2()
+            break;
+
+            case 3:
+                this.jogada3()
+            break;
+        
+            case 4:
+                this.jogada4()
+            break;
+        
+            case 5:
+                this.jogada5()
+            break;
+        
+            case 6:
+                this.jogada6()
+            break;
+        
+            case 7:
+                this.jogada7()
+            break;
+        
+            case 8:
+                this.jogada8()
+            break;
+        
+            default:
+            break;
+        }
+    }
+
+    jogada0() {
+        const sorte = this.random(1, 10)
+        if (sorte >= 9) {
+            this.fazerJogadaPossivel([1, 3, 5, 7])
+        } else if (sorte >= 6) {
+            this.fazerJogadaPossivel([4])
+        } else {
+            this.fazerJogadaPossivel([0, 2, 6, 8])
+        }
+    }
+
+    jogada1() {
+        
+    }
+
+    jogada2() {
+
+    }
+
+    jogada3() {
+
+    }
+
+    jogada4() {
+
+    }
+
+    jogada5() {
+
+    }
+
+    jogada6() {
+
+    }
+
+    jogada7() {
+
+    }
+
+    jogada8() {
+
     }
 
     /** 
