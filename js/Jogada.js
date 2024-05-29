@@ -27,6 +27,13 @@ export class Jogada {
         return this.j
     }
 
+    get getInverso() {
+        const indiceI = 2 - this.i
+        const indiceJ = 2 - this.j
+        const index = (3 * indiceI) + indiceJ
+        return new Jogada(-1, index)
+    }
+
     isCentro() {
         if (this.index == 4) {
             return true
