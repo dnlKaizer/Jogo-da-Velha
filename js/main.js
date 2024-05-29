@@ -10,14 +10,16 @@ window.clicar = (index) => {
     tela.atualizar()
     if (cpu != 0) {
         tela.disableAllCellButtons()
+        tela.disableButtonReiniciar()
         setTimeout(() => {
             if (!jogo.getFim) {
-                cpu.modoFacil()
+                cpu.jogar()
                 tela.atualizar()
                 setTimeout(() => {
                     tela.enableAllCellButtons()
                 }, 500)
             }
+            tela.enableButtonReiniciar()
         }, 1000)
     }
 }

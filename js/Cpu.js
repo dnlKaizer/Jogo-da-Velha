@@ -12,58 +12,58 @@ export class Cpu {
         this.dificuldade = dificuldade
     }
 
-    modoFacil() {
-        const nJogadas = this.jogo.getNJogadas
-        let jogadasPossiveis
-        switch (nJogadas) {
-            case 0:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 1:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 2:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 3:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 4:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 5:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 6:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 7:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-
-            case 8:
-                jogadasPossiveis = this.lerJogadasPossiveis()
-                this.fazerJogadaPossivel(jogadasPossiveis)
-            break;
-        
-            default:
-                break;
+    jogar() {
+        if (this.dificuldade == 0) {
+            this.jogarModoFacil()
+        } else if (this.dificuldade == 1) {
+            this.jogarModoMedio()
+        } else {
+            this.jogarModoMedio()
         }
+    }
+
+    jogarModoFacil() {
+        const ameacas = this.verificarAmeacas()
+        const nAmeacas = ameacas.length
+        let jogadasPossiveis = this.lerJogadasPossiveis()
+        const nJogadas = this.jogo.getNJogadas
+
+        if (nAmeacas > 0) {
+            for (const ameaca of ameacas) {
+                if (ameaca.getSymbol == (nJogadas + 1) % 2) {
+                    jogadasPossiveis = [ameaca.getIndex]
+                    break
+                } else {
+                    jogadasPossiveis.splice(jogadasPossiveis.indexOf(ameaca.getIndex), 1)
+                }
+            }
+        }
+        if (jogadasPossiveis.length == 0) {
+            jogadasPossiveis = this.lerJogadasPossiveis()
+        }
+        this.fazerJogadaPossivel(jogadasPossiveis)
+    }
+
+    jogarModoMedio() {
+        let jogadasPossiveis
+        const ameacas = this.verificarAmeacas()
+        const nAmeacas = ameacas.length
+        const nJogadas = this.jogo.getNJogadas
+
+        if (nAmeacas > 0) {
+            jogadasPossiveis = []
+            for (const ameaca of ameacas) {
+                if (ameaca.getSymbol == (nJogadas + 1) % 2) {
+                    jogadasPossiveis = [ameaca.getIndex]
+                    break
+                } else {
+                    jogadasPossiveis.push(ameaca.getIndex)
+                }
+            }
+        } else {
+            jogadasPossiveis = this.lerJogadasPossiveis()
+        }
+        this.fazerJogadaPossivel(jogadasPossiveis)
     }
 
     /** 
@@ -71,7 +71,12 @@ export class Cpu {
     */
     fazerJogadaPossivel(jogadasPossiveis) {
         const nJogadasPossiveis = jogadasPossiveis.length
-        if (nJogadasPossiveis > 0) {
+        if (nJogadasPossiveis == 0) {
+            return
+        }
+        if (nJogadasPossiveis == 1) {
+            this.jogo.jogarIndex(jogadasPossiveis[0])
+        } else {
             const index = this.random(0, nJogadasPossiveis - 1)
             this.jogo.jogarIndex(jogadasPossiveis[index])
         }
