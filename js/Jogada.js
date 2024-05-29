@@ -19,6 +19,14 @@ export class Jogada {
         return this.symbol
     }
 
+    get getI() {
+        return this.i
+    }
+
+    get getJ() {
+        return this.j
+    }
+
     isCentro() {
         if (this.index == 4) {
             return true
