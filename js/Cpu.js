@@ -189,6 +189,16 @@ export class Cpu {
         }
     }
 
+    meiosPossiveis() {
+        let meios = [1, 3, 5, 7]
+        return this.lerJogadaPossivel(meios)
+    }
+
+    cantosPossiveis() {
+        let cantos = [1, 3, 5, 7]
+        return this.lerJogadaPossivel(cantos)
+    }
+
     /**
      * @param {number[]} array 
      */
