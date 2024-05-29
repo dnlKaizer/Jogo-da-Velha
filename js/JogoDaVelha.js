@@ -1,3 +1,4 @@
+import { Jogada } from "./Jogada.js";
 import { Matriz } from "./Matriz.js";
 import { Vencedor } from "./Vencedor.js";
 
@@ -7,6 +8,7 @@ export class JogoDaVelha {
         this.nJogadas = 0
         this.fim = false
         this.vencedor = new Vencedor()
+        this.jogadas = []
     }
 
     get getMatriz() {
@@ -34,6 +36,7 @@ export class JogoDaVelha {
         }
         this.nJogadas++
         this.matriz.alterarByIndex((this.nJogadas % 2), index)
+        this.jogadas.push(new Jogada(this.nJogadas % 2, index))
         this.verificarVencedor()
     }
 

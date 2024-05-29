@@ -4,11 +4,11 @@ export class Jogada {
      * @param {number} index
      * @param {number} symbol
     */
-    constructor(index, symbol) {
+    constructor(symbol, index) {
+        this.symbol = symbol 
         this.index = index
         this.j = index % 3
         this.i = (index - (index % 3)) / 3
-        this.symbol = symbol 
     }
 
     get getIndex() {
