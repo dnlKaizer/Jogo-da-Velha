@@ -8,7 +8,7 @@ Repositório para criação de um web app de jogo da velha, para praticar e apre
 . Criar 2 modos de jogo:<br/>
 &emsp;&emsp;- Player vs Player<br/>
 &emsp;&emsp;- Player vs CPU<br/>
-. Criar 4 dificuldades de jogo contra a CPU:<br/>
+. Criar 3 dificuldades de jogo contra a CPU:<br/>
 &emsp;&emsp;- Fácil<br/>
 &emsp;&emsp;- Médio<br/>
 &emsp;&emsp;- Impossível (Literalmente)<br/>
