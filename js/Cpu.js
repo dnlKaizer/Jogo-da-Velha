@@ -9,7 +9,7 @@ export class Cpu {
     constructor(jogo, dificuldade) {
         this.jogo = jogo
         this.matriz = jogo.getMatriz
-        this.jogadas = jogo.
+        this.jogadas = jogo.getJogadas
         this.dificuldade = dificuldade
     }
 
@@ -123,7 +123,25 @@ export class Cpu {
     }
 
     jogada1() {
-        
+        const jogada = this.jogadas[0]
+        let jogadasPossiveis = []
+        if (jogada.isCentro()) {
+            jogadasPossiveis = [0, 2, 6, 8]
+        } else if (jogada.isMeio()) {
+            if (jogada.getIndex < 4) {
+                jogadasPossiveis.push(8)
+            } else {
+                jogadasPossiveis.push(0)
+            }
+            if ((jogada.getIndex % 4) == 1) {
+                jogadasPossiveis.push(6)
+            } else {
+                jogadasPossiveis.push(2)
+            }
+        } else {
+            jogadasPossiveis = [4]
+        }
+        this.fazerJogadaPossivel(jogadasPossiveis)
     }
 
     jogada2() {
