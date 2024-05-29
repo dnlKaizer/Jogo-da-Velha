@@ -26,6 +26,10 @@ export class JogoDaVelha {
     get getVencedor() {
         return this.vencedor
     }
+    
+    get getJogadas() {
+        return this.jogadas
+    }
 
     /** 
      * @param {number} index
