@@ -12,6 +12,19 @@ export class Cpu {
         this.matriz = jogo.getMatriz
         this.jogadas = jogo.getJogadas
         this.dificuldade = dificuldade
+        this.pattern = -1
+        /* 
+        0: início no centro
+        1: início no canto
+        2: início no meio
+        */
+    }
+
+    /**
+     * @param {number} pattern 
+    */
+    set setPattern(pattern) {
+        this.pattern = pattern
     }
 
     jogar() {
@@ -115,11 +128,14 @@ export class Cpu {
     jogada0() {
         const sorte = this.random(1, 10)
         if (sorte >= 9) {
-            this.fazerJogadaPossivel([1, 3, 5, 7])
+            this.fazerJogadaPossivel(this.meiosPossiveis())
+            this.setPattern = 2
         } else if (sorte >= 6) {
             this.fazerJogadaPossivel([4])
+            this.setPattern = 0
         } else {
-            this.fazerJogadaPossivel([0, 2, 6, 8])
+            this.fazerJogadaPossivel(this.cantosPossiveis())
+            this.setPattern = 1
         }
     }
 
@@ -127,7 +143,8 @@ export class Cpu {
         const jogada = this.jogadas[0]
         let jogadasPossiveis = []
         if (jogada.isCentro()) {
-            jogadasPossiveis = [0, 2, 6, 8]
+            jogadasPossiveis = this.cantosPossiveis
+            this.setPattern = 0
         } else if (jogada.isMeio()) {
             if (jogada.getIndex < 4) {
                 jogadasPossiveis.push(8)
@@ -139,8 +156,10 @@ export class Cpu {
             } else {
                 jogadasPossiveis.push(2)
             }
+            this.setPattern = 2
         } else {
             jogadasPossiveis = [4]
+            this.setPattern = 1
         }
         this.fazerJogadaPossivel(jogadasPossiveis)
     }
@@ -150,7 +169,7 @@ export class Cpu {
     }
 
     jogada3() {
-
+        
     }
 
     jogada4() {
@@ -171,6 +190,20 @@ export class Cpu {
 
     jogada8() {
 
+    }
+
+    /**
+     * @param {Ameaca[]} ameacas 
+     */
+    fazerJogadaAmeaca(ameacas) {
+        const symbol = (this.jogo.getNJogadas + 1) % 2
+        for (let index = 0; index < ameacas.length; index++) {
+            if (ameacas[index].getSymbol == symbol) {
+                this.jogo.jogarIndex(ameacas[index].getIndex)
+                return
+            }
+        }
+        this.jogo.jogarIndex(ameacas[0].getIndex)
     }
 
     /** 
