@@ -169,7 +169,10 @@ export class Cpu {
     }
 
     jogada3() {
-        
+        if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+            return
+        }
+
     }
 
     jogada4() {
@@ -196,14 +199,18 @@ export class Cpu {
      * @param {Ameaca[]} ameacas 
      */
     fazerJogadaAmeaca(ameacas) {
+        if (ameacas.length == 0) {
+            return false
+        }
         const symbol = (this.jogo.getNJogadas + 1) % 2
         for (let index = 0; index < ameacas.length; index++) {
             if (ameacas[index].getSymbol == symbol) {
                 this.jogo.jogarIndex(ameacas[index].getIndex)
-                return
+                return true
             }
         }
         this.jogo.jogarIndex(ameacas[0].getIndex)
+        return true
     }
 
     /** 
