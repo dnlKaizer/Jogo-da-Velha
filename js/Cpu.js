@@ -97,22 +97,37 @@ export class Cpu {
             break;
 
             case 3:
+                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+                    return
+                }
                 this.jogada3()
             break;
         
             case 4:
+                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+                    return
+                }
                 this.jogada4()
             break;
         
             case 5:
+                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+                    return
+                }
                 this.jogada5()
             break;
         
             case 6:
+                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+                    return
+                }
                 this.jogada6()
             break;
         
             case 7:
+                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+                    return
+                }
                 this.jogada7()
             break;
         
@@ -169,10 +184,20 @@ export class Cpu {
     }
 
     jogada3() {
-        if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
-            return
-        }
+        let jogadasPossiveis
+        if (this.pattern == 0) {
+            jogadasPossiveis = this.cantosPossiveis()
+        } else if (this.pattern == 2) {
+            if (this.jogadas[2].isMeio()) {
 
+            } else {
+                jogadasPossiveis = this.cantosPossiveis()
+                jogadasPossiveis.splice(jogadasPossiveis.indexOf(this.jogadas[1].getInverso), 1)
+            }
+        } else {
+
+        }
+        this.fazerJogadaPossivel(jogadasPossiveis)
     }
 
     jogada4() {
@@ -235,7 +260,7 @@ export class Cpu {
     }
 
     cantosPossiveis() {
-        let cantos = [1, 3, 5, 7]
+        let cantos = [0, 2, 6, 8]
         return this.lerJogadaPossivel(cantos)
     }
 
@@ -244,7 +269,7 @@ export class Cpu {
      */
     lerJogadaPossivel(array) {
         for (let i = 0; i < array.length; i++) {
-            if (this.matriz.getIndiceByIndex(array[i]) == -1) {
+            if (this.matriz.getIndiceByIndex(array[i]) != -1) {
                 array.splice(i, 1)
                 i--
             }
