@@ -83,6 +83,9 @@ export class Cpu {
 
     jogarModoImpossivel() {
         const nJogadas = this.jogo.getNJogadas
+        if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+            return
+        }
         switch (nJogadas) {
             case 0:
                 this.jogada0()
@@ -97,37 +100,22 @@ export class Cpu {
             break;
 
             case 3:
-                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
-                    return
-                }
                 this.jogada3()
             break;
         
             case 4:
-                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
-                    return
-                }
                 this.jogada4()
             break;
         
             case 5:
-                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
-                    return
-                }
                 this.jogada5()
             break;
         
             case 6:
-                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
-                    return
-                }
                 this.jogada6()
             break;
         
             case 7:
-                if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
-                    return
-                }
                 this.jogada7()
             break;
         
@@ -158,18 +146,17 @@ export class Cpu {
         const jogada = this.jogadas[0]
         let jogadasPossiveis = []
         if (jogada.isCentro()) {
-            jogadasPossiveis = this.cantosPossiveis
+            jogadasPossiveis = this.cantosPossiveis()
             this.setPattern = 0
         } else if (jogada.isMeio()) {
-            if (jogada.getIndex < 4) {
-                jogadasPossiveis.push(8)
+            jogadasPossiveis.push(4)
+            jogadasPossiveis.push(jogada.getInverso)
+            if (jogada.getJ == 1) {
+                jogadasPossiveis.push((3 * jogada.getI))
+                jogadasPossiveis.push((3 * jogada.getI) + 2)
             } else {
-                jogadasPossiveis.push(0)
-            }
-            if ((jogada.getIndex % 4) == 1) {
-                jogadasPossiveis.push(6)
-            } else {
-                jogadasPossiveis.push(2)
+                jogadasPossiveis.push(jogada.getJ)
+                jogadasPossiveis.push(6 + jogada.getJ)
             }
             this.setPattern = 2
         } else {
@@ -187,15 +174,13 @@ export class Cpu {
         let jogadasPossiveis
         if (this.pattern == 0) {
             jogadasPossiveis = this.cantosPossiveis()
-        } else if (this.pattern == 2) {
+        } else if (this.pattern == 1) {
+            jogadasPossiveis = this.meiosPossiveis()
             if (this.jogadas[2].isMeio()) {
-
-            } else {
-                jogadasPossiveis = this.cantosPossiveis()
-                jogadasPossiveis.splice(jogadasPossiveis.indexOf(this.jogadas[1].getInverso), 1)
+                jogadasPossiveis.splice(jogadasPossiveis.indexOf(this.jogadas[2].getInverso), 1)
             }
         } else {
-
+            
         }
         this.fazerJogadaPossivel(jogadasPossiveis)
     }
