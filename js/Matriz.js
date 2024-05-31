@@ -76,7 +76,9 @@ export class Matriz {
      * @param {number} j
     */
     alterar(valor, i, j) {
-        this.indices[i][j] = valor
+        if (this.indices[i][j] == -1) {
+            this.indices[i][j] = valor
+        }
     }
 
     /** 
@@ -86,6 +88,8 @@ export class Matriz {
     alterarByIndex(valor, index) {
         let j = index % 3 
         let i = (index - j) / 3
-        this.indices[i][j] = valor
+        if (this.indices[i][j] == -1) {
+            this.indices[i][j] = valor
+        }
     }
 }
