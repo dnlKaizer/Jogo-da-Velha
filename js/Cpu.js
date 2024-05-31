@@ -149,15 +149,7 @@ export class Cpu {
             jogadasPossiveis = this.cantosPossiveis()
             this.setPattern = 0
         } else if (jogada.isMeio()) {
-            jogadasPossiveis.push(4)
-            jogadasPossiveis.push(jogada.getInverso)
-            if (jogada.getJ == 1) {
-                jogadasPossiveis.push((3 * jogada.getI))
-                jogadasPossiveis.push((3 * jogada.getI) + 2)
-            } else {
-                jogadasPossiveis.push(jogada.getJ)
-                jogadasPossiveis.push(6 + jogada.getJ)
-            }
+            jogadasPossiveis = [4]
             this.setPattern = 2
         } else {
             jogadasPossiveis = [4]
@@ -189,47 +181,29 @@ export class Cpu {
                 //FINALIZADO
             }
         } else {
-            if (this.jogadas[1].isCentro()) {
-                jogadasPossiveis = this.jogada30()
-                //FINALIZADO
-            } else if (this.jogadas[1].isCanto()) {
-                jogadasPossiveis = this.jogada31()
+            if (this.jogadas[2].isCanto()) {
+                let index
+                if (this.jogadas[0].getI == 1) {
+                    index = (3 * (2 - this.jogadas[2].getI)) + 1
+                } else {
+                    index = 3 + 2 - this.jogadas[2].getJ
+                }
+                jogadasPossiveis = [index]
+            } else if (this.jogadas[2].getIndex == this.jogadas[0].getInverso) {
+                jogadasPossiveis = this.cantosPossiveis()
             } else {
-                jogadasPossiveis = this.jogada32()
+                jogadasPossiveis = this.cantosPossiveis()
+                let i = this.jogadas[(this.jogadas[0].getI % 2) * 2].getI
+                let j = this.jogadas[(this.jogadas[0].getJ % 2) * 2].getJ
+                let index
+                index = (3 * i) + j
+                jogadasPossiveis.splice(jogadasPossiveis.indexOf(index), 1)
+                index = (3 * (2 - i)) + 2 - j
+                jogadasPossiveis.splice(jogadasPossiveis.indexOf(index), 1)
             }
+            //FINALIZADO
         }
         this.fazerJogadaPossivel(jogadasPossiveis)
-    }
-
-    jogada30() {
-        let jogadasPossiveis = []
-        if (this.jogadas[2].isCanto()) {
-            let index
-            if (this.jogadas[0].getI == 1) {
-                index = (3 * (2 - this.jogadas[2].getI)) + 1
-            } else {
-                index = (3 * 1) + 2 - this.jogadas[2].getJ
-            }
-            jogadasPossiveis.push(index)
-        } else if (this.jogadas[2].getIndex == this.jogadas[0].getInverso) {
-            jogadasPossiveis = this.cantosPossiveis()
-        } else {
-            jogadasPossiveis = this.cantosPossiveis()
-            let i = this.jogadas[(this.jogadas[0].getI % 2) * 2].getI
-            let j = this.jogadas[(this.jogadas[0].getJ % 2) * 2].getJ
-            let index
-            index = (3 * i) + j
-            jogadasPossiveis.splice(jogadasPossiveis.indexOf(index), 1)
-            index = (3 * (2 - i)) + 2 - j
-            jogadasPossiveis.splice(jogadasPossiveis.indexOf(index), 1)
-        }
-        return jogadasPossiveis
-    }
-    jogada31() {
-
-    }
-    jogada32() {
-
     }
 
     jogada4() {
@@ -241,7 +215,7 @@ export class Cpu {
     }
 
     jogada6() {
-        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
+        
     }
 
     jogada7() {
@@ -249,7 +223,7 @@ export class Cpu {
     }
 
     jogada8() {
-        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
+        
     }
 
     /**
