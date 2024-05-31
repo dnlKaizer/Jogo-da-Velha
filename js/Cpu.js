@@ -251,7 +251,7 @@ export class Cpu {
 
     /**
      * @param {number[]} array 
-     */
+    */
     lerJogadaPossivel(array) {
         for (let i = 0; i < array.length; i++) {
             if (this.matriz.getIndiceByIndex(array[i]) != -1) {
