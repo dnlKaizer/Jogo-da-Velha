@@ -150,14 +150,14 @@ export class Cpu {
             this.setPattern = 0
         } else if (jogada.isMeio()) {
             jogadasPossiveis.push(4)
-            // jogadasPossiveis.push(jogada.getInverso)
-            // if (jogada.getJ == 1) {
-            //     jogadasPossiveis.push((3 * jogada.getI))
-            //     jogadasPossiveis.push((3 * jogada.getI) + 2)
-            // } else {
-            //     jogadasPossiveis.push(jogada.getJ)
-            //     jogadasPossiveis.push(6 + jogada.getJ)
-            // }
+            jogadasPossiveis.push(jogada.getInverso)
+            if (jogada.getJ == 1) {
+                jogadasPossiveis.push((3 * jogada.getI))
+                jogadasPossiveis.push((3 * jogada.getI) + 2)
+            } else {
+                jogadasPossiveis.push(jogada.getJ)
+                jogadasPossiveis.push(6 + jogada.getJ)
+            }
             this.setPattern = 2
         } else {
             jogadasPossiveis = [4]
@@ -175,9 +175,18 @@ export class Cpu {
         if (this.pattern == 0) {
             jogadasPossiveis = this.cantosPossiveis()
         } else if (this.pattern == 1) {
-            jogadasPossiveis = this.meiosPossiveis()
             if (this.jogadas[2].isMeio()) {
-                jogadasPossiveis.splice(jogadasPossiveis.indexOf(this.jogadas[2].getInverso), 1)
+                let i = this.jogadas[0].getI
+                let j = this.jogadas[0].getJ
+                if (this.matriz.getIndice(2 - i, 1) == -1) {
+                    jogadasPossiveis = [(3 * (2 - i)) + 1]
+                } else {
+                    jogadasPossiveis = [3 + 2 - j]
+                }
+                //FINALIZADO
+            } else {
+                jogadasPossiveis = this.meiosPossiveis()
+                //FINALIZADO
             }
         } else {
             if (this.jogadas[1].isCentro()) {
@@ -228,19 +237,19 @@ export class Cpu {
     }
 
     jogada5() {
-
+        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
     }
 
     jogada6() {
-
+        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
     }
 
     jogada7() {
-
+        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
     }
 
     jogada8() {
-
+        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
     }
 
     /**
