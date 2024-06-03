@@ -51,3 +51,5 @@ window.escolherModo = (index) => {
 let jogo = new JogoDaVelha()
 let tela = new Interface(jogo)
 let cpu = 0
+
+//teste
