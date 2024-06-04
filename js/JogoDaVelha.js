@@ -37,7 +37,7 @@ export class JogoDaVelha {
     /** 
      * @param {number} index
     */
-    jogarIndex(index) {
+    jogar(index) {
         if (this.fim) {
             return
         }
