@@ -30,11 +30,20 @@ export class Interface {
         this.jogo = jogo
     }
 
+    atualizarPainel() {
+        for (let i = 0; i < 9; i++) {
+            const cell = cells[i]
+            if (cell.querySelector('div') != null && this.jogo.getMatriz.getIndiceByIndex(i) == -1) {
+                this.#adicionarSimbolo(cell)
+                this.#disableButton(cell)
+            }
+        }
+    }
+
     /**
-     * @param {number} indexCell 
+     * @param {HTMLButtonElement} cell 
      */
-    adicionarSimbolo(indexCell) {
-        const cell = cells[indexCell]
+    #adicionarSimbolo(cell) {
         const symbol = this.getNjogadas % 2
         if (symbol == 0) {
             symbol = this.#criarO()
