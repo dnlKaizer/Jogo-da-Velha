@@ -19,6 +19,10 @@ export class Interface {
         return this.seletor.getModo
     }
 
+    get getNjogadas() {
+        return this.jogo.getNJogadas
+    }
+
     /**
      * @param {JogoDaVelha} jogo
      */
