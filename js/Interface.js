@@ -30,6 +30,9 @@ export class Interface {
         this.jogo = jogo
     }
 
+    /**
+     * @param {number} indexCell 
+     */
     adicionarSimbolo(indexCell) {
         const cell = cells[indexCell]
         const symbol = this.getNjogadas % 2
@@ -39,6 +42,22 @@ export class Interface {
             symbol = this.criarX()
         }
         cell.appendChild(symbol)
+    }
+
+    /**
+     * @param {HTMLButtonElement} button 
+     */
+    disableButton(button) {
+        button.disabled = true
+        button.style.cursor = 'default'
+    }
+
+    /**
+     * @param {HTMLButtonElement} button 
+     */
+    enableButton(button) {
+        button.disabled = false
+        button.style.cursor = 'pointer'
     }
 
     /**
@@ -73,7 +92,6 @@ export class Interface {
         const i = (index - j) / 3
         return [i,j]
     }
-
     /**
      * @param {number} i 
      * @param {number} j 
