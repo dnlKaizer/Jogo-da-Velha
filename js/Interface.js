@@ -30,6 +30,9 @@ export class Interface {
         this.jogo = jogo
     }
 
+    /**
+     * @returns {HTMLDivElement}
+     */
     criarX() {
         const symbol1 = document.createElement('div')
         const symbol11 = document.createElement('div')
@@ -41,9 +44,32 @@ export class Interface {
         symbol1.appendChild(symbol12)
         return symbol1
     }
+    /**
+     * @returns {HTMLDivElement}
+     */
     criarO() {
         const symbol0 = document.createElement('div')
         symbol0.classList = 'symbol0'
         return symbol0
+    }
+
+    /**
+     * @param {number} index 
+     * @returns {number[]}
+     */  
+    indexParaIndices(index) {
+        const j = index % 3
+        const i = (index - j) / 3
+        return [i,j]
+    }
+
+    /**
+     * @param {number} i 
+     * @param {number} j 
+     * @returns {number}
+     */
+    indicesParaIndex(i, j) {
+        const index = (3 * i) + j
+        return index 
     }
 }
