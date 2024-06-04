@@ -37,9 +37,9 @@ export class Interface {
         const cell = cells[indexCell]
         const symbol = this.getNjogadas % 2
         if (symbol == 0) {
-            symbol = this.criarO()
+            symbol = this.#criarO()
         } else {
-            symbol = this.criarX()
+            symbol = this.#criarX()
         }
         cell.appendChild(symbol)
     }
@@ -47,7 +47,7 @@ export class Interface {
     /**
      * @param {HTMLButtonElement} button 
      */
-    disableButton(button) {
+    #disableButton(button) {
         button.disabled = true
         button.style.cursor = 'default'
     }
@@ -55,7 +55,7 @@ export class Interface {
     /**
      * @param {HTMLButtonElement} button 
      */
-    enableButton(button) {
+    #enableButton(button) {
         button.disabled = false
         button.style.cursor = 'pointer'
     }
@@ -63,7 +63,7 @@ export class Interface {
     /**
      * @returns {HTMLDivElement}
      */
-    criarX() {
+    #criarX() {
         const symbol1 = document.createElement('div')
         const symbol11 = document.createElement('div')
         const symbol12 = document.createElement('div')
@@ -77,7 +77,7 @@ export class Interface {
     /**
      * @returns {HTMLDivElement}
      */
-    criarO() {
+    #criarO() {
         const symbol0 = document.createElement('div')
         symbol0.classList = 'symbol0'
         return symbol0
@@ -87,7 +87,7 @@ export class Interface {
      * @param {number} index 
      * @returns {number[]}
      */  
-    indexParaIndices(index) {
+    #indexParaIndices(index) {
         const j = index % 3
         const i = (index - j) / 3
         return [i,j]
@@ -97,7 +97,7 @@ export class Interface {
      * @param {number} j 
      * @returns {number}
      */
-    indicesParaIndex(i, j) {
+    #indicesParaIndex(i, j) {
         const index = (3 * i) + j
         return index 
     }
