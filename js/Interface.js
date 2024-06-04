@@ -30,6 +30,17 @@ export class Interface {
         this.jogo = jogo
     }
 
+    adicionarSimbolo(indexCell) {
+        const cell = cells[indexCell]
+        const symbol = this.getNjogadas % 2
+        if (symbol == 0) {
+            symbol = this.criarO()
+        } else {
+            symbol = this.criarX()
+        }
+        cell.appendChild(symbol)
+    }
+
     /**
      * @returns {HTMLDivElement}
      */
