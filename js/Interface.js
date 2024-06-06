@@ -103,26 +103,11 @@ export class Interface {
      * @param {HTMLButtonElement} cell 
      */
     #desaparecerSymbol(cell) {
-        let symbol = cell.querySelector('div')
+        const symbol = cell.querySelector('div')
         if (symbol.className == 'symbol1') {
-            const symbol11 = symbol.querySelector('.symbol11')
-            const symbol12 = symbol.querySelector('.symbol12')
-
-            symbol11.style.animation = 'disappear-x 0.25s ease-in-out 0.25s'
-            symbol11.addEventListener("animationend", () => {
-                symbol.remove()
-                this.#enableButton(cell)
-            })
-            symbol12.style.animation = 'disappear-x 0.25s'
-            symbol12.addEventListener("animationend", () => {
-                symbol12.remove()
-            })
+            this.#desaparecerX(cell, symbol)
         } else {
-            symbol.style.animation = 'disappear-o 0.5s ease-in-out'
-            symbol.addEventListener("animationend", () => {
-                symbol.remove()
-                this.#enableButton(cell)
-            })
+            this.#desaparecerO(cell, symbol)
         }
     }
 
@@ -133,6 +118,36 @@ export class Interface {
                 this.#desaparecerSymbol(cell)
             }
         }
+    }
+
+    /**
+     * @param {HTMLButtonElement} cell 
+     * @param {HTMLDivElement} symbol 
+     */
+    #desaparecerX(cell, symbol) {
+        const symbol11 = symbol.querySelector('.symbol11')
+        const symbol12 = symbol.querySelector('.symbol12')
+
+        symbol11.style.animation = 'disappear-x 0.25s ease-in-out 0.25s'
+        symbol11.addEventListener("animationend", () => {
+            symbol.remove()
+            this.#enableButton(cell)
+        })
+        symbol12.style.animation = 'disappear-x 0.25s'
+        symbol12.addEventListener("animationend", () => {
+            symbol12.remove()
+        })
+    }
+    /**
+     * @param {HTMLButtonElement} cell 
+     * @param {HTMLDivElement} symbol 
+     */
+    #desaparecerO(cell, symbol) {
+        symbol.style.animation = 'disappear-o 0.5s ease-in-out'
+        symbol.addEventListener("animationend", () => {
+            symbol.remove()
+            this.#enableButton(cell)
+        })
     }
 
     reiniciar() {
