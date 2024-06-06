@@ -15,6 +15,10 @@ export class JogoDaVelha {
         return this.matriz
     }
 
+    getIndice(index) {
+        return this.matriz.getIndiceByIndex(index)
+    }
+
     get getNJogadas() {
         return this.nJogadas
     }
