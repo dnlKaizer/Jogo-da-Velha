@@ -38,6 +38,10 @@ export class Interface {
                 this.#disableButton(cell)
             }
         }
+
+        if (this.jogo.getFim) {
+            this.#disableAllCellButtons()
+        }
     }
 
     /**
@@ -79,6 +83,20 @@ export class Interface {
         button.style.cursor = 'pointer'
     }
 
+    #disableAllCellButtons() {
+        for (let index = 0; index < 9; index++) {
+            const cell = this.cells[index];
+            this.#disableButton(cell)
+        }
+    }
+
+    #enableAllCellButtons() {
+        for (let index = 0; index < 9; index++) {
+            const cell = this.cells[index];
+            this.#enableButton(cell)
+        }
+    }
+
     /**
      * @param {HTMLButtonElement} cell 
      */
@@ -101,13 +119,19 @@ export class Interface {
         })
     }
 
-    reiniciar() {
+    #desaparecerAllSymbols() {
         for (let index = 0; index < 9; index++) {
             if (this.jogo.getIndice(index) != -1) {
                 const cell = this.cells[index]
                 this.#desaparecerSymbol(cell)
             }
         }
+    }
+
+    reiniciar() {
+        this.#desaparecerAllSymbols()
+        // ASYNC AWAIT AQUI OH
+        this.#enableAllCellButtons()
     }
 
     /**
