@@ -221,6 +221,7 @@
 /* Símbolos */
 .symbol0 {
     animation: appear-o 0.25s;
+    animation-timing-function: linear;
     position: absolute;
     width: 130px;
     height: 130px;

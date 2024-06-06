@@ -58,16 +58,6 @@ export class Interface {
     }
 
     /**
-     * @param {HTMLButtonElement} cell 
-     */
-    #removerSimbolo(cell) {
-        const div = cell.querySelector('div')
-        if (div != null) {
-            cell.removeChild(div)
-        }
-    }
-
-    /**
      * @param {HTMLButtonElement} button 
      */
     #disableButton(button) {
@@ -103,7 +93,7 @@ export class Interface {
      * @param {HTMLButtonElement} cell 
      */
     #desaparecerSymbol(cell) {
-        const symbol = cell.querySelector('div')
+        const symbol = cell.firstChild
         if (symbol.className == 'symbol1') {
             this.#desaparecerX(cell, symbol)
         } else {
@@ -143,7 +133,7 @@ export class Interface {
      * @param {HTMLDivElement} symbol 
      */
     #desaparecerO(cell, symbol) {
-        symbol.style.animation = 'disappear-o 0.5s ease-in-out'
+        symbol.style.animation = 'disappear-o 0.5s linear'
         symbol.addEventListener("animationend", () => {
             symbol.remove()
             this.#enableButton(cell)
