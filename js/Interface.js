@@ -90,10 +90,12 @@ export class Interface {
         }
     }
 
-    #enableAllCellButtons() {
+    #enableSelectedCellButtons() {
         for (let index = 0; index < 9; index++) {
-            const cell = this.cells[index];
-            this.#enableButton(cell)
+            if (this.jogo.getIndice(index) == -1) {
+                const cell = this.cells[index];
+                this.#enableButton(cell)
+            }
         }
     }
 
@@ -106,17 +108,22 @@ export class Interface {
             const symbol11 = symbol.querySelector('.symbol11')
             const symbol12 = symbol.querySelector('.symbol12')
 
-            symbol11.style.animation = 'disappear-x1 0.4s'
-            symbol12.style.animation = 'disappear-x2 0.4s'
-
-            symbol = symbol11
+            symbol11.style.animation = 'disappear-x 0.25s ease-in-out 0.25s'
+            symbol11.addEventListener("animationend", () => {
+                symbol.remove()
+                this.#enableButton(cell)
+            })
+            symbol12.style.animation = 'disappear-x 0.25s'
+            symbol12.addEventListener("animationend", () => {
+                symbol12.remove()
+            })
         } else {
-            symbol.style.animation = 'disappear-o 0.4s'
+            symbol.style.animation = 'disappear-o 0.5s ease-in-out'
+            symbol.addEventListener("animationend", () => {
+                symbol.remove()
+                this.#enableButton(cell)
+            })
         }
-        symbol.addEventListener("animationend", () => {
-            this.#removerSimbolo(cell)
-            this.#enableButton(cell)
-        })
     }
 
     #desaparecerAllSymbols() {
@@ -130,8 +137,7 @@ export class Interface {
 
     reiniciar() {
         this.#desaparecerAllSymbols()
-        // ASYNC AWAIT AQUI OH
-        this.#enableAllCellButtons()
+        this.#enableSelectedCellButtons()
     }
 
     /**

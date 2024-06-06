@@ -45,26 +45,9 @@
 }
 
 /* Animação de desaparecer do X */
-@keyframes disappear-x1 {
+@keyframes disappear-x {
     0% {
         clip-path: inset(0 0 0 0);
-    }
-    40% {
-        clip-path: inset(0 0 0 0);
-    }
-    80% {
-        clip-path: inset(0 100% 0 0);
-    }
-    100% {
-        clip-path: inset(0 100% 0 0);
-    }
-}
-@keyframes disappear-x2 {
-    0% {
-        clip-path: inset(0 0 0 0);
-    }
-    80% {
-        clip-path: inset(0 100% 0 0);
     }
     100% {
         clip-path: inset(0 100% 0 0);
