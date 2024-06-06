@@ -80,6 +80,37 @@ export class Interface {
     }
 
     /**
+     * @param {HTMLButtonElement} cell 
+     */
+    #desaparecerSymbol(cell) {
+        let symbol = cell.querySelector('div')
+        if (symbol.className == 'symbol1') {
+            const symbol11 = symbol.querySelector('.symbol11')
+            const symbol12 = symbol.querySelector('.symbol12')
+
+            symbol11.style.animation = 'disappear-x1 0.4s'
+            symbol12.style.animation = 'disappear-x2 0.4s'
+
+            symbol = symbol11
+        } else {
+            symbol.style.animation = 'disappear-o 0.4s'
+        }
+        symbol.addEventListener("animationend", () => {
+            this.#removerSimbolo(cell)
+            this.#enableButton(cell)
+        })
+    }
+
+    reiniciar() {
+        for (let index = 0; index < 9; index++) {
+            if (this.jogo.getIndice(index) != -1) {
+                const cell = this.cells[index]
+                this.#desaparecerSymbol(cell)
+            }
+        }
+    }
+
+    /**
      * @returns {HTMLDivElement}
      */
     #criarX() {
