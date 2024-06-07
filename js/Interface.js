@@ -40,14 +40,14 @@ export class Interface {
         }
 
         if (this.jogo.getFim) {
-            this.#disableAllCellButtons()
+            this.disableAllCellButtons()
             this.#adicionarLinhaVitoria()
         }
     }
 
     reiniciar() {
         this.#desaparecerAllSymbols()
-        this.#enableSelectedCellButtons()
+        this.enableSelectedCellButtons()
         this.#removerLinhaVitoria()
     }
 
@@ -95,13 +95,13 @@ export class Interface {
         button.style.cursor = 'pointer'
     }
 
-    #disableAllCellButtons() {
+    disableAllCellButtons() {
         for (let index = 0; index < 9; index++) {
             const cell = this.cells[index];
             this.#disableButton(cell)
         }
     }
-    #enableSelectedCellButtons() {
+    enableSelectedCellButtons() {
         for (let index = 0; index < 9; index++) {
             if (this.jogo.getIndice(index) == -1) {
                 const cell = this.cells[index];
