@@ -236,11 +236,11 @@ export class Cpu {
         const symbol = (this.jogo.getNJogadas + 1) % 2
         for (let index = 0; index < ameacas.length; index++) {
             if (ameacas[index].getSymbol == symbol) {
-                this.jogo.jogarIndex(ameacas[index].getIndex)
+                this.jogo.jogar(ameacas[index].getIndex)
                 return true
             }
         }
-        this.jogo.jogarIndex(ameacas[0].getIndex)
+        this.jogo.jogar(ameacas[0].getIndex)
         return true
     }
 
@@ -253,10 +253,10 @@ export class Cpu {
             return
         }
         if (nJogadasPossiveis == 1) {
-            this.jogo.jogarIndex(jogadasPossiveis[0])
+            this.jogo.jogar(jogadasPossiveis[0])
         } else {
             const index = this.#random(0, nJogadasPossiveis - 1)
-            this.jogo.jogarIndex(jogadasPossiveis[index])
+            this.jogo.jogar(jogadasPossiveis[index])
         }
     }
 
