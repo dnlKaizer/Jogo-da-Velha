@@ -41,7 +41,24 @@ export class Interface {
 
         if (this.jogo.getFim) {
             this.#disableAllCellButtons()
+            this.#adicionarLinhaVitoria()
         }
+    }
+
+    reiniciar() {
+        this.#desaparecerAllSymbols()
+        this.#enableSelectedCellButtons()
+    }
+
+    #adicionarLinhaVitoria() {
+        const vencedor = this.jogo.getVencedor
+        const linha = document.createElement('div')
+        linha.classList = 'vencedor'
+        linha.id = `vencedor${vencedor.getType}${vencedor.getIndex}`
+        linha.addEventListener("animationstart", () => {
+            linha.style.opacity = '1'
+        })
+        this.box.appendChild(linha)
     }
 
     /**
@@ -138,11 +155,6 @@ export class Interface {
             symbol.remove()
             this.#enableButton(cell)
         })
-    }
-
-    reiniciar() {
-        this.#desaparecerAllSymbols()
-        this.#enableSelectedCellButtons()
     }
 
     /**
