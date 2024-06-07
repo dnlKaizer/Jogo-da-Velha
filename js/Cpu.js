@@ -23,7 +23,7 @@ export class Cpu {
     /**
      * @param {number} pattern 
     */
-    set setPattern(pattern) {
+    set #setPattern(pattern) {
         this.pattern = pattern
     }
 
@@ -132,13 +132,13 @@ export class Cpu {
         const sorte = this.#random(1, 10)
         if (sorte >= 9) {
             this.#fazerJogadaPossivel(this.#meiosPossiveis())
-            this.setPattern = 2
+            this.#setPattern = 2
         } else if (sorte >= 6) {
             this.#fazerJogadaPossivel([4])
-            this.setPattern = 0
+            this.#setPattern = 0
         } else {
             this.#fazerJogadaPossivel(this.#cantosPossiveis())
-            this.setPattern = 1
+            this.#setPattern = 1
         }
     }
 
@@ -147,13 +147,13 @@ export class Cpu {
         let jogadasPossiveis = []
         if (jogada.isCentro()) {
             jogadasPossiveis = this.#cantosPossiveis()
-            this.setPattern = 0
+            this.#setPattern = 0
         } else if (jogada.isMeio()) {
             jogadasPossiveis = [4]
-            this.setPattern = 2
+            this.#setPattern = 2
         } else {
             jogadasPossiveis = [4]
-            this.setPattern = 1
+            this.#setPattern = 1
         }
         this.#fazerJogadaPossivel(jogadasPossiveis)
     }
