@@ -29,18 +29,18 @@ export class Cpu {
 
     jogar() {
         if (this.dificuldade == 0) {
-            this.jogarModoFacil()
+            this.#jogarModoFacil()
         } else if (this.dificuldade == 1) {
-            this.jogarModoMedio()
+            this.#jogarModoMedio()
         } else {
-            this.jogarModoImpossivel()
+            this.#jogarModoImpossivel()
         }
     }
 
-    jogarModoFacil() {
-        const ameacas = this.verificarAmeacas()
+    #jogarModoFacil() {
+        const ameacas = this.#verificarAmeacas()
         const nAmeacas = ameacas.length
-        let jogadasPossiveis = this.lerTodasJogadasPossiveis()
+        let jogadasPossiveis = this.#lerTodasJogadasPossiveis()
         const nJogadas = this.jogo.getNJogadas
 
         if (nAmeacas > 0) {
@@ -54,14 +54,14 @@ export class Cpu {
             }
         }
         if (jogadasPossiveis.length == 0) {
-            jogadasPossiveis = this.lerTodasJogadasPossiveis()
+            jogadasPossiveis = this.#lerTodasJogadasPossiveis()
         }
-        this.fazerJogadaPossivel(jogadasPossiveis)
+        this.#fazerJogadaPossivel(jogadasPossiveis)
     }
 
-    jogarModoMedio() {
+    #jogarModoMedio() {
         let jogadasPossiveis
-        const ameacas = this.verificarAmeacas()
+        const ameacas = this.#verificarAmeacas()
         const nAmeacas = ameacas.length
         const nJogadas = this.jogo.getNJogadas
 
@@ -76,51 +76,51 @@ export class Cpu {
                 }
             }
         } else {
-            jogadasPossiveis = this.lerTodasJogadasPossiveis()
+            jogadasPossiveis = this.#lerTodasJogadasPossiveis()
         }
-        this.fazerJogadaPossivel(jogadasPossiveis)
+        this.#fazerJogadaPossivel(jogadasPossiveis)
     }
 
-    jogarModoImpossivel() {
+    #jogarModoImpossivel() {
         const nJogadas = this.jogo.getNJogadas
-        if (this.fazerJogadaAmeaca(this.verificarAmeacas())) {
+        if (this.#fazerJogadaAmeaca(this.#verificarAmeacas())) {
             return
         }
         switch (nJogadas) {
             case 0:
-                this.jogada0()
+                this.#jogada0()
             break;
         
             case 1:
-                this.jogada1()
+                this.#jogada1()
             break;
         
             case 2:
-                this.jogada2()
+                this.#jogada2()
             break;
 
             case 3:
-                this.jogada3()
+                this.#jogada3()
             break;
         
             case 4:
-                this.jogada4()
+                this.#jogada4()
             break;
         
             case 5:
-                this.jogada5()
+                this.#jogada5()
             break;
         
             case 6:
-                this.jogada6()
+                this.#jogada6()
             break;
         
             case 7:
-                this.jogada7()
+                this.#jogada7()
             break;
         
             case 8:
-                this.jogada8()
+                this.#jogada8()
             break;
         
             default:
@@ -128,25 +128,25 @@ export class Cpu {
         }
     }
 
-    jogada0() {
-        const sorte = this.random(1, 10)
+    #jogada0() {
+        const sorte = this.#random(1, 10)
         if (sorte >= 9) {
-            this.fazerJogadaPossivel(this.meiosPossiveis())
+            this.#fazerJogadaPossivel(this.#meiosPossiveis())
             this.setPattern = 2
         } else if (sorte >= 6) {
-            this.fazerJogadaPossivel([4])
+            this.#fazerJogadaPossivel([4])
             this.setPattern = 0
         } else {
-            this.fazerJogadaPossivel(this.cantosPossiveis())
+            this.#fazerJogadaPossivel(this.#cantosPossiveis())
             this.setPattern = 1
         }
     }
 
-    jogada1() {
+    #jogada1() {
         const jogada = this.jogadas[0]
         let jogadasPossiveis = []
         if (jogada.isCentro()) {
-            jogadasPossiveis = this.cantosPossiveis()
+            jogadasPossiveis = this.#cantosPossiveis()
             this.setPattern = 0
         } else if (jogada.isMeio()) {
             jogadasPossiveis = [4]
@@ -155,17 +155,17 @@ export class Cpu {
             jogadasPossiveis = [4]
             this.setPattern = 1
         }
-        this.fazerJogadaPossivel(jogadasPossiveis)
+        this.#fazerJogadaPossivel(jogadasPossiveis)
     }
 
-    jogada2() {
+    #jogada2() {
 
     }
 
-    jogada3() {
+    #jogada3() {
         let jogadasPossiveis
         if (this.pattern == 0) {
-            jogadasPossiveis = this.cantosPossiveis()
+            jogadasPossiveis = this.#cantosPossiveis()
         } else if (this.pattern == 1) {
             if (this.jogadas[2].isMeio()) {
                 let i = this.jogadas[0].getI
@@ -177,7 +177,7 @@ export class Cpu {
                 }
                 //FINALIZADO
             } else {
-                jogadasPossiveis = this.meiosPossiveis()
+                jogadasPossiveis = this.#meiosPossiveis()
                 //FINALIZADO
             }
         } else {
@@ -190,9 +190,9 @@ export class Cpu {
                 }
                 jogadasPossiveis = [index]
             } else if (this.jogadas[2].getIndex == this.jogadas[0].getInverso) {
-                jogadasPossiveis = this.cantosPossiveis()
+                jogadasPossiveis = this.#cantosPossiveis()
             } else {
-                jogadasPossiveis = this.cantosPossiveis()
+                jogadasPossiveis = this.#cantosPossiveis()
                 let i = this.jogadas[(this.jogadas[0].getI % 2) * 2].getI
                 let j = this.jogadas[(this.jogadas[0].getJ % 2) * 2].getJ
                 let index
@@ -203,33 +203,33 @@ export class Cpu {
             }
             //FINALIZADO
         }
-        this.fazerJogadaPossivel(jogadasPossiveis)
+        this.#fazerJogadaPossivel(jogadasPossiveis)
     }
 
-    jogada4() {
+    #jogada4() {
 
     }
 
-    jogada5() {
-        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
+    #jogada5() {
+        this.#fazerJogadaPossivel(this.#lerTodasJogadasPossiveis())
     }
 
-    jogada6() {
+    #jogada6() {
         
     }
 
-    jogada7() {
-        this.fazerJogadaPossivel(this.lerTodasJogadasPossiveis())
+    #jogada7() {
+        this.#fazerJogadaPossivel(this.#lerTodasJogadasPossiveis())
     }
 
-    jogada8() {
+    #jogada8() {
         
     }
 
     /**
      * @param {Ameaca[]} ameacas 
      */
-    fazerJogadaAmeaca(ameacas) {
+    #fazerJogadaAmeaca(ameacas) {
         if (ameacas.length == 0) {
             return false
         }
@@ -247,7 +247,7 @@ export class Cpu {
     /** 
      * @param {number[]} jogadasPossiveis 
     */
-    fazerJogadaPossivel(jogadasPossiveis) {
+    #fazerJogadaPossivel(jogadasPossiveis) {
         const nJogadasPossiveis = jogadasPossiveis.length
         if (nJogadasPossiveis == 0) {
             return
@@ -255,25 +255,25 @@ export class Cpu {
         if (nJogadasPossiveis == 1) {
             this.jogo.jogarIndex(jogadasPossiveis[0])
         } else {
-            const index = this.random(0, nJogadasPossiveis - 1)
+            const index = this.#random(0, nJogadasPossiveis - 1)
             this.jogo.jogarIndex(jogadasPossiveis[index])
         }
     }
 
-    meiosPossiveis() {
+    #meiosPossiveis() {
         let meios = [1, 3, 5, 7]
-        return this.lerJogadaPossivel(meios)
+        return this.#lerJogadaPossivel(meios)
     }
 
-    cantosPossiveis() {
+    #cantosPossiveis() {
         let cantos = [0, 2, 6, 8]
-        return this.lerJogadaPossivel(cantos)
+        return this.#lerJogadaPossivel(cantos)
     }
 
     /**
      * @param {number[]} array 
     */
-    lerJogadaPossivel(array) {
+    #lerJogadaPossivel(array) {
         for (let i = 0; i < array.length; i++) {
             if (this.matriz.getIndiceByIndex(array[i]) != -1) {
                 array.splice(i, 1)
@@ -286,7 +286,7 @@ export class Cpu {
     /** 
      * @returns {number[]} 
     */
-    lerTodasJogadasPossiveis() {
+    #lerTodasJogadasPossiveis() {
         let jogadasPossiveis = []
         for (let i = 0; i < 9; i++) {
             if (this.matriz.getIndiceByIndex(i) == -1) {
@@ -299,13 +299,13 @@ export class Cpu {
     /** 
      * @returns {Ameaca[]} 
     */
-    verificarAmeacas() {
+    #verificarAmeacas() {
         let ameacas = []
         let ameaca
         let i
         let j
         for (let m = 0; m < 3; m++) {
-            j = this.verificarAmeacaArray(this.matriz.getRow(m))
+            j = this.#verificarAmeacaArray(this.matriz.getRow(m))
             if (j != -1) {
                 i = m
                 if (j == 1) {
@@ -315,7 +315,7 @@ export class Cpu {
                 }
                 ameacas.push(ameaca)
             }
-            i = this.verificarAmeacaArray(this.matriz.getColumn(m))
+            i = this.#verificarAmeacaArray(this.matriz.getColumn(m))
             if (i != -1) {
                 j = m
                 if (i == 1) {
@@ -326,7 +326,7 @@ export class Cpu {
                 ameacas.push(ameaca)
             }
         }
-        i = this.verificarAmeacaArray(this.matriz.getDiagonalPrincipal())
+        i = this.#verificarAmeacaArray(this.matriz.getDiagonalPrincipal())
         if (i != -1) {
             if (i == 1) {
                 ameaca = new Ameaca(i, i, this.matriz.getIndice(0, 0))
@@ -335,7 +335,7 @@ export class Cpu {
             }
             ameacas.push(ameaca)
         }
-        i = this.verificarAmeacaArray(this.matriz.getDiagonalSecundaria())
+        i = this.#verificarAmeacaArray(this.matriz.getDiagonalSecundaria())
         if (i != -1) {
             if (j == i) {
                 ameaca = new Ameaca(i, 2-i, this.matriz.getIndice(0, 2))
@@ -359,7 +359,7 @@ export class Cpu {
      * @param {number[]} array 
      * @returns {number}
     */
-    verificarAmeacaArray(array) {
+    #verificarAmeacaArray(array) {
         inicio:
         for (let i = 0; i < 3; i++) {
             for (let j = i + 1; j < 3; j++) {
@@ -381,7 +381,7 @@ export class Cpu {
      * @param {number} max 
      * @returns {number}
     */
-    random(min, max) {
+    #random(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
 }
