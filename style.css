@@ -112,7 +112,6 @@
     }
     100% {
         clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0);
-       
     }
 }
 
@@ -275,12 +274,10 @@
 #modo {
     display: inline-block;
     cursor: default;
-    
+
     width: 174px;
 }
 #seta {
-    cursor: pointer;
-
     padding: 2px;
     width: 25px;
 }
@@ -289,7 +286,8 @@
     float: right;
     border: none;
     background: none;
-    
+    cursor: pointer;
+
     width: 25px;
     height: 25px;
 }
@@ -306,7 +304,7 @@
     overflow: hidden;
     z-index: 2;
     max-height: 0px;
-    
+
     margin-top: 6px;
     height: 168px;
     width: 180px;
@@ -314,11 +312,11 @@
 }
 #seletorOn {
     max-height: 168px;
-    animation: appear-seletor 1.5s;
+    animation: appear-seletor 1s;
 }
 #seletorOff {
     max-height: 0px;
-    animation: disappear-seletor 1.5s;
+    animation: disappear-seletor 1s;
 }
 #texto-seletor {
     display: inline;
@@ -415,7 +413,7 @@
         width: 100px;
         height: 100px;
     }
-    
+
     .symbol0 {
         width: 87px;
         height: 87px;
@@ -449,7 +447,7 @@
         width: 15px;
         height: 15px;
     }
-    
+
     .seletor {
         margin-top: 6px;
         height: 120px;
@@ -471,7 +469,7 @@
         padding-top: 7px;
         padding-bottom: 4px;
     }
-    
+
     .vencedor {
         height: 8.7px;
         width: 300px;
