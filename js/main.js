@@ -12,7 +12,7 @@ let cpu
 window.clicar = (indexCell) => {
     jogo.jogar(indexCell)
     tela.atualizarPainel()
-    if (tela.getModo < 3) {
+    if (tela.getModo < 3 && !jogo.getFim) {
         jogadaCpu()
     }
 } 
@@ -31,7 +31,7 @@ function jogadaCpu() {
  * @param {number} tipoModo 
  */  
 window.escolherModo = (tipoModo) => {
-
+    tela.escolherModo(tipoModo)
 } 
 
 window.reiniciar = () => {
