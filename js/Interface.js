@@ -50,6 +50,16 @@ export class Interface {
         this.#removerLinhaVitoria()
     }
 
+    clicarSeletor() {
+        if (this.seletor.getStatus) {
+            this.seletor.disappear()
+            this.#backgroundOff()
+        } else {
+            this.seletor.appear()
+            this.#backgroundOn()
+        }
+    }
+
     #adicionarLinhaVitoria() {
         const vencedor = this.jogo.getVencedor
         const linha = document.createElement('div')
@@ -183,18 +193,18 @@ export class Interface {
     }
 
     #backgroundOn() {
-        const background = document.querySelector('#background')
-        background.classList = 'backgroundOn'
+        const background = document.querySelector('.background')
+        background.id = 'backgroundOn'
         background.style.zIndex = '1'
         background.removeEventListener("animationend", this.#alterarZIndex)
     }
     #backgroundOff() {
-        const background = document.querySelector('#background')
-        background.classList = 'backgroundOff'
+        const background = document.querySelector('.background')
+        background.id = 'backgroundOff'
         background.addEventListener("animationend", this.#alterarZIndex)
     }
     #alterarZIndex() {
-        const background = document.querySelector('#background')
+        const background = document.querySelector('.background')
         background.style.zIndex = '0'
     }
 
