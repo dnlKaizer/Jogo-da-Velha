@@ -130,10 +130,12 @@ export class Interface {
      */
     #desaparecerSymbol(cell) {
         const symbol = cell.firstChild
-        if (symbol.className == 'symbol1') {
-            this.#desaparecerX(cell, symbol)
-        } else {
-            this.#desaparecerO(cell, symbol)
+        if (symbol != null) {
+            if (symbol.className == 'symbol1') {
+                this.#desaparecerX(cell, symbol)
+            } else {
+                this.#desaparecerO(cell, symbol)
+            }
         }
     }
     #desaparecerAllSymbols() {
@@ -187,6 +189,8 @@ export class Interface {
         symbol12.classList = 'symbol12'
         symbol1.appendChild(symbol11)
         symbol1.appendChild(symbol12)
+        this.addStartEventSymbol(symbol11)
+        this.addEndEventSymbol(symbol12)
         return symbol1
     }
     /**
@@ -195,6 +199,8 @@ export class Interface {
     #criarO() {
         const symbol0 = document.createElement('div')
         symbol0.classList = 'symbol0'
+        this.addStartEventSymbol(symbol0)
+        this.addEndEventSymbol(symbol0)
         return symbol0
     }
 
