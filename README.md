@@ -12,3 +12,5 @@ Repositório para criação de um web app de jogo da velha, para praticar e apre
 &emsp;&emsp;- Fácil<br/>
 &emsp;&emsp;- Médio<br/>
 &emsp;&emsp;- Impossível (Literalmente)<br/>
+
+[Link do Site](https://elaborate-salmiakki-52833b.netlify.app/)
