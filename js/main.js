@@ -31,6 +31,7 @@ function jogadaCpu() {
  * @param {number} tipoModo 
  */  
 window.escolherModo = (tipoModo) => {
+    window.reiniciar()
     tela.escolherModo(tipoModo)
 } 
 
