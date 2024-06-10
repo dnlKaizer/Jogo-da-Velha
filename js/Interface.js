@@ -12,7 +12,6 @@ export class Interface {
         this.seletor = new Seletor()
         this.modo = document.querySelector('#modo')
         this.buttonReiniciar = document.querySelector('#reiniciar')     
-        this.background = document.querySelector('.background')
     }
 
     get getModo() {
@@ -181,6 +180,22 @@ export class Interface {
         const symbol0 = document.createElement('div')
         symbol0.classList = 'symbol0'
         return symbol0
+    }
+
+    #backgroundOn() {
+        const background = document.querySelector('#background')
+        background.classList = 'backgroundOn'
+        background.style.zIndex = '1'
+        background.removeEventListener("animationend", this.#alterarZIndex)
+    }
+    #backgroundOff() {
+        const background = document.querySelector('#background')
+        background.classList = 'backgroundOff'
+        background.addEventListener("animationend", this.#alterarZIndex)
+    }
+    #alterarZIndex() {
+        const background = document.querySelector('#background')
+        background.style.zIndex = '0'
     }
 
     /**
