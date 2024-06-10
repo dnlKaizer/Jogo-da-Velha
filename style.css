@@ -456,11 +456,11 @@
     }
     #seletorOn {
         max-height: 120px;
-        animation: appear-seletor-mobile 1.5s;
+        animation: appear-seletor 1s;
     }
     #seletorOff {
         max-height: 0px;
-        animation: disappear-seletor-mobile 1.5s;
+        animation: disappear-seletor 1s;
     }
     .modos {
         width: 90px;
