@@ -3,6 +3,7 @@ export class Seletor {
         this.seletor = document.querySelector('.seletor')
         this.textoSeletor = document.querySelector('#texto-seletor')
         this.seta = document.querySelector('#seta')
+        this.buttonSeta = document.querySelector('#botao-seta')  
         this.buttonModos = document.getElementsByClassName('modos')
         this.enable = false
         this.modo = 3
@@ -21,11 +22,10 @@ export class Seletor {
         this.enable = true
 
         this.seta.style.rotate = '180deg'
-        this.seta.onclick = ''
+        this.disableButton(this.buttonSeta)
+
         setTimeout(() => {
-            this.seta.onclick = () => {
-                window.clicarSeletor()
-            }
+            this.enableButton(this.buttonSeta)
             this.enableButtonModos()
         }, 1000)
     }
@@ -35,30 +35,39 @@ export class Seletor {
         this.enable = false
 
         this.seta.style.rotate = '0deg'
-        this.seta.onclick = ''
-        setTimeout(() => {
-            this.seta.onclick = () => {
-                window.clicarSeletor()
-            }
+        this.disableButton(this.buttonSeta)
+
+        this.seletor.addEventListener("animationend",() => {
+            this.enableButton(this.buttonSeta)
             this.disableButtonModos()
-        }, 1000)
+        })
+    }
+
+    /**
+     * @param {HTMLButtonElement} button 
+     */
+    disableButton(button) {
+        button.style.cursor = 'default'
+        button.disabled = true
+    }
+    /**
+     * @param {HTMLButtonElement} button 
+     */
+    enableButton(button) {
+        button.style.cursor = 'pointer'
+        button.disabled = false
     }
 
     disableButtonModos() {
         for (let index = 0; index < this.buttonModos.length; index++) {
             const button = this.buttonModos[index]
-            button.style.cursor = 'default'
-            button.onclick = ''
+            this.disableButton(button)
         }
     }
-
     enableButtonModos() {
         for (let index = 0; index < this.buttonModos.length; index++) {
             const button = this.buttonModos[index]
-            button.style.cursor = 'pointer'
-            button.onclick = () => {
-                window.escolherModo(index)
-            }
+            this.enableButton(button)
         }
     }
 
