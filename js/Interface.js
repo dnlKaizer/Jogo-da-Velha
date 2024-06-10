@@ -60,6 +60,11 @@ export class Interface {
         }
     }
 
+    escolherModo(tipoModo) {
+        this.seletor.escolherModo(tipoModo)
+        this.clicarSeletor()
+    }
+
     #adicionarLinhaVitoria() {
         const vencedor = this.jogo.getVencedor
         const linha = document.createElement('div')
@@ -71,8 +76,9 @@ export class Interface {
         this.box.appendChild(linha)
     }
     #removerLinhaVitoria() {
-        if (this.jogo.getVencedor.symbol != null) {
-            this.box.lastChild.remove()
+        const linha = this.box.querySelector('.vencedor')
+        if (linha != null) {
+            linha.remove()
         }
     }
 
@@ -206,24 +212,5 @@ export class Interface {
     #alterarZIndex() {
         const background = document.querySelector('.background')
         background.style.zIndex = '0'
-    }
-
-    /**
-     * @param {number} index 
-     * @returns {number[]}
-     */  
-    #indexParaIndices(index) {
-        const j = index % 3
-        const i = (index - j) / 3
-        return [i,j]
-    }
-    /**
-     * @param {number} i 
-     * @param {number} j 
-     * @returns {number}
-     */
-    #indicesParaIndex(i, j) {
-        const index = (3 * i) + j
-        return index 
     }
 }
