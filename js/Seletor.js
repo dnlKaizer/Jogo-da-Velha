@@ -7,6 +7,14 @@ export class Seletor {
         this.buttonModos = document.getElementsByClassName('modos')
         this.enable = false
         this.modo = 3
+
+        this.seletor.addEventListener("animationend",() => {
+            this.enableButton(this.buttonSeta)
+            this.enableButtonModos()
+        })
+        this.seletor.addEventListener("animationstart",() => {
+            this.disableButtonModos()
+        })
     }
 
     get getStatus() {
@@ -23,11 +31,6 @@ export class Seletor {
 
         this.seta.style.rotate = '180deg'
         this.disableButton(this.buttonSeta)
-
-        setTimeout(() => {
-            this.enableButton(this.buttonSeta)
-            this.enableButtonModos()
-        }, 1000)
     }
 
     disappear() {
@@ -36,11 +39,6 @@ export class Seletor {
 
         this.seta.style.rotate = '0deg'
         this.disableButton(this.buttonSeta)
-
-        this.seletor.addEventListener("animationend",() => {
-            this.enableButton(this.buttonSeta)
-            this.disableButtonModos()
-        })
     }
 
     /**
