@@ -198,6 +198,23 @@ export class Interface {
         return symbol0
     }
 
+    /**
+     * @param {HTMLDivElement} symbol 
+     */
+    addStartEventSymbol(symbol) {
+        symbol.addEventListener("animationstart", () => {
+            this.#disableButton(this.buttonReiniciar)
+        })
+    }
+    /**
+     * @param {HTMLDivElement} symbol 
+     */
+    addEndEventSymbol(symbol) {
+        symbol.addEventListener("animationend", () => {
+            this.#enableButton(this.buttonReiniciar)
+        })
+    }
+
     #backgroundOn() {
         const background = document.querySelector('.background')
         background.id = 'backgroundOn'
