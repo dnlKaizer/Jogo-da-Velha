@@ -12,7 +12,6 @@ export class Cpu {
         this.matriz = jogo.getMatriz
         this.jogadas = jogo.getJogadas
         this.dificuldade = dificuldade
-        this.pattern = -1
         /* 
         0: início no centro
         1: início no canto
@@ -21,10 +20,16 @@ export class Cpu {
     }
 
     /**
-     * @param {number} pattern 
-    */
-    set #setPattern(pattern) {
-        this.pattern = pattern
+     * @returns {number}
+     */
+    get #getPattern() {
+        if (this.jogadas[0].isCentro()) {
+            return 0
+        } else if (this.jogadas[0].isMeio()) {
+            return 2
+        } else {
+            return 1
+        }
     }
 
     jogar() {
@@ -132,28 +137,23 @@ export class Cpu {
         const sorte = this.#random(1, 10)
         if (sorte >= 9) {
             this.#fazerJogadaPossivel(this.#meiosPossiveis())
-            this.#setPattern = 2
         } else if (sorte >= 6) {
             this.#fazerJogadaPossivel([4])
-            this.#setPattern = 0
         } else {
             this.#fazerJogadaPossivel(this.#cantosPossiveis())
-            this.#setPattern = 1
         }
     }
 
     #jogada1() {
         const jogada = this.jogadas[0]
         let jogadasPossiveis = []
-        if (jogada.isCentro()) {
+        const pattern = this.#getPattern
+        if (pattern == 0) {
             jogadasPossiveis = this.#cantosPossiveis()
-            this.#setPattern = 0
-        } else if (jogada.isMeio()) {
+        } else if (pattern == 2) {
             jogadasPossiveis = [4]
-            this.#setPattern = 2
         } else {
             jogadasPossiveis = [4]
-            this.#setPattern = 1
         }
         this.#fazerJogadaPossivel(jogadasPossiveis)
     }
@@ -164,9 +164,10 @@ export class Cpu {
 
     #jogada3() {
         let jogadasPossiveis
-        if (this.pattern == 0) {
+        const pattern = this.#getPattern
+        if (pattern == 0) {
             jogadasPossiveis = this.#cantosPossiveis()
-        } else if (this.pattern == 1) {
+        } else if (pattern == 1) {
             if (this.jogadas[2].isMeio()) {
                 let i = this.jogadas[0].getI
                 let j = this.jogadas[0].getJ
