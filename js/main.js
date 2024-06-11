@@ -23,7 +23,9 @@ function jogadaCpu() {
     tela.disableAllCellButtons()
     setTimeout(() => {
         tela.atualizarPainel()
-        tela.enableSelectedCellButtons()
+        if (!jogo.getFim) {
+            tela.enableSelectedCellButtons()
+        }
     }, 750);
 }
 
