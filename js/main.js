@@ -24,7 +24,7 @@ function jogadaCpu() {
     setTimeout(() => {
         tela.atualizarPainel()
         tela.enableSelectedCellButtons()
-    }, 500);
+    }, 750);
 }
 
 /**
